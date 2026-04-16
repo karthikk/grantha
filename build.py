@@ -27,7 +27,6 @@ SOURCES = {
     'brahmasutra':   'https://advaitasharada.sringeri.net/display/moola/BS/devanagari',
 }
 
-# Display names
 NAMES = {
     'isha': 'ईशावास्योपनिषद्',
     'kena': 'केनोपनिषद्',
@@ -44,32 +43,15 @@ NAMES = {
 }
 
 GITA_ADHYAYA_NAMES = [
-    'अर्जुनविषादयोगः',
-    'साङ्ख्ययोगः',
-    'कर्मयोगः',
-    'ज्ञानकर्मसन्न्यासयोगः',
-    'कर्मसन्न्यासयोगः',
-    'आत्मसंयमयोगः',
-    'ज्ञानविज्ञानयोगः',
-    'अक्षरब्रह्मयोगः',
-    'राजविद्याराजगुह्ययोगः',
-    'विभूतियोगः',
-    'विश्वरूपदर्शनयोगः',
-    'भक्तियोगः',
-    'क्षेत्रक्षेत्रज्ञविभागयोगः',
-    'गुणत्रयविभागयोगः',
-    'पुरुषोत्तमयोगः',
-    'दैवासुरसम्पद्विभागयोगः',
-    'श्रद्धात्रयविभागयोगः',
-    'मोक्षसन्न्यासयोगः',
+    'अर्जुनविषादयोगः', 'साङ्ख्ययोगः', 'कर्मयोगः',
+    'ज्ञानकर्मसन्न्यासयोगः', 'कर्मसन्न्यासयोगः', 'आत्मसंयमयोगः',
+    'ज्ञानविज्ञानयोगः', 'अक्षरब्रह्मयोगः', 'राजविद्याराजगुह्ययोगः',
+    'विभूतियोगः', 'विश्वरूपदर्शनयोगः', 'भक्तियोगः',
+    'क्षेत्रक्षेत्रज्ञविभागयोगः', 'गुणत्रयविभागयोगः', 'पुरुषोत्तमयोगः',
+    'दैवासुरसम्पद्विभागयोगः', 'श्रद्धात्रयविभागयोगः', 'मोक्षसन्न्यासयोगः',
 ]
 
-BS_ADHYAYA_NAMES = [
-    'समन्वयाध्यायः',
-    'अविरोधाध्यायः',
-    'साधनाध्यायः',
-    'फलाध्यायः',
-]
+BS_ADHYAYA_NAMES = ['समन्वयाध्यायः', 'अविरोधाध्यायः', 'साधनाध्यायः', 'फलाध्यायः']
 
 ORDINALS = ['प्रथम', 'द्वितीय', 'तृतीय', 'चतुर्थ', 'पञ्चम', 'षष्ठ',
             'सप्तम', 'अष्टम', 'नवम', 'दशम', 'एकादश', 'द्वादश',
@@ -81,24 +63,22 @@ DEVANAGARI_DIGITS = str.maketrans('0123456789', '०१२३४५६७८९'
 
 
 def to_dev(n):
-    """Convert number to devanagari digits."""
     return str(n).translate(DEVANAGARI_DIGITS)
 
 
+def ordinal(i):
+    return ORDINALS[i] if i < len(ORDINALS) else to_dev(i + 1)
+
+
 def clean_verse_text(vt_div):
-    """Extract clean Devanagari text from a versetext div."""
     content = vt_div.decode_contents()
     content = html.unescape(content)
-    # Replace <br/> and <br> with newline
     content = re.sub(r'<br\s*/?>', '\n', content)
-    # Remove any remaining HTML tags
     content = re.sub(r'<[^>]+>', '', content)
-    content = content.strip()
-    return content
+    return content.strip()
 
 
 def verse_html(text, num_label):
-    """Generate HTML for a single verse. Number at end."""
     lines = text.split('\n')
     inner = '<br>\n      '.join(line.strip() for line in lines if line.strip())
     return f'''  <div class="verse">
@@ -109,29 +89,37 @@ def verse_html(text, num_label):
 '''
 
 
-def page_html(title, breadcrumbs, body, prev_link=None, next_link=None, css_path='../css/style.css'):
-    """Generate a full HTML page."""
-    bc_html = breadcrumb_html(breadcrumbs)
+def breadcrumb_html(crumbs):
+    parts = []
+    for i, c in enumerate(crumbs):
+        if i == len(crumbs) - 1:
+            parts.append(c[1])
+        else:
+            parts.append(f'<a href="{c[0]}">{c[1]}</a>')
+    return '<nav class="breadcrumb">\n    ' + '<span class="sep">»</span>'.join(parts) + '\n  </nav>'
 
-    nav = ''
-    if prev_link or next_link:
-        prev_part = ''
-        next_part = ''
-        if prev_link:
-            prev_part = f'<span class="nav-label">← पूर्वम्</span>\n      <a href="{prev_link[0]}">{prev_link[1]}</a>'
-        if next_link:
-            next_part = f'<span class="nav-label">अग्रे →</span>\n      <a href="{next_link[0]}">{next_link[1]}</a>'
-        nav = f'''
+
+def nav_html(prev_link, next_link):
+    if not prev_link and not next_link:
+        return ''
+    prev_part = ''
+    next_part = ''
+    if prev_link:
+        prev_part = f'<span class="nav-label">← पूर्वम्</span>\n      <a href="{prev_link[0]}">{prev_link[1]}</a>'
+    if next_link:
+        next_part = f'<span class="nav-label">अग्रे →</span>\n      <a href="{next_link[0]}">{next_link[1]}</a>'
+    return f'''
   <nav class="page-nav">
-    <div class="prev">
-      {prev_part}
-    </div>
-    <div class="next">
-      {next_part}
-    </div>
+    <div class="prev">{prev_part}</div>
+    <div class="next">{next_part}</div>
   </nav>
 '''
 
+
+def page_html(title, breadcrumbs, body, prev_link=None, next_link=None, css_path='../css/style.css'):
+    bc = breadcrumb_html(breadcrumbs)
+    nav = nav_html(prev_link, next_link)
+    home = '../' * css_path.count('../')
     return f'''<!DOCTYPE html>
 <html lang="sa">
 <head>
@@ -144,16 +132,13 @@ def page_html(title, breadcrumbs, body, prev_link=None, next_link=None, css_path
 
 <header class="site-header">
   <div class="container">
-    <div class="site-title"><a href="{"../" * css_path.count("../") }">ग्रन्थसङ्ग्रहः</a></div>
+    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
   </div>
 </header>
 
 <main class="container">
-
-  {bc_html}
-
+  {bc}
   <h1>{title}</h1>
-
 {body}
 {nav}
 </main>
@@ -167,19 +152,60 @@ def page_html(title, breadcrumbs, body, prev_link=None, next_link=None, css_path
 '''
 
 
-def breadcrumb_html(crumbs):
-    """crumbs = [(url, label), ...] last one has no url."""
-    parts = []
-    for i, c in enumerate(crumbs):
-        if i == len(crumbs) - 1:
-            parts.append(c[1])
-        else:
-            parts.append(f'<a href="{c[0]}">{c[1]}</a>')
-    return '<nav class="breadcrumb">\n    ' + '<span class="sep">»</span>'.join(parts) + '\n  </nav>'
+def sidebar_page_html(title, breadcrumbs, sections_content, sidebar_items,
+                      prev_link=None, next_link=None, css_path='../css/style.css'):
+    """Page with right sidebar for section navigation.
+    sections_content: the main body HTML with section anchors
+    sidebar_items: list of (anchor_id, label) for sidebar links
+    """
+    bc = breadcrumb_html(breadcrumbs)
+    nav = nav_html(prev_link, next_link)
+    home = '../' * css_path.count('../')
 
+    sidebar_links = '\n'.join(
+        f'      <li><a href="#{aid}">{label}</a></li>'
+        for aid, label in sidebar_items
+    )
 
-def home_path(depth):
-    return '../' * depth
+    return f'''<!DOCTYPE html>
+<html lang="sa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — ग्रन्थसङ्ग्रहः</title>
+  <link rel="stylesheet" href="{css_path}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
+  </div>
+</header>
+
+<div class="page-with-sidebar">
+  <div class="page-content">
+    {bc}
+    <h1>{title}</h1>
+{sections_content}
+{nav}
+  </div>
+  <aside class="sidebar">
+    <nav>
+      <ul>
+{sidebar_links}
+      </ul>
+    </nav>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="container">ग्रन्थसङ्ग्रहः</div>
+</footer>
+
+</body>
+</html>
+'''
 
 
 def fetch(url):
@@ -190,7 +216,6 @@ def fetch(url):
 
 
 def extract_verses(container):
-    """Extract all verse divs from a container, returning list of (id, type, text)."""
     results = []
     for v in container.find_all('div', class_='verse'):
         vt = v.find('div', class_='versetext')
@@ -207,320 +232,262 @@ def write_file(path, content):
     print(f'    Wrote {path}')
 
 
-def extract_verse_num_from_text(text):
-    """The source text often has ॥ N ॥ at the end. Extract and remove it."""
-    # Match patterns like ॥ १ ॥ or ॥ १.१ ॥ at end
+def extract_verse_num(text, vid=''):
+    """Extract ॥ N ॥ from end of text, or derive from verse ID."""
     m = re.search(r'॥\s*([०-९\.]+)\s*॥\s*$', text)
     if m:
-        num = m.group(1)
-        text = text[:m.start()].rstrip()
-        return text, num
-    return text, None
+        return text[:m.start()].rstrip(), m.group(1)
+    m2 = re.search(r'_[VK](\d+)', vid)
+    if m2:
+        return text, to_dev(int(m2.group(1)))
+    return text, ''
 
 
-# ─── Single-page Upanishads (Isha, Mandukya) ───
+def verses_body(verses, num_prefix=''):
+    """Build verse HTML from list of (id, type, text)."""
+    body = ''
+    for vid, vtype, text in verses:
+        text, num = extract_verse_num(text, vid)
+        label = f'{num_prefix}{num}' if num_prefix else num
+        if vtype == 'kaarika':
+            label = f'कारिका {num}'
+        body += verse_html(text, label)
+    return body
 
-def build_single_page_upanishad(key, soup):
+
+def slug(text):
+    """Make a URL-safe anchor from text."""
+    return re.sub(r'[^\w\u0900-\u097F]', '-', text).strip('-')
+
+
+# ─── Isha (single page, no sections) ───
+
+def build_isha(soup):
+    name = NAMES['isha']
+    body = verses_body(extract_verses(soup))
+    write_file(os.path.join(BASE_DIR, 'upanishads', 'isha.html'),
+               page_html(name,
+                        [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                        body, next_link=('kena.html', 'केनोपनिषद्'),
+                        css_path='../css/style.css'))
+
+
+# ─── Mandukya (single page, prakaranams as sections with sidebar) ───
+
+def build_mandukya(soup):
+    name = NAMES['mandukya']
+    chapters = soup.find_all('div', class_='chapter')
+    prakarana_names = ['आगमप्रकरणम्', 'वैतथ्यप्रकरणम्', 'अद्वैतप्रकरणम्', 'अलातशान्तिप्रकरणम्']
+
+    # Collect all mantras (non-karika) first for the moolam section
+    all_mantras = []
+    for ch in chapters:
+        for vid, vtype, text in extract_verses(ch):
+            if vtype != 'kaarika':
+                all_mantras.append((vid, vtype, text))
+
+    body = '\n  <h2 class="section-heading" id="moolam">मूलम्</h2>\n\n'
+    sidebar = [('moolam', 'मूलम्')]
+    for vid, vtype, text in all_mantras:
+        text, num = extract_verse_num(text, vid)
+        body += verse_html(text, num)
+
+    for ci, ch in enumerate(chapters):
+        pname = prakarana_names[ci] if ci < len(prakarana_names) else ch.get('data-name', '')
+        aid = slug(pname)
+        sidebar.append((aid, pname))
+        body += f'\n  <h2 class="section-heading" id="{aid}">{pname}</h2>\n\n'
+        for vid, vtype, text in extract_verses(ch):
+            text, num = extract_verse_num(text, vid)
+            if vtype == 'kaarika':
+                label = f'कारिका {num}'
+                body += verse_html(text, label)
+            else:
+                label = num
+                body += verse_html(text, label).replace('<div class="verse">', '<div class="verse mantra">', 1)
+
+    write_file(os.path.join(BASE_DIR, 'upanishads', 'mandukya.html'),
+               sidebar_page_html(name,
+                    [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                    body, sidebar,
+                    prev_link=('mundaka.html', 'मुण्डकोपनिषद्'),
+                    next_link=('taittiriya.html', 'तैत्तिरीयोपनिषद्'),
+                    css_path='../css/style.css'))
+
+
+# ─── Flat texts with sections merged into one page + sidebar ───
+# Used for: Kena (khandas), Prashna (prashnas), Taittiriya (vallis), Aitareya (adhyayas)
+
+CHAPTER_NAMES_OVERRIDE = {
+    'taittiriya': ['शीक्षावल्ली', 'ब्रह्मानन्दवल्ली', 'भृगुवल्ली'],
+}
+
+
+def build_flat_with_sidebar(key, soup):
+    """All chapters merged into one page with sidebar."""
     name = NAMES[key]
-    out_dir = os.path.join(BASE_DIR, 'upanishads')
+    chapters = soup.find_all('div', class_='chapter')
+    overrides = CHAPTER_NAMES_OVERRIDE.get(key, [])
 
-    if key == 'mandukya':
-        # Mandukya has 4 prakaranams with mantras and karikas interleaved
-        body = ''
-        chapters = soup.find_all('div', class_='chapter')
-        prakarana_names = [
-            'आगमप्रकरणम्',
-            'वैतथ्यप्रकरणम्',
-            'अद्वैतप्रकरणम्',
-            'अलातशान्तिप्रकरणम्',
-        ]
-        for ci, ch in enumerate(chapters):
-            pname = prakarana_names[ci] if ci < len(prakarana_names) else ch.get('data-name', '')
-            body += f'\n  <h2>{pname}</h2>\n\n'
-            for vid, vtype, text in extract_verses(ch):
-                text, num = extract_verse_num_from_text(text)
-                if not num:
-                    # derive from ID like MK_C01_V07 or MK_C01_K10
-                    m = re.search(r'_[VK](\d+)', vid)
-                    num = to_dev(int(m.group(1))) if m else ''
-                label_prefix = 'कारिका ' if vtype == 'kaarika' else ''
-                body += verse_html(text, f'{label_prefix}{num}')
+    body = ''
+    sidebar = []
+    for ci, ch in enumerate(chapters):
+        cname = overrides[ci] if ci < len(overrides) else ch.get('data-name', f'{ordinal(ci)}')
+        aid = f'section-{ci+1}'
+        sidebar.append((aid, cname))
+        body += f'\n  <h2 class="section-heading" id="{aid}">{cname}</h2>\n\n'
+        body += verses_body(extract_verses(ch))
 
-        write_file(os.path.join(out_dir, f'{key}.html'),
-                   page_html(name,
-                            [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
-                            body,
-                            prev_link=('mundaka/', 'मुण्डकोपनिषद्'),
-                            next_link=('taittiriya/', 'तैत्तिरीयोपनिषद्'),
-                            css_path='../css/style.css'))
-    else:
-        # Simple single page (Isha)
-        verses = extract_verses(soup)
-        body = ''
-        for vid, vtype, text in verses:
-            text, num = extract_verse_num_from_text(text)
-            if not num:
-                m = re.search(r'_V(\d+)', vid)
-                num = to_dev(int(m.group(1))) if m else ''
-            body += verse_html(text, num)
+    # Determine prev/next based on upanishad order
+    upanishad_order = ['isha', 'kena', 'katha', 'prashna', 'mundaka', 'mandukya',
+                       'taittiriya', 'aitareya', 'chandogya', 'brihadaranyaka']
+    idx = upanishad_order.index(key) if key in upanishad_order else -1
+    prev_link = None
+    next_link = None
+    if idx > 0:
+        pk = upanishad_order[idx - 1]
+        prev_link = (get_upanishad_link(pk), NAMES[pk])
+    if idx < len(upanishad_order) - 1:
+        nk = upanishad_order[idx + 1]
+        next_link = (get_upanishad_link(nk), NAMES[nk])
 
-        write_file(os.path.join(out_dir, f'{key}.html'),
-                   page_html(name,
-                            [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
-                            body,
-                            next_link=('kena/', 'केनोपनिषद्'),
-                            css_path='../css/style.css'))
+    write_file(os.path.join(BASE_DIR, 'upanishads', f'{key}.html'),
+               sidebar_page_html(name,
+                    [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                    body, sidebar,
+                    prev_link=prev_link, next_link=next_link,
+                    css_path='../css/style.css'))
 
 
-# ─── Kena (khandas, no adhyayas) ───
+def get_upanishad_link(key):
+    return f'{key}.html'
 
-def build_kena(soup):
-    name = NAMES['kena']
-    out_dir = os.path.join(BASE_DIR, 'upanishads', 'kena')
+
+# ─── Texts with adhyaya > section: single page with 2-level sidebar ───
+# Used for: Katha, Mundaka, Brihadaranyaka, Chandogya
+
+def build_two_level_single_page(key, soup):
+    """Entire text on one page. Sidebar shows adhyayas with sections nested."""
+    name = NAMES[key]
     chapters = soup.find_all('div', class_='chapter')
 
-    # Index page
-    items = ''
+    body = ''
+    # Build 2-level sidebar HTML manually
+    sidebar_html = ''
+
     for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ः खण्डः')
-        items += f'    <li><a href="khanda-{ci+1}.html">{cname}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), (None, name)],
-                        body,
-                        css_path='../../css/style.css'))
+        cname = ch.get('data-name', f'{ordinal(ci)}ोऽध्यायः')
+        ch_aid = f'ch-{ci+1}'
+        body += f'\n  <h2 class="section-heading" id="{ch_aid}">{cname}</h2>\n\n'
 
-    # Section pages
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ः खण्डः')
-        verses = extract_verses(ch)
-        body = ''
-        for vid, vtype, text in verses:
-            text, num = extract_verse_num_from_text(text)
-            if not num:
-                m = re.search(r'_V(\d+)', vid)
-                num = to_dev(int(m.group(1))) if m else ''
-            body += verse_html(text, f'{to_dev(ci+1)}.{num}')
+        sidebar_html += f'      <li><a href="#{ch_aid}" class="sidebar-group-title">{cname}</a>\n'
 
-        prev_link = (f'khanda-{ci}.html', chapters[ci-1].get('data-name', '')) if ci > 0 else None
-        next_link = (f'khanda-{ci+2}.html', chapters[ci+1].get('data-name', '')) if ci < len(chapters)-1 else None
-
-        write_file(os.path.join(out_dir, f'khanda-{ci+1}.html'),
-                   page_html(cname,
-                            [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), ('./', name), (None, cname)],
-                            body,
-                            prev_link=prev_link,
-                            next_link=next_link,
-                            css_path='../../css/style.css'))
-
-
-# ─── Upanishads with adhyaya > section structure (Katha, Mundaka, Taittiriya, etc.) ───
-
-def build_sectioned_upanishad(key, soup, section_label='वल्ली'):
-    """For upanishads with adhyaya > section > verse structure."""
-    name = NAMES[key]
-    out_dir = os.path.join(BASE_DIR, 'upanishads', key)
-    chapters = soup.find_all('div', class_='chapter')
-
-    has_sections = any(ch.find('div', class_='section', recursive=False) for ch in chapters)
-
-    if not has_sections:
-        # Chapters directly contain verses (like Prashna - 6 prashnas)
-        items = ''
-        for ci, ch in enumerate(chapters):
-            cname = ch.get('data-name', f'{ORDINALS[ci]}ः {section_label}')
-            items += f'    <li><a href="section-{ci+1}.html">{cname}</a></li>\n'
-        body = f'  <ul class="text-list">\n{items}  </ul>\n'
-        write_file(os.path.join(out_dir, 'index.html'),
-                   page_html(name,
-                            [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), (None, name)],
-                            body,
-                            css_path='../../css/style.css'))
-
-        for ci, ch in enumerate(chapters):
-            cname = ch.get('data-name', f'{ORDINALS[ci]}ः {section_label}')
-            verses = extract_verses(ch)
-            body = ''
-            for vid, vtype, text in verses:
-                text, num = extract_verse_num_from_text(text)
-                if not num:
-                    m = re.search(r'_V(\d+)', vid)
-                    num = to_dev(int(m.group(1))) if m else ''
-                body += verse_html(text, num)
-
-            prev_link = (f'section-{ci}.html', chapters[ci-1].get('data-name', '')) if ci > 0 else None
-            next_link = (f'section-{ci+2}.html', chapters[ci+1].get('data-name', '')) if ci < len(chapters)-1 else None
-
-            write_file(os.path.join(out_dir, f'section-{ci+1}.html'),
-                       page_html(cname,
-                                [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), ('./', name), (None, cname)],
-                                body,
-                                prev_link=prev_link,
-                                next_link=next_link,
-                                css_path='../../css/style.css'))
-        return
-
-    # Has adhyaya > section structure (Katha, Brihadaranyaka, etc.)
-    # Check if we need 2-level navigation
-    # For some texts (Katha: 2 adhyayas, 3 vallis each), sections are the leaf pages
-    # For Brihadaranyaka: 6 adhyayas, each with named brahmanas
-
-    # Build main index
-    items = ''
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ोऽध्यायः')
-        items += f'    <li><a href="adhyaya-{ci+1}/">{cname}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), (None, name)],
-                        body,
-                        css_path='../../css/style.css'))
-
-    # Build adhyaya pages with section listings
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ोऽध्यायः')
         sections = ch.find_all('div', class_='section', recursive=False)
-        adh_dir = os.path.join(out_dir, f'adhyaya-{ci+1}')
+        if sections:
+            open_class = ' class="open"' if ci == 0 else ''
+            sidebar_html += f'        <ul{open_class}>\n'
+            for si, sec in enumerate(sections):
+                sname = sec.get('data-name', f'{ordinal(si)}')
+                sec_aid = f'ch-{ci+1}-s-{si+1}'
+                sidebar_html += f'          <li><a href="#{sec_aid}">{sname}</a></li>\n'
+                body += f'\n  <h3 class="section-heading" id="{sec_aid}">{sname}</h3>\n\n'
+                body += verses_body(extract_verses(sec))
+            sidebar_html += '        </ul>\n'
+        else:
+            body += verses_body(extract_verses(ch))
 
-        items = ''
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si]} {section_label}')
-            items += f'    <li><a href="section-{si+1}.html">{sname}</a></li>\n'
-        body = f'  <ul class="text-list">\n{items}  </ul>\n'
-        write_file(os.path.join(adh_dir, 'index.html'),
-                   page_html(cname,
-                            [('../../../', 'मुख्यम्'), ('../../', 'उपनिषदः'), ('../', name), (None, cname)],
-                            body,
-                            css_path='../../../css/style.css'))
+        sidebar_html += '      </li>\n'
 
-        # Build section pages
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si]} {section_label}')
-            verses = extract_verses(sec)
-            body = ''
-            for vid, vtype, text in verses:
-                text, num = extract_verse_num_from_text(text)
-                if not num:
-                    m = re.search(r'_V(\d+)', vid)
-                    num = to_dev(int(m.group(1))) if m else ''
-                body += verse_html(text, num)
+    # Determine prev/next
+    upanishad_order = ['isha', 'kena', 'katha', 'prashna', 'mundaka', 'mandukya',
+                       'taittiriya', 'aitareya', 'chandogya', 'brihadaranyaka']
+    idx = upanishad_order.index(key) if key in upanishad_order else -1
+    prev_link = None
+    next_link = None
+    if idx > 0:
+        pk = upanishad_order[idx - 1]
+        prev_link = (get_upanishad_link(pk), NAMES[pk])
+    if idx < len(upanishad_order) - 1:
+        nk = upanishad_order[idx + 1]
+        next_link = (get_upanishad_link(nk), NAMES[nk])
 
-            prev_link = (f'section-{si}.html', sections[si-1].get('data-name', '')) if si > 0 else None
-            next_link = (f'section-{si+2}.html', sections[si+1].get('data-name', '')) if si < len(sections)-1 else None
+    # Use custom sidebar HTML instead of flat sidebar_items
+    bc = breadcrumb_html([('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)])
+    nav = nav_html(prev_link, next_link)
+    css_path = '../css/style.css'
+    home = '../'
 
-            write_file(os.path.join(adh_dir, f'section-{si+1}.html'),
-                       page_html(sname,
-                                [('../../../', 'मुख्यम्'), ('../../', 'उपनिषदः'), ('../', name),
-                                 ('./', cname), (None, sname)],
-                                body,
-                                prev_link=prev_link,
-                                next_link=next_link,
-                                css_path='../../../css/style.css'))
+    html_out = f'''<!DOCTYPE html>
+<html lang="sa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{name} — ग्रन्थसङ्ग्रहः</title>
+  <link rel="stylesheet" href="{css_path}">
+</head>
+<body>
 
+<header class="site-header">
+  <div class="container">
+    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
+  </div>
+</header>
 
-def build_flat_sectioned_upanishad(key, soup, section_label='खण्डः'):
-    """For upanishads with flat chapter structure where each chapter is a section.
-    Used for Prashna, Aitareya, Taittiriya."""
-    name = NAMES[key]
-    out_dir = os.path.join(BASE_DIR, 'upanishads', key)
-    chapters = soup.find_all('div', class_='chapter')
+<div class="page-with-sidebar">
+  <div class="page-content">
+    {bc}
+    <h1>{name}</h1>
+{body}
+{nav}
+  </div>
+  <aside class="sidebar">
+    <nav>
+      <ul>
+{sidebar_html}
+      </ul>
+    </nav>
+  </aside>
+</div>
 
-    items = ''
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}')
-        items += f'    <li><a href="section-{ci+1}.html">{cname}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), (None, name)],
-                        body,
-                        css_path='../../css/style.css'))
+<footer class="site-footer">
+  <div class="container">ग्रन्थसङ्ग्रहः</div>
+</footer>
 
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}')
-        verses = extract_verses(ch)
-        body = ''
-        for vid, vtype, text in verses:
-            text, num = extract_verse_num_from_text(text)
-            if not num:
-                m = re.search(r'_V(\d+)', vid)
-                num = to_dev(int(m.group(1))) if m else ''
-            body += verse_html(text, num)
-
-        prev_link = (f'section-{ci}.html', chapters[ci-1].get('data-name', '')) if ci > 0 else None
-        next_link = (f'section-{ci+2}.html', chapters[ci+1].get('data-name', '')) if ci < len(chapters)-1 else None
-
-        write_file(os.path.join(out_dir, f'section-{ci+1}.html'),
-                   page_html(cname,
-                            [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), ('./', name), (None, cname)],
-                            body,
-                            prev_link=prev_link,
-                            next_link=next_link,
-                            css_path='../../css/style.css'))
-
-
-# ─── Chandogya: adhyaya > khanda (sections within chapters) ───
-
-def build_chandogya(soup):
-    """Chandogya has 8 prapathakas, each with khandas as sections."""
-    name = NAMES['chandogya']
-    out_dir = os.path.join(BASE_DIR, 'upanishads', 'chandogya')
-    chapters = soup.find_all('div', class_='chapter')
-
-    items = ''
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ः प्रपाठकः')
-        items += f'    <li><a href="prapathaka-{ci+1}/">{cname}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../../', 'मुख्यम्'), ('../', 'उपनिषदः'), (None, name)],
-                        body,
-                        css_path='../../css/style.css'))
-
-    for ci, ch in enumerate(chapters):
-        cname = ch.get('data-name', f'{ORDINALS[ci]}ः प्रपाठकः')
-        sections = ch.find_all('div', class_='section', recursive=False)
-        pdir = os.path.join(out_dir, f'prapathaka-{ci+1}')
-
-        items = ''
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si] if si < len(ORDINALS) else to_dev(si+1)}ः खण्डः')
-            items += f'    <li><a href="khanda-{si+1}.html">{sname}</a></li>\n'
-        body = f'  <ul class="text-list">\n{items}  </ul>\n'
-        write_file(os.path.join(pdir, 'index.html'),
-                   page_html(cname,
-                            [('../../../', 'मुख्यम्'), ('../../', 'उपनिषदः'), ('../', name), (None, cname)],
-                            body,
-                            css_path='../../../css/style.css'))
-
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si] if si < len(ORDINALS) else to_dev(si+1)}ः खण्डः')
-            verses = extract_verses(sec)
-            body = ''
-            for vid, vtype, text in verses:
-                text, num = extract_verse_num_from_text(text)
-                if not num:
-                    m = re.search(r'_V(\d+)', vid)
-                    num = to_dev(int(m.group(1))) if m else ''
-                body += verse_html(text, num)
-
-            prev_link = (f'khanda-{si}.html', sections[si-1].get('data-name', '')) if si > 0 else None
-            next_link = (f'khanda-{si+2}.html', sections[si+1].get('data-name', '')) if si < len(sections)-1 else None
-
-            write_file(os.path.join(pdir, f'khanda-{si+1}.html'),
-                       page_html(sname,
-                                [('../../../', 'मुख्यम्'), ('../../', 'उपनिषदः'), ('../', name),
-                                 ('./', cname), (None, sname)],
-                                body,
-                                prev_link=prev_link,
-                                next_link=next_link,
-                                css_path='../../../css/style.css'))
+<script>
+document.querySelectorAll('.sidebar-group-title').forEach(function(el) {{
+  el.addEventListener('click', function(e) {{
+    var sub = this.nextElementSibling;
+    if (sub && sub.tagName === 'UL') {{
+      // collapse all others
+      document.querySelectorAll('.sidebar ul ul.open').forEach(function(u) {{
+        if (u !== sub) u.classList.remove('open');
+      }});
+      sub.classList.toggle('open');
+    }}
+  }});
+}});
+</script>
+</body>
+</html>
+'''
+    write_file(os.path.join(BASE_DIR, 'upanishads', f'{key}.html'), html_out)
 
 
 # ─── Gita ───
+
+def extract_gita_verses(chapter):
+    """Gita verses can have two versetext divs: an उवाच line + the actual shloka."""
+    results = []
+    for v in chapter.find_all('div', class_='verse'):
+        vts = v.find_all('div', class_='versetext')
+        for vt in vts:
+            text = clean_verse_text(vt)
+            if not text:
+                continue
+            is_uvacha = text.endswith('—') or 'उवाच' in text
+            results.append((v.get('id', ''), 'uvacha' if is_uvacha else 'shloka', text))
+    return results
+
 
 def build_gita(soup):
     name = NAMES['gita']
@@ -530,100 +497,166 @@ def build_gita(soup):
     items = ''
     for ci, ch in enumerate(chapters):
         yoga = GITA_ADHYAYA_NAMES[ci] if ci < len(GITA_ADHYAYA_NAMES) else ''
-        label = f'{ORDINALS[ci]}ोऽध्यायः — {yoga}'
+        label = f'{ordinal(ci)}ोऽध्यायः — {yoga}'
         items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
     body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../', 'मुख्यम्'), (None, name)],
-                        body,
-                        css_path='../css/style.css'))
+               page_html(name, [('../', 'मुख्यम्'), (None, name)], body, css_path='../css/style.css'))
 
     for ci, ch in enumerate(chapters):
         yoga = GITA_ADHYAYA_NAMES[ci] if ci < len(GITA_ADHYAYA_NAMES) else ''
-        title = f'{ORDINALS[ci]}ोऽध्यायः — {yoga}'
-        verses = extract_verses(ch)
-        body = ''
-        for vid, vtype, text in verses:
-            text, num = extract_verse_num_from_text(text)
-            if not num:
-                m = re.search(r'_V(\d+)', vid)
-                num = to_dev(int(m.group(1))) if m else ''
-            body += verse_html(text, num)
+        title = f'{ordinal(ci)}ोऽध्यायः — {yoga}'
 
-        prev_link = (f'adhyaya-{ci}.html', GITA_ADHYAYA_NAMES[ci-1] if ci > 0 else '') if ci > 0 else None
-        next_link = (f'adhyaya-{ci+2}.html', GITA_ADHYAYA_NAMES[ci+1] if ci+1 < len(GITA_ADHYAYA_NAMES) else '') if ci < len(chapters)-1 else None
+        body = ''
+        for vid, vtype, text in extract_gita_verses(ch):
+            if vtype == 'uvacha':
+                # Speaker label — no verse number
+                body += f'  <div class="verse">\n    <div class="shloka">{text}</div>\n  </div>\n'
+            else:
+                text, num = extract_verse_num(text, vid)
+                body += verse_html(text, num)
+
+        prev_link = (f'adhyaya-{ci}.html', GITA_ADHYAYA_NAMES[ci-1]) if ci > 0 else None
+        next_link = (f'adhyaya-{ci+2}.html', GITA_ADHYAYA_NAMES[ci+1]) if ci < len(chapters)-1 else None
 
         write_file(os.path.join(out_dir, f'adhyaya-{ci+1}.html'),
                    page_html(title,
                             [('../', 'मुख्यम्'), ('./', name), (None, title)],
-                            body,
-                            prev_link=prev_link,
-                            next_link=next_link,
+                            body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
 
 # ─── Brahma Sutra ───
+
+def extract_bs_verses_with_adhikarana(section):
+    """Extract sutras grouped by adhikarana."""
+    results = []  # list of (adhikarana_name, adhikarana_id, [(vid, text)])
+    current_adh = None
+    current_sutras = []
+    for v in section.find_all('div', class_='verse'):
+        vt = v.find('div', class_='versetext')
+        if not vt:
+            continue
+        text = clean_verse_text(vt)
+        adh_name = v.get('data-adhikarana', '')
+        adh_id = v.get('data-adhikaranaid', '')
+        if adh_name != current_adh:
+            if current_adh is not None:
+                results.append((current_adh, current_adh_id, current_sutras))
+            current_adh = adh_name
+            current_adh_id = adh_id
+            current_sutras = []
+        current_sutras.append((v.get('id', ''), text))
+    if current_adh is not None:
+        results.append((current_adh, current_adh_id, current_sutras))
+    return results
+
 
 def build_brahmasutra(soup):
     name = NAMES['brahmasutra']
     out_dir = os.path.join(BASE_DIR, 'brahmasutra')
     chapters = soup.find_all('div', class_='chapter')
 
-    # Index with adhyayas and padas
-    body = ''
+    # Index — just 4 adhyaya links
+    items = ''
     for ci, ch in enumerate(chapters):
         adh_name = BS_ADHYAYA_NAMES[ci] if ci < len(BS_ADHYAYA_NAMES) else ''
-        body += f'\n  <h2>{ORDINALS[ci]}ोऽध्यायः — {adh_name}</h2>\n'
-        sections = ch.find_all('div', class_='section', recursive=False)
-        body += '  <ul class="text-list">\n'
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si]}ः पादः')
-            body += f'    <li><a href="{ci+1}-{si+1}.html">{sname}</a></li>\n'
-        body += '  </ul>\n'
-
+        label = f'{ordinal(ci)}ोऽध्यायः — {adh_name}'
+        items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
+    body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name,
-                        [('../', 'मुख्यम्'), (None, name)],
-                        body,
-                        css_path='../css/style.css'))
+               page_html(name, [('../', 'मुख्यम्'), (None, name)], body, css_path='../css/style.css'))
 
-    # Build flat list of all padas for prev/next linking
-    all_padas = []
+    # One page per adhyaya: padas as top-level sidebar, adhikaranas nested
     for ci, ch in enumerate(chapters):
-        sections = ch.find_all('div', class_='section', recursive=False)
-        for si, sec in enumerate(sections):
-            sname = sec.get('data-name', f'{ORDINALS[si]}ः पादः')
-            all_padas.append((ci, si, sec, sname))
-
-    for pi, (ci, si, sec, sname) in enumerate(all_padas):
         adh_name = BS_ADHYAYA_NAMES[ci] if ci < len(BS_ADHYAYA_NAMES) else ''
-        title = f'{ORDINALS[ci]}ोऽध्यायः {sname}'
-        verses = extract_verses(sec)
+        title = f'{ordinal(ci)}ोऽध्यायः — {adh_name}'
+        sections = ch.find_all('div', class_='section', recursive=False)
+
         body = ''
-        for vid, vtype, text in verses:
-            text, num = extract_verse_num_from_text(text)
-            if not num:
-                m = re.search(r'_V(\d+)', vid)
-                num = to_dev(int(m.group(1))) if m else ''
-            body += verse_html(text, num)
+        sidebar_html = ''
 
-        prev_link = None
-        next_link = None
-        if pi > 0:
-            pci, psi = all_padas[pi-1][0], all_padas[pi-1][1]
-            prev_link = (f'{pci+1}-{psi+1}.html', all_padas[pi-1][3])
-        if pi < len(all_padas) - 1:
-            nci, nsi = all_padas[pi+1][0], all_padas[pi+1][1]
-            next_link = (f'{nci+1}-{nsi+1}.html', all_padas[pi+1][3])
+        for si, sec in enumerate(sections):
+            sname = sec.get('data-name', f'{ordinal(si)}ः पादः')
+            pada_aid = f'pada-{si+1}'
+            body += f'\n  <h2 class="section-heading" id="{pada_aid}">{sname}</h2>\n\n'
 
-        write_file(os.path.join(out_dir, f'{ci+1}-{si+1}.html'),
-                   page_html(title,
-                            [('../', 'मुख्यम्'), ('./', name), (None, title)],
-                            body,
-                            prev_link=prev_link,
-                            next_link=next_link,
-                            css_path='../css/style.css'))
+            sidebar_html += f'      <li><a href="#{pada_aid}" class="sidebar-group-title">{sname}</a>\n'
+
+            adhikaranas = extract_bs_verses_with_adhikarana(sec)
+            if adhikaranas:
+                open_class = ' class="open"' if si == 0 else ''
+                sidebar_html += f'        <ul{open_class}>\n'
+                for ai, (adh_name_inner, adh_id, sutras) in enumerate(adhikaranas):
+                    adh_aid = f'pada-{si+1}-adh-{ai+1}'
+                    sidebar_html += f'          <li><a href="#{adh_aid}">{adh_name_inner}</a></li>\n'
+                    body += f'\n  <h3 class="section-heading" id="{adh_aid}">{adh_name_inner}</h3>\n\n'
+                    for vid, text in sutras:
+                        text, num = extract_verse_num(text, vid)
+                        body += verse_html(text, num)
+                sidebar_html += '        </ul>\n'
+
+            sidebar_html += '      </li>\n'
+
+        prev_link = (f'adhyaya-{ci}.html', BS_ADHYAYA_NAMES[ci-1]) if ci > 0 else None
+        next_link = (f'adhyaya-{ci+2}.html', BS_ADHYAYA_NAMES[ci+1]) if ci < len(chapters)-1 else None
+
+        bc = breadcrumb_html([('../', 'मुख्यम्'), ('./', name), (None, title)])
+        nav = nav_html(prev_link, next_link)
+
+        html_out = f'''<!DOCTYPE html>
+<html lang="sa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title} — ग्रन्थसङ्ग्रहः</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
+  </div>
+</header>
+
+<div class="page-with-sidebar">
+  <div class="page-content">
+    {bc}
+    <h1>{title}</h1>
+{body}
+{nav}
+  </div>
+  <aside class="sidebar">
+    <nav>
+      <ul>
+{sidebar_html}
+      </ul>
+    </nav>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="container">ग्रन्थसङ्ग्रहः</div>
+</footer>
+
+<script>
+document.querySelectorAll('.sidebar-group-title').forEach(function(el) {{
+  el.addEventListener('click', function(e) {{
+    var sub = this.nextElementSibling;
+    if (sub && sub.tagName === 'UL') {{
+      document.querySelectorAll('.sidebar ul ul.open').forEach(function(u) {{
+        if (u !== sub) u.classList.remove('open');
+      }});
+      sub.classList.toggle('open');
+    }}
+  }});
+}});
+</script>
+</body>
+</html>
+'''
+        write_file(os.path.join(out_dir, f'adhyaya-{ci+1}.html'), html_out)
 
 
 # ─── Main ───
@@ -637,45 +670,39 @@ def main():
 
     print('\nGenerating HTML pages...\n')
 
-    # Isha - single page
+    # Single page upanishads
     print('Building Isha...')
-    build_single_page_upanishad('isha', soups['isha'])
+    build_isha(soups['isha'])
 
-    # Kena - 4 khandas
+    # Flat texts -> single page with sidebar
     print('Building Kena...')
-    build_kena(soups['kena'])
+    build_flat_with_sidebar('kena', soups['kena'])
 
-    # Katha - 2 adhyayas, 3 vallis each (has sections)
-    print('Building Katha...')
-    build_sectioned_upanishad('katha', soups['katha'], section_label='वल्ली')
-
-    # Prashna - 6 prashnas (flat chapters, no sections within)
     print('Building Prashna...')
-    build_flat_sectioned_upanishad('prashna', soups['prashna'], section_label='प्रश्नः')
+    build_flat_with_sidebar('prashna', soups['prashna'])
 
-    # Mundaka - 3 mundakas, 2 khandas each (has sections)
-    print('Building Mundaka...')
-    build_sectioned_upanishad('mundaka', soups['mundaka'], section_label='खण्डः')
-
-    # Mandukya - single page with karikas
-    print('Building Mandukya...')
-    build_single_page_upanishad('mandukya', soups['mandukya'])
-
-    # Taittiriya - 3 vallis (flat chapters)
     print('Building Taittiriya...')
-    build_flat_sectioned_upanishad('taittiriya', soups['taittiriya'], section_label='वल्ली')
+    build_flat_with_sidebar('taittiriya', soups['taittiriya'])
 
-    # Aitareya - 3 adhyayas (flat chapters)
     print('Building Aitareya...')
-    build_flat_sectioned_upanishad('aitareya', soups['aitareya'], section_label='अध्यायः')
+    build_flat_with_sidebar('aitareya', soups['aitareya'])
 
-    # Chandogya - 8 prapathakas with khandas
+    # Mandukya - single page with prakaranam sidebar
+    print('Building Mandukya...')
+    build_mandukya(soups['mandukya'])
+
+    # Two-level texts -> single page with 2-level sidebar
+    print('Building Katha...')
+    build_two_level_single_page('katha', soups['katha'])
+
+    print('Building Mundaka...')
+    build_two_level_single_page('mundaka', soups['mundaka'])
+
     print('Building Chandogya...')
-    build_chandogya(soups['chandogya'])
+    build_two_level_single_page('chandogya', soups['chandogya'])
 
-    # Brihadaranyaka - 6 adhyayas with brahmanas
     print('Building Brihadaranyaka...')
-    build_sectioned_upanishad('brihadaranyaka', soups['brihadaranyaka'], section_label='ब्राह्मणम्')
+    build_two_level_single_page('brihadaranyaka', soups['brihadaranyaka'])
 
     # Gita
     print('Building Gita...')

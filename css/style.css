@@ -16,6 +16,7 @@
 
 html {
   font-size: 18px;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -172,6 +173,95 @@ h2 {
   color: #888;
 }
 
+/* Page with sidebar */
+
+.page-with-sidebar {
+  display: flex;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.page-with-sidebar .page-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-with-sidebar .sidebar {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.sidebar nav {
+  position: sticky;
+  top: 1rem;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  border-left: 1px solid var(--border);
+  padding-left: 0.75rem;
+}
+
+.sidebar li {
+  margin: 0.3rem 0;
+}
+
+.sidebar a {
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.5;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: var(--link-hover);
+}
+
+.sidebar .sidebar-group-title {
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  margin-bottom: 0.1rem;
+  display: block;
+}
+
+.sidebar ul ul {
+  border-left: none;
+  padding-left: 0.6rem;
+  margin: 0;
+  display: none;
+}
+
+.sidebar ul ul.open {
+  display: block;
+}
+
+.sidebar .sidebar-group-title {
+  cursor: pointer;
+}
+
+/* Section headings within a page */
+
+.section-heading {
+  font-size: 1.15rem;
+  font-weight: normal;
+  color: var(--accent);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-heading:first-of-type {
+  margin-top: 0.5rem;
+  border-top: none;
+  padding-top: 0;
+}
+
 /* Verses */
 
 .verse {
@@ -180,13 +270,17 @@ h2 {
 }
 
 .shloka {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   line-height: 1.8;
 }
 
 .verse-num {
   color: var(--accent);
   display: inline;
+}
+
+.verse.mantra .shloka {
+  font-weight: bold;
 }
 
 /* Prev/Next navigation */
@@ -229,6 +323,43 @@ h2 {
 
 /* Responsive */
 
+@media (max-width: 768px) {
+  .page-with-sidebar {
+    flex-direction: column;
+    padding: 1.25rem 1rem;
+  }
+
+  .page-with-sidebar .sidebar {
+    width: 100%;
+    order: -1;
+    margin-bottom: 1rem;
+  }
+
+  .sidebar nav {
+    position: static;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .sidebar ul ul {
+    padding-left: 0;
+  }
+
+  .sidebar li {
+    margin: 0;
+  }
+
+  .sidebar .sidebar-group-title {
+    margin-top: 0.25rem;
+  }
+}
+
 @media (max-width: 600px) {
   html {
     font-size: 16px;
@@ -243,7 +374,7 @@ h2 {
   }
 
   .shloka {
-    font-size: 1.15rem;
+    font-size: 1rem;
     line-height: 1.8;
   }
 
