@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+
+:root {
+  --text: #2c2c2c;
+  --bg: #ffffff;
+  --subtle-bg: #f9f7f4;
+  --border: #e0dcd5;
+  --accent: #7a5c3a;
+  --link: #5a3e1b;
+  --link-hover: #3a2510;
+  --max-width: 700px;
+  --font: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  font-size: 18px;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 2;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* Layout */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Site header */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+
+.site-header .container {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.site-title {
+  font-size: 1.5rem;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+}
+
+.site-title a {
+  color: var(--text);
+}
+
+.site-title a:hover {
+  text-decoration: none;
+}
+
+/* Breadcrumb */
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.breadcrumb a {
+  color: #888;
+}
+
+.breadcrumb a:hover {
+  color: var(--link-hover);
+}
+
+.breadcrumb .sep {
+  margin: 0 0.3rem;
+}
+
+/* Page heading */
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: normal;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+/* Text listing / TOC */
+
+.text-list {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.text-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.8;
+}
+
+.text-list li:last-child {
+  border-bottom: none;
+}
+
+.text-list a {
+  display: block;
+  padding: 0.2rem 0;
+}
+
+.text-list .subtitle {
+  font-size: 0.85rem;
+  color: #888;
+  margin-left: 0.5rem;
+}
+
+/* Category cards on home page */
+
+.categories {
+  list-style: none;
+  margin: 2rem 0;
+}
+
+.categories li {
+  margin-bottom: 1rem;
+}
+
+.categories a {
+  display: block;
+  padding: 1.25rem 1.5rem;
+  background: var(--subtle-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: border-color 0.2s;
+}
+
+.categories a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.categories .cat-title {
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 0.15rem;
+}
+
+.categories .cat-desc {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Verses */
+
+.verse {
+  margin: 0.75rem 0;
+  padding: 0;
+}
+
+.shloka {
+  font-size: 1.3rem;
+  line-height: 1.8;
+}
+
+.verse-num {
+  color: var(--accent);
+  display: inline;
+}
+
+/* Prev/Next navigation */
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.page-nav .prev,
+.page-nav .next {
+  max-width: 45%;
+}
+
+.page-nav .next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.page-nav .nav-label {
+  font-size: 0.75rem;
+  color: #888;
+  display: block;
+}
+
+/* Footer */
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .shloka {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+  .categories a {
+    padding: 1rem 1.25rem;
+  }
+
+  .categories .cat-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 1rem 0.75rem;
+  }
+}
