@@ -265,12 +265,12 @@ h2 {
 /* Verses */
 
 .verse {
-  margin: 0.75rem 0;
+  margin: 0.4rem 0;
   padding: 0;
 }
 
 .shloka {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.8;
 }
 
