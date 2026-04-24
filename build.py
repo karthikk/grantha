@@ -659,6 +659,44 @@ document.querySelectorAll('.sidebar-group-title').forEach(function(el) {{
         write_file(os.path.join(out_dir, f'adhyaya-{ci+1}.html'), html_out)
 
 
+# ─── Prakaranas ───
+
+PRAKARANAS = [
+    ('मायापञ्चकम्', 'mayapanchakam',
+     'https://advaitasharada.sringeri.net/display/stotrani/pancharatna/devanagari?page=8&id=PRS_C08'),
+    ('मनीषापञ्चकम्', 'manishapanchakam',
+     'https://advaitasharada.sringeri.net/display/stotrani/pancharatna/devanagari?page=11&id=PRS_C11'),
+    ('काशीपञ्चकम्', 'kashipanchakam',
+     'https://advaitasharada.sringeri.net/display/stotrani/pancharatna/devanagari?page=12&id=PRS_C12'),
+]
+
+
+def build_prakaranas():
+    out_dir = os.path.join(BASE_DIR, 'prakarana')
+
+    items = ''
+    for si, (title, key, url) in enumerate(PRAKARANAS):
+        soup = fetch(url)
+        body = verses_body(extract_verses(soup))
+
+        prev_link = (f'{PRAKARANAS[si-1][1]}.html', PRAKARANAS[si-1][0]) if si > 0 else None
+        next_link = (f'{PRAKARANAS[si+1][1]}.html', PRAKARANAS[si+1][0]) if si < len(PRAKARANAS)-1 else None
+
+        write_file(os.path.join(out_dir, f'{key}.html'),
+                   page_html(title,
+                            [('../', 'मुख्यम्'), ('./', 'प्रकरणग्रन्थाः'), (None, title)],
+                            body, prev_link=prev_link, next_link=next_link,
+                            css_path='../css/style.css'))
+
+        items += f'    <li><a href="{key}.html">{title}</a></li>\n'
+
+    body = f'  <ul class="text-list">\n{items}  </ul>\n'
+    write_file(os.path.join(out_dir, 'index.html'),
+               page_html('प्रकरणग्रन्थाः',
+                        [('../', 'मुख्यम्'), (None, 'प्रकरणग्रन्थाः')],
+                        body, css_path='../css/style.css'))
+
+
 # ─── Main ───
 
 def main():
@@ -711,6 +749,10 @@ def main():
     # Brahma Sutra
     print('Building Brahma Sutra...')
     build_brahmasutra(soups['brahmasutra'])
+
+    # Prakaranas
+    print('Building Prakaranas...')
+    build_prakaranas()
 
     print('\nDone!')
 

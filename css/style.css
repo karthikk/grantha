@@ -5,7 +5,7 @@
   --bg: #ffffff;
   --subtle-bg: #f9f7f4;
   --border: #e0dcd5;
-  --accent: #7a5c3a;
+  --accent: #8b1a1a;
   --link: #5a3e1b;
   --link-hover: #3a2510;
   --max-width: 700px;
@@ -48,7 +48,7 @@ a:hover {
 /* Site header */
 
 .site-header {
-  border-bottom: 1px solid var(--border);
+  background: #8b1a1a;
   padding: 1rem 0;
 }
 
@@ -61,10 +61,11 @@ a:hover {
   font-size: 1.5rem;
   font-weight: normal;
   letter-spacing: 0.02em;
+  text-align: center;
 }
 
 .site-title a {
-  color: var(--text);
+  color: #fff;
 }
 
 .site-title a:hover {
