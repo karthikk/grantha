@@ -103,18 +103,27 @@ h1 {
 }
 
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: normal;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
+  margin: 0 0 0.3rem;
   color: var(--accent);
+}
+
+/* Grouped section box */
+
+.group {
+  background: var(--subtle-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
 }
 
 /* Text listing / TOC */
 
 .text-list {
   list-style: none;
-  margin: 1rem 0;
+  margin: 0.25rem 0 0;
 }
 
 .text-list li {
