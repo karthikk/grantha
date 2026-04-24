@@ -558,6 +558,17 @@ def build_gita(soup):
                 text, num = extract_verse_num(text, vid)
                 body += verse_html(text, num)
 
+        # Add colophon
+        authorline = ch.find('div', class_='authorline')
+        if authorline:
+            colophon = clean_verse_text(authorline)
+            if colophon:
+                # Strip the Mahabharata reference, keep from श्रीमद्भगवद्गीता onwards
+                m = re.search(r'श्रीमद्भगवद्गीता', colophon)
+                if m:
+                    colophon = 'ॐ तत्सदिति ' + colophon[m.start():]
+                body += f'  <div class="verse shanti">\n    <div class="shloka">{colophon}</div>\n  </div>\n'
+
         prev_link = (f'adhyaya-{ci}.html', GITA_ADHYAYA_NAMES[ci-1]) if ci > 0 else None
         next_link = (f'adhyaya-{ci+2}.html', GITA_ADHYAYA_NAMES[ci+1]) if ci < len(chapters)-1 else None
 
