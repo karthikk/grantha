@@ -284,6 +284,11 @@ h2 {
   font-weight: bold;
 }
 
+.verse.shanti {
+  margin: 1rem 0 1.5rem;
+  color: var(--accent);
+}
+
 /* Prev/Next navigation */
 
 .page-nav {
