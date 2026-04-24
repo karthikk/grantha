@@ -317,8 +317,8 @@ h2 {
 }
 
 .shloka {
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 1.15rem;
+  line-height: 2;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
