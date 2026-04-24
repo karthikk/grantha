@@ -319,11 +319,14 @@ h2 {
 .shloka {
   font-size: 1rem;
   line-height: 1.8;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .verse-num {
   color: var(--accent);
   display: inline;
+  white-space: nowrap;
 }
 
 .verse.mantra .shloka {

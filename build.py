@@ -270,7 +270,7 @@ def verses_body(verses, num_prefix=''):
         text, num = extract_verse_num(text, vid)
         label = f'{num_prefix}{num}' if num_prefix else num
         if vtype == 'kaarika':
-            label = f'कारिका {num}'
+            label = f'का॰ {num}'
         body += verse_html(text, label)
     return body
 
@@ -324,7 +324,7 @@ def build_mandukya(soup):
         for vid, vtype, text in extract_verses(ch):
             text, num = extract_verse_num(text, vid)
             if vtype == 'kaarika':
-                label = f'कारिका {num}'
+                label = f'का॰ {num}'
                 body += verse_html(text, label)
             else:
                 label = num
