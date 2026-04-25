@@ -367,7 +367,8 @@ def build_flat_with_sidebar(key, soup):
         aid = f'section-{ci+1}'
         sidebar.append((aid, cname))
         body += f'\n  <h2 class="section-heading" id="{aid}">{cname}</h2>\n\n'
-        body += verses_body(extract_verses(ch))
+        prefix = f'{to_dev(ci+1)}.'
+        body += verses_body(extract_verses(ch), num_prefix=prefix)
 
     # Add closing shanti mantra if available
     if key in SHANTI_MANTRAS:
@@ -430,10 +431,12 @@ def build_two_level_single_page(key, soup):
                 sec_aid = f'ch-{ci+1}-s-{si+1}'
                 sidebar_html += f'          <li><a href="#{sec_aid}">{sname}</a></li>\n'
                 body += f'\n  <h3 class="section-heading" id="{sec_aid}">{sname}</h3>\n\n'
-                body += verses_body(extract_verses(sec))
+                prefix = f'{to_dev(ci+1)}.{to_dev(si+1)}.'
+                body += verses_body(extract_verses(sec), num_prefix=prefix)
             sidebar_html += '        </ul>\n'
         else:
-            body += verses_body(extract_verses(ch))
+            prefix = f'{to_dev(ci+1)}.'
+            body += verses_body(extract_verses(ch), num_prefix=prefix)
 
         sidebar_html += '      </li>\n'
 
