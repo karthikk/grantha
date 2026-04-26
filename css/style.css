@@ -316,11 +316,12 @@ h2 {
   padding: 0;
 }
 
-.shloka {
+p.shloka {
   font-size: 1.15rem;
   line-height: 2;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  margin: 0;
 }
 
 .verse-num {

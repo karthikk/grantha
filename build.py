@@ -79,7 +79,7 @@ def shanti_html(text):
     """Render a shanti mantra as a verse div with special styling."""
     lines = text.split('\n')
     inner = '<br>\n      '.join(l.strip() for l in lines if l.strip())
-    return f'  <div class="verse shanti">\n    <div class="shloka">\n      {inner}\n    </div>\n  </div>\n'
+    return f'  <div class="verse shanti">\n    <p class="shloka">\n      {inner}\n    </div>\n  </div>\n'
 
 
 def to_dev(n):
@@ -102,9 +102,9 @@ def verse_html(text, num_label):
     lines = text.split('\n')
     inner = '<br>\n      '.join(line.strip() for line in lines if line.strip())
     return f'''  <div class="verse">
-    <div class="shloka">
+    <p class="shloka">
       {inner} <span class="verse-num">॥ {num_label} ॥</span>
-    </div>
+    </p>
   </div>
 '''
 
@@ -556,7 +556,7 @@ def build_gita(soup):
         for vid, vtype, text in extract_gita_verses(ch):
             if vtype == 'uvacha':
                 # Speaker label — no verse number
-                body += f'  <div class="verse">\n    <div class="shloka">{text}</div>\n  </div>\n'
+                body += f'  <div class="verse">\n    <p class="shloka">{text}</p>\n  </div>\n'
             else:
                 text, num = extract_verse_num(text, vid)
                 body += verse_html(text, num)
@@ -570,7 +570,7 @@ def build_gita(soup):
                 m = re.search(r'श्रीमद्भगवद्गीता', colophon)
                 if m:
                     colophon = 'ॐ तत्सदिति ' + colophon[m.start():]
-                body += f'  <div class="verse shanti">\n    <div class="shloka">{colophon}</div>\n  </div>\n'
+                body += f'  <div class="verse shanti">\n    <p class="shloka">{colophon}</p>\n  </div>\n'
 
         prev_link = (f'adhyaya-{ci}.html', GITA_ADHYAYA_NAMES[ci-1]) if ci > 0 else None
         next_link = (f'adhyaya-{ci+2}.html', GITA_ADHYAYA_NAMES[ci+1]) if ci < len(chapters)-1 else None
