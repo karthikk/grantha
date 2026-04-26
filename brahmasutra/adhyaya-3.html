@@ -20,6 +20,14 @@
     <a href="../">मुख्यम्</a><span class="sep">»</span><a href="./">ब्रह्मसूत्रम्</a><span class="sep">»</span>तृतीयोऽध्यायः — साधनाध्यायः
   </nav>
     <h1>तृतीयोऽध्यायः — साधनाध्यायः</h1>
+  <div class="playlist-links">
+    <details>
+      <summary>पाठाः ▾</summary>
+    <div class="playlist-panel">
+    <div class="playlist-row"><span class="playlist-batch">धन्योसि</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN9SUYzes8bADGwBu1oRSTR0" target="_blank" rel="noopener" class="playlist-link">▶</a></div>
+    </div>
+    </details>
+  </div>
   <article>
   <div class="group">
 
@@ -1289,5 +1297,6 @@ document.querySelectorAll('.sidebar-group-title').forEach(function(el) {
 </script>
 <script src="../js/script-toggle.js"></script>
 <script src="../js/sidebar-mobile.js"></script>
+<script>document.addEventListener('click',function(e){document.querySelectorAll('.playlist-links details[open]').forEach(function(d){if(!d.contains(e.target))d.removeAttribute('open')})});</script>
 </body>
 </html>

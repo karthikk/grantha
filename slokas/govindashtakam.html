@@ -19,6 +19,14 @@
     <a href="../">मुख्यम्</a><span class="sep">»</span><a href="./">श्लोकाः</a><span class="sep">»</span>श्रीगोविन्दाष्टकम्
   </nav>
   <h1>श्रीगोविन्दाष्टकम्</h1>
+  <div class="playlist-links">
+    <details>
+      <summary>पाठाः ▾</summary>
+    <div class="playlist-panel">
+    <div class="playlist-row"> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN9GGidSE9ICk5ISGuGv__Kg" target="_blank" rel="noopener" class="playlist-link">▶</a></div>
+    </div>
+    </details>
+  </div>
   <article>
   <div class="group">
   <div class="verse">
@@ -112,5 +120,6 @@
 </footer>
 
 <script src="../js/script-toggle.js"></script>
+<script>document.addEventListener('click',function(e){document.querySelectorAll('.playlist-links details[open]').forEach(function(d){if(!d.contains(e.target))d.removeAttribute('open')})});</script>
 </body>
 </html>

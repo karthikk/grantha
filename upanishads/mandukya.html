@@ -20,6 +20,14 @@
     <a href="../">मुख्यम्</a><span class="sep">»</span><a href="./">उपनिषदः</a><span class="sep">»</span>माण्डूक्योपनिषद्
   </nav>
     <h1>माण्डूक्योपनिषद्</h1>
+  <div class="playlist-links">
+    <details>
+      <summary>पाठाः ▾</summary>
+    <div class="playlist-panel">
+    <div class="playlist-row"><span class="playlist-batch">धन्योसि</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_zMEvDbzZ2R03XrkTp-r_c" target="_blank" rel="noopener" class="playlist-link">आगमप्रकरणम्</a> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN-sw3YM0_x1WPqxxVqbJ_8_" target="_blank" rel="noopener" class="playlist-link">वैतथ्यप्रकरणम्</a> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_D_c4lAN_I5tdKfW6cqWCa" target="_blank" rel="noopener" class="playlist-link">अद्वैतप्रकरणम्</a> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN8WTlBQTwxM-HNEho5u0kEt" target="_blank" rel="noopener" class="playlist-link">अलातशान्तिप्रकरणम्</a></div>
+    </div>
+    </details>
+  </div>
   <article>
   <div class="group">
   <div class="verse shanti">
@@ -1491,5 +1499,6 @@
 
 <script src="../js/script-toggle.js"></script>
 <script src="../js/sidebar-mobile.js"></script>
+<script>document.addEventListener('click',function(e){document.querySelectorAll('.playlist-links details[open]').forEach(function(d){if(!d.contains(e.target))d.removeAttribute('open')})});</script>
 </body>
 </html>

@@ -7,9 +7,9 @@
 (function() {
   var API = 'https://aksharamukha.appspot.com/api/public';
   var SCRIPTS = {
-    'Devanagari': 'देवनागरी',
-    'Tamil': 'தமிழ்',
-    'IAST': 'IAST'
+    'Devanagari': 'दे',
+    'Tamil': 'த',
+    'IAST': 'ia'
   };
   var current = localStorage.getItem('grantha-script') || 'Devanagari';
   var cache = {}; // cache[elementId][script] = text
@@ -17,10 +17,6 @@
   function buildToggle() {
     var bar = document.createElement('div');
     bar.className = 'script-toggle';
-    var label = document.createElement('span');
-    label.className = 'script-label';
-    label.textContent = 'लिपिः: ';
-    bar.appendChild(label);
 
     Object.keys(SCRIPTS).forEach(function(script) {
       var btn = document.createElement('a');
@@ -38,10 +34,26 @@
       bar.appendChild(btn);
     });
 
-    // Insert after h1 or at top of container/page-content
+    // Insert into toolbar (create if needed), after h1
     var h1 = document.querySelector('h1');
     if (h1) {
-      h1.parentNode.insertBefore(bar, h1.nextSibling);
+      var toolbar = h1.parentNode.querySelector('.toolbar');
+      if (!toolbar) {
+        toolbar = document.createElement('div');
+        toolbar.className = 'toolbar';
+        // Move playlist-links into toolbar if present
+        var pl = h1.parentNode.querySelector('.playlist-links');
+        if (pl) {
+          h1.parentNode.insertBefore(toolbar, pl);
+          toolbar.appendChild(bar);
+          toolbar.appendChild(pl);
+        } else {
+          h1.parentNode.insertBefore(toolbar, h1.nextSibling);
+          toolbar.appendChild(bar);
+        }
+      } else {
+        toolbar.insertBefore(bar, toolbar.firstChild);
+      }
     }
   }
 

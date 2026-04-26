@@ -19,6 +19,16 @@
     <a href="../">मुख्यम्</a><span class="sep">»</span><a href="./">श्रीमद्भगवद्गीता</a><span class="sep">»</span>ध्यानम्
   </nav>
   <h1>ध्यानम्</h1>
+  <div class="playlist-links">
+    <details>
+      <summary>पाठाः ▾</summary>
+    <div class="playlist-panel">
+    <div class="playlist-row"><span class="playlist-batch">धन्योसि</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_6oslVhuNEJp9ZFHyzPwVO" target="_blank" rel="noopener" class="playlist-link">▶</a></div>
+    <div class="playlist-row"><span class="playlist-batch">जिज्ञासु</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN9YstvRqoLl2J9Jwr5qFM6p" target="_blank" rel="noopener" class="playlist-link">▶</a></div>
+    <div class="playlist-row"><span class="playlist-batch">तत्त्वमसि</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_uCv2_3H51xW93FVAQXcpC" target="_blank" rel="noopener" class="playlist-link">Ch 1-5</a> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_Ue_cqVP7n5heT7fvs-r2T" target="_blank" rel="noopener" class="playlist-link">Ch 6-9</a> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN9eTodpynNoy_jorqNM54KW" target="_blank" rel="noopener" class="playlist-link">Ch 10+</a></div>
+    </div>
+    </details>
+  </div>
   <article>
   <div class="group">
   <div class="verse">
@@ -151,5 +161,6 @@
 </footer>
 
 <script src="../js/script-toggle.js"></script>
+<script>document.addEventListener('click',function(e){document.querySelectorAll('.playlist-links details[open]').forEach(function(d){if(!d.contains(e.target))d.removeAttribute('open')})});</script>
 </body>
 </html>

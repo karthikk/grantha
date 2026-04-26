@@ -19,6 +19,14 @@
     <a href="../">मुख्यम्</a><span class="sep">»</span><a href="./">प्रकरणग्रन्थाः</a><span class="sep">»</span>आत्मबोधः
   </nav>
   <h1>आत्मबोधः</h1>
+  <div class="playlist-links">
+    <details>
+      <summary>पाठाः ▾</summary>
+    <div class="playlist-panel">
+    <div class="playlist-row"><span class="playlist-batch">धन्योसि</span> <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN9v_w-fLicguq8BXCUf3mxU" target="_blank" rel="noopener" class="playlist-link">▶</a></div>
+    </div>
+    </details>
+  </div>
   <article>
   <div class="group">
   <div class="verse">
@@ -455,5 +463,6 @@
 </footer>
 
 <script src="../js/script-toggle.js"></script>
+<script>document.addEventListener('click',function(e){document.querySelectorAll('.playlist-links details[open]').forEach(function(d){if(!d.contains(e.target))d.removeAttribute('open')})});</script>
 </body>
 </html>
