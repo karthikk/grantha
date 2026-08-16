@@ -859,13 +859,6 @@ body.shell::before {
   padding: 0.5rem 1.25rem;
 }
 
-.topbar-mid {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-width: 0;
-}
-
 /* the parampara, reading left to right in the order it came down */
 .parampara {
   display: flex;
@@ -887,11 +880,6 @@ body.shell::before {
 
 .acharya:hover {
   border-color: var(--cat);
-}
-
-/* below this the bar has room for the title and the search and nothing else */
-@media (max-width: 760px) {
-  .parampara { display: none; }
 }
 
 /* Shallower than the page-body input this inherits from: it is chrome, and
@@ -920,6 +908,34 @@ body.shell::before {
   flex: 1;
   max-width: 26rem;
   margin: 0;
+}
+
+/* On a phone the four portraits, the title and the search will not sit on
+   one line. The search drops to its own row instead of the parampara being
+   dropped altogether -- the lineage is the point of the bar. */
+@media (max-width: 760px) {
+  .topbar-inner {
+    flex-wrap: wrap;
+    row-gap: 0.35rem;
+    padding: 0.45rem 1rem;
+  }
+
+  .parampara.p-left { order: 1; margin-right: auto; }
+  .brand { order: 2; }
+  .parampara.p-right { order: 3; margin-left: auto; }
+
+  .topbar .search-home {
+    order: 4;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .topbar .search-input { max-width: none; }
+
+  .acharya {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
 }
 
 /* ── two panes ── */

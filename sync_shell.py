@@ -184,18 +184,16 @@ def chrome(up, lineage):
     return f'''    {BEGIN}
     <header class="topbar">
       <div class="topbar-inner">
-{figures(lineage, 'left', up, 8)}        <div class="topbar-mid">
-          <a class="brand" href="{up or './'}">ग्रन्थसङ्ग्रहः</a>
-          <div class="search-home" id="search-home">
-            <input
-              type="text"
-              class="search-input"
-              aria-label="search texts"
-              autocomplete="off"
-              spellcheck="false"
-            />
-            <div class="search-list" hidden></div>
-          </div>
+{figures(lineage, 'left', up, 8)}        <a class="brand" href="{up or './'}">ग्रन्थसङ्ग्रहः</a>
+        <div class="search-home" id="search-home">
+          <input
+            type="text"
+            class="search-input"
+            aria-label="search texts"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-list" hidden></div>
         </div>
 {figures(lineage, 'right', up, 8)}      </div>
     </header>
