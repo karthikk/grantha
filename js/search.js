@@ -246,7 +246,15 @@
 
     function pick() {
       var h = hits[cursor];
-      if (h) { go(h); }
+      if (!h) { return; }
+      // Dismiss before jumping. A hit on the page you are already reading
+      // scrolls rather than navigates, so nothing reloads -- and the panel
+      // was left sitting over the very mantra it had just taken you to.
+      // Blurring matters on a phone too: it puts the keyboard away.
+      list.hidden = true;
+      input.blur();
+      closeOverlay();
+      go(h);
     }
 
     function run() {

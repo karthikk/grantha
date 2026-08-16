@@ -148,8 +148,16 @@
     if (onpage) { sections(onpage); }
 
     // The toolbar script-toggle.js builds sits right under the <h1>, which is
-    // where these controls belong -- they act on the text below them. The
-    // class links are plain markup now, so there is nothing left to fix up.
+    // where these controls belong -- they act on the text below them.
+
+    // माण्डूक्य's batch pill opens a list of its four prakaraṇas. <details>
+    // has no notion of "click elsewhere", so close it by hand.
+    document.addEventListener('click', function (e) {
+      var open = document.querySelectorAll('.playlist-menu[open]');
+      for (var i = 0; i < open.length; i++) {
+        if (!open[i].contains(e.target)) { open[i].removeAttribute('open'); }
+      }
+    });
   }
 
   if (document.readyState === 'complete') {

@@ -50,8 +50,6 @@
      Mono, because these are short technical labels -- swap the first entries
      for -apple-system (system UI) or ui-serif (New York) if you prefer. */
   --ui-font: ui-monospace, 'SF Mono', Menlo, 'Tiro Devanagari Hindi', monospace;
-  /* play triangle, used as a mask so it inherits the text colour */
-  --play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10'%3E%3Cpath d='M0 0l8 5-8 5z'/%3E%3C/svg%3E");
 }
 
 /* Dark. Only the tokens change -- every rule below is written against them,
@@ -242,32 +240,67 @@ h2 {
   transition: background 0.12s, border-color 0.12s, color 0.12s;
 }
 
-/* A play mark, drawn rather than typed -- masked so it takes the colour of
-   the text beside it in either scheme, including on hover. Optically centred
-   by a hair: a triangle reads as sitting right of where its box says. */
-.playlist-link::before {
-  content: '';
-  flex: none;
-  width: 0.42em;
-  height: 0.5em;
-  margin-left: -0.05em;
-  background-color: currentColor;
-  opacity: 0.55;
-  -webkit-mask: var(--play) center / contain no-repeat;
-  mask: var(--play) center / contain no-repeat;
-}
-
 /* Each batch owns a hue, so you learn which row is yours by colour before
    you read it. A pill with no batch (six texts have a single unnamed list)
    falls back to the neutral chrome colour. */
-.playlist-link.b-dhanyosi   { --batch: #b45309; --batch-soft: #fdf2e2; }
-.playlist-link.b-jijnasu    { --batch: #6b21c4; --batch-soft: #f3ebfd; }
-.playlist-link.b-tattvamasi { --batch: #0f7a6b; --batch-soft: #e6f4f1; }
+.b-dhanyosi   { --batch: #b45309; --batch-soft: #fdf2e2; }
+.b-jijnasu    { --batch: #6b21c4; --batch-soft: #f3ebfd; }
+.b-tattvamasi { --batch: #0f7a6b; --batch-soft: #e6f4f1; }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-scheme='light']) .playlist-link.b-dhanyosi   { --batch: #f0b45c; --batch-soft: #2b1f0e; }
-  :root:not([data-scheme='light']) .playlist-link.b-jijnasu    { --batch: #c49bff; --batch-soft: #201434; }
-  :root:not([data-scheme='light']) .playlist-link.b-tattvamasi { --batch: #3fd0b8; --batch-soft: #10241f; }
+  :root:not([data-scheme='light']) .b-dhanyosi   { --batch: #f0b45c; --batch-soft: #2b1f0e; }
+  :root:not([data-scheme='light']) .b-jijnasu    { --batch: #c49bff; --batch-soft: #201434; }
+  :root:not([data-scheme='light']) .b-tattvamasi { --batch: #3fd0b8; --batch-soft: #10241f; }
+}
+
+/* माण्डूक्य carries the Upanishad and the three Kārikā prakaraṇas as four
+   separate lists for one batch. Four identical pills would say nothing, so
+   the batch keeps a single pill and opens. Rare -- no other text needs it. */
+.playlist-menu {
+  position: relative;
+}
+
+.playlist-menu > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.playlist-menu > summary::-webkit-details-marker { display: none; }
+
+.playlist-menu[open] > summary {
+  background: var(--batch-soft, var(--cat-soft));
+  border-color: var(--batch, var(--cat));
+}
+
+.playlist-drop {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 0.3rem);
+  right: 0;                    /* the pill sits at the right of the toolbar,
+                                  so open leftward or a phone clips this */
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  padding: 0.3rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 14%);
+  white-space: nowrap;
+}
+
+.playlist-drop a {
+  padding: 0.22rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--batch, var(--chrome));
+  text-decoration: none;
+}
+
+.playlist-drop a:hover {
+  background: var(--batch-soft, var(--cat-soft));
+  text-decoration: none;
 }
 
 .playlist-link:hover {
@@ -275,10 +308,6 @@ h2 {
   background: var(--batch-soft, var(--cat-soft));
   color: var(--batch, var(--cat));
   text-decoration: none;
-}
-
-.playlist-link:hover::before {
-  opacity: 1;
 }
 
 /* Grouped section box */
