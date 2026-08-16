@@ -1310,6 +1310,30 @@ body.cat-home .reading {
     border-top: 1px solid var(--border);
     padding: 1rem;
   }
-  .reading { order: 1; padding: 1rem; }
-  .shell-body { flex-direction: column; padding-right: 0; }
+  /* margin:0 auto centres this column on the desktop row. Here the shell is
+     a column, so horizontal is the cross axis -- and auto cross-margins
+     switch off `stretch` in flexbox. The pane then sized to its own content:
+     a 144-character sandhi compound in बृहदारण्यक made it 1111px wide inside
+     a 390px phone, so every line was cut off at the right edge. */
+  .reading {
+    order: 1;
+    padding: 1rem;
+    margin: 0;
+    width: auto;
+  }
+
+  /* these two are more specific than the rule above, so they would keep the
+     auto margins and the same suppressed stretch -- they only escape it now
+     because nothing on the home page is long enough to notice */
+  body.is-index .reading,
+  body.cat-home .reading {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .shell-body {
+    flex-direction: column;
+    align-items: stretch;
+    padding-right: 0;
+  }
 }
