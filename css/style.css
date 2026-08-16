@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
 
 :root {
   /* Neutral greys -- no warm bias anywhere. Text is near-black, secondary text
@@ -33,6 +33,17 @@
      they read it from here rather than each carrying its own guess. */
   --chrome-h: 2.9rem;
   --font: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
+  /* Swara. Tiro carries udatta and anudatta but has no glyph for U+1CDA, the
+     double svarita -- and Google's @font-face for it declares U+1CD0-1CF9 all
+     the same, so the browser never looks elsewhere. The shaper is then left
+     with a mark it cannot attach, and does the specified thing: inserts
+     U+25CC as a stand-in base. Hence a dotted circle wearing the accent.
+
+     Listing Noto after Tiro does not fix it -- fallback is per character, so
+     the base stays in Tiro and the mark shapes alone in Noto, which is an
+     orphaned mark again. The cluster has to shape in one font that has all
+     of it, so the pages carrying swara switch face outright. */
+  --font-vedic: 'Noto Serif Devanagari', 'Tiro Devanagari Hindi', serif;
   /* UI chrome is English now. Font matching is per-character, so a Latin face
      first with the Devanagari face behind it renders mixed strings like
      "Home » उपनिषदः" correctly in both scripts.
@@ -84,6 +95,10 @@
   --accent-ink: #12070a;
   --accent-soft: #2a1315;
 }
+
+/* sync_shell.py adds this to any page whose text contains a Vedic Extension,
+   so it follows the character rather than a hardcoded list of files */
+body.vedic { --font: var(--font-vedic); }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 

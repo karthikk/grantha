@@ -254,6 +254,11 @@ def sync(path, order, tiers, cats, lineage):
     cls += ' shell'
     if is_index:
         cls += ' is-index'
+    # Swara: Tiro has no glyph for U+1CDA and the shaper falls back to a dotted
+    # circle. Pages carrying any Vedic Extension switch to a face that has the
+    # whole range -- keyed off the text itself, not a list of filenames.
+    if re.search(r'[\u1CD0-\u1CFF]', s):
+        cls += ' vedic'
     s = re.sub(r'<body[^>]*>', f'<body class="{cls}">', s, count=1)
 
     # An earlier layout left a second, brandless top bar sitting outside the
