@@ -137,7 +137,8 @@
       "playlists": [
         { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-7nBeVc6nb0aN0C3hcpGyN" },
         { "batch": "jijnasu", "list": "PL7qtWZUUoJN87z7ShVsgyJR-xBqFU8cK5" },
-        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN-loWUMfGgHk_GNE_IjDVBp" }
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN-loWUMfGgHk_GNE_IjDVBp" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSGagQfXtzh431js9aUDZoA" }
       ]
     },
     {
@@ -221,7 +222,8 @@
       "alias": ["sadhana", "upadeshapanchakam"],
       "group": "भगवत्पादः",
       "playlists": [
-        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9i1PvdFwcLX4qq38ilz7GW" }
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9i1PvdFwcLX4qq38ilz7GW" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCShLufjXl_N4fticAPNY8Zi" }
       ]
     },
     {
