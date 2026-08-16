@@ -189,7 +189,7 @@ def text_for(rel, blob):
     return None
 
 
-def classes(text, acharyas, indent):
+def classes(text, acharyas, up, indent):
     """The class recordings for one text, as one bordered set per teacher.
 
     A batch is a pill. A batch that ran the text over several playlists --
@@ -222,9 +222,14 @@ def classes(text, acharyas, indent):
                 '%s      <div class="playlist-drop">\n%s%s      </div>\n'
                 '%s    </details>' % (p, cls, p, b['name'], p, opts, p, p))
         if rows:
-            sets.append('%s  <div class="acharya-set">\n'
+            face = ''
+            if os.path.exists(os.path.join(BASE, 'images', a['id'] + '.jpg')):
+                face = ('%s    <img class="set-face" src="%simages/%s.jpg" alt="" '
+                        'width="192" height="192" loading="lazy" />\n'
+                        % (p, up, a['id']))
+            sets.append('%s  <div class="acharya-set">\n%s'
                         '%s    <span class="set-name">%s</span>\n%s\n%s  </div>'
-                        % (p, p, a['name'], '\n'.join(rows), p))
+                        % (p, face, p, a['name'], '\n'.join(rows), p))
     if not sets:
         return ''
     return '%s<div class="playlist-links">\n%s\n%s</div>\n' % (p, '\n'.join(sets), p)
@@ -365,7 +370,7 @@ def sync(path, order, tiers, cats, lineage, acharyas):
     if here is not None:
         text = text_for(rel, cats[here])
         if text is not None:
-            block = classes(text, acharyas, 8)
+            block = classes(text, acharyas, up, 8)
             span = div_block(s, '<div class="playlist-links">')
             if span:
                 s = s[:span[0]] + block + s[span[1]:]

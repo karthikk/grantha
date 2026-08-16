@@ -5,10 +5,10 @@
     { "slug": "dakshinamurti", "name": "दक्षिणामूर्तिः", "side": "left" },
     { "slug": "vyasa", "name": "व्यासः", "side": "left" },
     { "slug": "shankara", "name": "भगवत्पादः", "side": "right" },
-    { "slug": "rangaaji", "name": "आचार्यरङ्गाजी", "side": "right", "href": "https://www.brahmavidyamandir.in/" },
+    { "slug": "rangaaji", "name": "आचार्य रङ्गाजी", "side": "right", "href": "https://www.brahmavidyamandir.in/" },
     {
       "slug": "suryapriya",
-      "name": "आचार्यसूर्यप्रिया",
+      "name": "आचार्य सूर्यप्रिया जी",
       "side": "right",
       "href": "https://www.youtube.com/@advaitabharati4487"
     }
@@ -17,7 +17,7 @@
   "acharyas": [
     {
       "id": "rangaaji",
-      "name": "आचार्यरङ्गाजी",
+      "name": "आचार्य रङ्गाजी",
       "batches": [
         { "id": "dhanyosi", "name": "धन्योसि" },
         { "id": "jijnasu", "name": "जिज्ञासु" },
@@ -27,7 +27,7 @@
     },
     {
       "id": "suryapriya",
-      "name": "आचार्यसूर्यप्रिया",
+      "name": "आचार्य सूर्यप्रिया जी",
       "batches": [
         { "id": "kashi", "name": "काशी" },
         { "id": "kanchi", "name": "काञ्ची" },

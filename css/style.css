@@ -152,7 +152,7 @@ h2 {
    Which script to read in, on the left; whose recorded classes to follow, on
    the right. They are the only things on the site you can press, so they are
    built as a matched pair: same height, same radius, same hairline, and both
-   taking the page's colour when active. --ctl-h keeps the two honest.
+   taking the page's colour when active.
 
    Both carry Indic labels of very different widths (दे, த, धन्योसि), so the
    text face is used throughout and the segments are floored to a common
@@ -160,7 +160,6 @@ h2 {
    they came out visibly mismatched. */
 
 .toolbar {
-  --ctl-h: 1.65rem;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -183,7 +182,6 @@ h2 {
   align-items: stretch;
   gap: 2px;
   padding: 2px;
-  height: var(--ctl-h, 1.65rem);
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--surface);
@@ -194,14 +192,14 @@ h2 {
   align-items: center;
   justify-content: center;
   min-width: 2.15rem;
-  padding: 0 0.5rem;
+  padding: 0.14rem 0.5rem;
   border: none;
   border-radius: 999px;
   background: transparent;
   color: var(--chrome);
   font-family: var(--font);
   font-size: 0.8rem;
-  line-height: 1;
+  line-height: 1.5;
   text-decoration: none;
   transition: background 0.12s, color 0.12s;
 }
@@ -226,32 +224,40 @@ h2 {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.3rem;
-  padding: 0.3rem 0.45rem;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  gap: 0.4rem;
+}
+
+/* The teacher's own face marks the set. A bordered box around the pills was
+   a second rounded rectangle around a row of rounded rectangles, which read
+   as packaging rather than as meaning; the portrait says whose class it is
+   at a glance, and ties the row to the parampara in the bar above. */
+.set-face {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
 }
 
 .set-name {
-  padding: 0 0.2rem 0 0.1rem;
   font-family: var(--font);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--chrome);
   white-space: nowrap;
+  margin-right: 0.1rem;
 }
 
 .playlist-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  height: var(--ctl-h, 1.65rem);
-  padding: 0 0.75rem;
+  padding: 0.14rem 0.75rem;
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--batch, var(--chrome));
   font-family: var(--font);
   font-size: 0.8rem;
-  line-height: 1;
+  line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.12s, border-color 0.12s, color 0.12s;
