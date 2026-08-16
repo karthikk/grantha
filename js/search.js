@@ -15,8 +15,20 @@
  */
 (function () {
   var DEV = '०१२३४५६७८९';
-  var root = location.pathname.indexOf('/', 1) > 0 &&
-             /\/[^/]+\/[^/]*$/.test(location.pathname) ? '../' : './';
+
+  // Site root, taken from this script's own URL rather than guessed from the
+  // page's path depth. The guess broke on GitHub Pages, which serves the site
+  // from /grantha/ while a local server serves it from / -- the home page then
+  // resolved "../data" to the domain root and 404'd.
+  var root = (function () {
+    var s = document.currentScript ||
+            document.querySelector('script[src$="js/search.js"]');
+    if (!s || !s.src) { return './'; }
+    // new URL() collapses any ".." segments, so this holds whether the tag
+    // said "js/search.js" or "../js/search.js".
+    return new URL(s.src, location.href).href
+      .replace(/js\/search\.js(\?.*)?$/, '');
+  })();
 
   function toDev(s) {
     return String(s).replace(/\d/g, function (d) { return DEV[+d]; });
