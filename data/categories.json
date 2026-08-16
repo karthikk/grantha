@@ -1,5 +1,13 @@
 {
-  "_note": "Order here is the order of the collection row. Tiers group them.",
+  "_note": "Tiers group the collections; 'categories' is the order they appear in.",
+  "_parampara": "The top bar, left to right. A figure is drawn only once images/<slug>.jpg exists, so adding a portrait is a matter of dropping the file in and re-running sync_shell.py.",
+  "parampara": [
+    { "slug": "dakshinamurti", "name": "दक्षिणामूर्तिः", "side": "left" },
+    { "slug": "vyasa", "name": "व्यासः", "side": "left" },
+    { "slug": "shankara", "name": "भगवत्पादः", "side": "right" },
+    { "slug": "rangaaji", "name": "आचार्यरङ्गाजी", "side": "right",
+      "href": "https://www.brahmavidyamandir.in/" }
+  ],
   "tiers": [
     {
       "id": "prasthanatrayi",

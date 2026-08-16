@@ -40,7 +40,11 @@ def load():
     cats = {}
     for c in order:
         cats[c] = json.load(open(os.path.join(DATA, c + '.json'), encoding='utf-8'))
-    return order, tiers, cats
+    # only the figures whose portrait is actually on disk -- a missing file
+    # should leave a gap, not a broken image
+    lineage = [f for f in man.get('parampara', [])
+               if os.path.exists(os.path.join(BASE, 'images', f['slug'] + '.jpg'))]
+    return order, tiers, cats, lineage
 
 
 def dev_name(cat, blob):
@@ -124,7 +128,7 @@ def home_body(order, tiers, cats):
 
     -- but the shape on the page is identical, so the eye learns it once.
     """
-    out = []
+    out = ['      <p class="namah">श्रीगुरुभ्यो नमः</p>']
     for tier in tiers:
         here = [c for c in order if cats[c]['tier'] == tier['id']]
         if not here:
@@ -144,28 +148,56 @@ def home_body(order, tiers, cats):
     return '      %s\n%s\n      %s' % (HOME_BEGIN, '\n'.join(out), HOME_END)
 
 
-def chrome(up):
+def figures(lineage, side, up, indent):
+    """The parampara, as portraits flanking the bar.
+
+    Reads left to right in the order the teaching came down: दक्षिणामूर्ति and
+    व्यास to the left of the title, भगवत्पाद and one's own आचार्य to its right.
+    """
+    p = ' ' * indent
+    out = []
+    for f in lineage:
+        if f.get('side') != side:
+            continue
+        img = ('<img class="acharya" src="%simages/%s.jpg" alt="%s" '
+               'title="%s" width="192" height="192" loading="lazy" />'
+               % (up, f['slug'], f['name'], f['name']))
+        if f.get('href'):
+            img = ('<a href="%s" target="_blank" rel="noopener">%s</a>'
+                   % (f['href'], img))
+        out.append(p + img)
+    if not out:
+        return ''
+    return ('%s<div class="parampara p-%s">\n%s\n%s</div>\n'
+            % (p, side, '\n'.join('  ' + o for o in out), p))
+
+
+def chrome(up, lineage):
     """The top bar: the way home, and the way to any text.
 
     There was a row of collection tabs under this. The home page now lists
     every text in the corpus, so a tab that went to a collection listing had
-    nothing left to show -- brand and search are the whole of it.
+    nothing left to show. What flanks the title instead is the parampara --
+    the space either side of a centred brand was empty, and this is what it
+    is for.
     """
     return f'''    {BEGIN}
     <header class="topbar">
       <div class="topbar-inner">
-        <a class="brand" href="{up or './'}">ग्रन्थसङ्ग्रहः</a>
-        <div class="search-home" id="search-home">
-          <input
-            type="text"
-            class="search-input"
-            aria-label="search texts"
-            autocomplete="off"
-            spellcheck="false"
-          />
-          <div class="search-list" hidden></div>
+{figures(lineage, 'left', up, 8)}        <div class="topbar-mid">
+          <a class="brand" href="{up or './'}">ग्रन्थसङ्ग्रहः</a>
+          <div class="search-home" id="search-home">
+            <input
+              type="text"
+              class="search-input"
+              aria-label="search texts"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <div class="search-list" hidden></div>
+          </div>
         </div>
-      </div>
+{figures(lineage, 'right', up, 8)}      </div>
     </header>
     {END}
 '''
@@ -189,7 +221,7 @@ def convert_layout(s, is_index):
     return s
 
 
-def sync(path, order, tiers, cats):
+def sync(path, order, tiers, cats, lineage):
     rel = os.path.relpath(path, BASE)
     d = rel.split(os.sep)[0]
     here = d if d in cats else None
@@ -234,7 +266,7 @@ def sync(path, order, tiers, cats):
         s = head + END + tail
 
     # chrome block, replaced wholesale so it can never drift
-    block = chrome(up)
+    block = chrome(up, lineage)
     if BEGIN in s:
         # the file already carries the indentation before BEGIN, so the
         # replacement must not bring its own
@@ -267,12 +299,12 @@ def sync(path, order, tiers, cats):
 
 def main():
     check = '--check' in sys.argv
-    order, tiers, cats = load()
+    order, tiers, cats, lineage = load()
     pages = sorted(glob.glob(os.path.join(BASE, '*', '*.html')) +
                    glob.glob(os.path.join(BASE, '*.html')))
     stale = 0
     for p in pages:
-        out, changed = sync(p, order, tiers, cats)
+        out, changed = sync(p, order, tiers, cats, lineage)
         if not changed:
             continue
         stale += 1

@@ -834,15 +834,49 @@ body.shell::before {
   box-shadow: inset 0 3px 0 var(--cat);
 }
 
-/* Brand and search sit centred as a pair, over the reading column below --
-   not pushed to the window edges. The panes flanking that column are near
-   enough the same width that page-centre and column-centre agree. */
+/* One centred cluster: the parampara sits against the title and search rather
+   than out at the window edges, so the whole bar reads as a single object. */
 .topbar-inner {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.topbar-mid {
+  display: flex;
+  align-items: center;
   gap: 0.75rem;
-  padding: 0.55rem 1.25rem;
+  min-width: 0;
+}
+
+/* the parampara, reading left to right in the order it came down */
+.parampara {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.acharya {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  transition: border-color 0.12s;
+}
+
+.acharya:hover {
+  border-color: var(--cat);
+}
+
+/* below this the bar has room for the title and the search and nothing else */
+@media (max-width: 760px) {
+  .parampara { display: none; }
 }
 
 /* Shallower than the page-body input this inherits from: it is chrome, and
@@ -1060,6 +1094,16 @@ body.shell::before {
    The one screen where completeness is the point, and now the only index
    there is -- every text in the corpus is reachable from here, so nothing
    truncates. Columns keep 88 entries down to a page and a half. */
+
+/* the salutation the corpus opens under. Set quietly and given room: it is
+   not a heading, and the tier rules below should not read as answering it. */
+.namah {
+  margin: 0 0 2.2rem;
+  text-align: center;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--chrome);
+}
 
 .tier {
   margin-bottom: 2.4rem;
