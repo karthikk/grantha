@@ -226,6 +226,13 @@ def nav_div(prev, nxt, ind, compact=False):
             + f'{ind}</nav>\n')
 
 
+BATCH_SLUG = {
+    'धन्योसि': 'dhanyosi',
+    'जिज्ञासु': 'jijnasu',
+    'तत्त्वमसि': 'tattvamasi',
+}
+
+
 def playlist_div(rows, ind):
     """One oval link per batch, laid out flat beside the title.
 
@@ -238,9 +245,12 @@ def playlist_div(rows, ind):
         return ''
     out = ''
     for batch, pid in rows:
-        out += (f'{ind}    <a class="playlist-link" '
+        # the slug is what gives the pill its colour; see .b-* in style.css
+        slug = BATCH_SLUG.get(batch, '')
+        cls = 'playlist-link' + (' b-' + slug if slug else '')
+        out += (f'{ind}    <a class="{cls}" '
                 f'href="https://www.youtube.com/playlist?list={pid}" '
-                f'target="_blank" rel="noopener">{batch or "प्रवचनम्"}</a>\n')
+                f'target="_blank" rel="noopener">{batch or "Classes"}</a>\n')
     return (f'{ind}<div class="playlist-links">\n'
             f'{ind}  <div class="playlist-panel">\n{out}'
             f'{ind}  </div>\n{ind}</div>\n')

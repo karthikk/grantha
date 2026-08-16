@@ -135,64 +135,74 @@ h2 {
   color: var(--head);
 }
 
-/* Toolbar (script toggle + playlist links) */
+/* ── The one row of controls a text page has ───────────────────────────────
+   Which script to read in, on the left; whose recorded classes to follow, on
+   the right. They are the only things on the site you can press, so they are
+   built as a matched pair: same height, same radius, same hairline, and both
+   taking the page's colour when active. --ctl-h keeps the two honest.
+
+   Both carry Indic labels of very different widths (दे, த, धन्योसि), so the
+   text face is used throughout and the segments are floored to a common
+   width -- a mono stack rendered these through three different fallbacks and
+   they came out visibly mismatched. */
 
 .toolbar {
+  --ctl-h: 1.65rem;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.7rem;
+  gap: 0.6rem;
+  margin: 1.1rem 0 0.9rem;
 }
 
-/* playlists stay right; search and script toggle sit left */
+/* script on the left, classes on the right */
 .toolbar .playlist-links {
   margin-left: auto;
 }
 
+/* a segmented control, not three loose boxes */
 .script-toggle {
-  font-size: 0.7rem;
-}
-
-.script-label {
-  color: var(--chrome);
-  margin-right: 0.15rem;
+  display: inline-flex;
+  align-items: stretch;
+  gap: 2px;
+  padding: 2px;
+  height: var(--ctl-h, 1.65rem);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
 }
 
 .script-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.5em;
-  height: 1.5em;
-  padding: 0 0.3rem;
-  margin-left: 0.1rem;
-  border: 1px solid var(--border);
-  border-radius: 2px;
+  min-width: 2.15rem;
+  padding: 0 0.5rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
   color: var(--chrome);
-  font-size: 0.7rem;
-  text-decoration: none;
+  font-family: var(--font);
+  font-size: 0.8rem;
   line-height: 1;
-  vertical-align: middle;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
 }
 
 .script-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: var(--cat-soft);
+  color: var(--cat);
   text-decoration: none;
 }
 
 .script-btn.active {
-  background: var(--accent);
-  color: var(--accent-ink);
-  border-color: var(--accent);
+  background: var(--cat);
+  color: var(--bg);
+  font-weight: 600;
 }
 
-/* Playlist links -- one oval tag per class batch, named, beside the title.
-   Was a <details> dropdown holding rows of "<batch> ▶"; the glyph-in-a-box
-   said nothing the pill does not, and the click to open bought nothing when
-   there are only ever two or three. */
+/* One tag per class batch, named. Outlined rather than filled, so the row
+   stays quiet until you reach for it and the segmented control opposite is
+   the only solid thing on the line. */
 
 .playlist-panel {
   display: flex;
@@ -204,35 +214,56 @@ h2 {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  padding: 0.1rem 0.65rem;
-  border: 1px solid var(--border-strong);
+  height: var(--ctl-h, 1.65rem);
+  padding: 0 0.75rem;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 0.75rem;
-  line-height: 1.75;
+  color: var(--batch, var(--chrome));
+  font-family: var(--font);
+  font-size: 0.8rem;
+  line-height: 1;
   text-decoration: none;
   white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
 }
 
 /* A play mark, drawn rather than typed -- masked so it takes the colour of
-   the text beside it in either scheme, including on hover. */
+   the text beside it in either scheme, including on hover. Optically centred
+   by a hair: a triangle reads as sitting right of where its box says. */
 .playlist-link::before {
   content: '';
   flex: none;
-  width: 0.52em;
-  height: 0.6em;
+  width: 0.42em;
+  height: 0.5em;
+  margin-left: -0.05em;
   background-color: currentColor;
-  opacity: 0.75;
+  opacity: 0.55;
   -webkit-mask: var(--play) center / contain no-repeat;
   mask: var(--play) center / contain no-repeat;
 }
 
+/* Each batch owns a hue, so you learn which row is yours by colour before
+   you read it. A pill with no batch (six texts have a single unnamed list)
+   falls back to the neutral chrome colour. */
+.playlist-link.b-dhanyosi   { --batch: #b45309; --batch-soft: #fdf2e2; }
+.playlist-link.b-jijnasu    { --batch: #6b21c4; --batch-soft: #f3ebfd; }
+.playlist-link.b-tattvamasi { --batch: #0f7a6b; --batch-soft: #e6f4f1; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-scheme='light']) .playlist-link.b-dhanyosi   { --batch: #f0b45c; --batch-soft: #2b1f0e; }
+  :root:not([data-scheme='light']) .playlist-link.b-jijnasu    { --batch: #c49bff; --batch-soft: #201434; }
+  :root:not([data-scheme='light']) .playlist-link.b-tattvamasi { --batch: #3fd0b8; --batch-soft: #10241f; }
+}
+
 .playlist-link:hover {
-  border-color: var(--cat);
-  background: var(--cat-soft);
-  color: var(--cat);
+  border-color: var(--batch, var(--cat));
+  background: var(--batch-soft, var(--cat-soft));
+  color: var(--batch, var(--cat));
   text-decoration: none;
+}
+
+.playlist-link:hover::before {
+  opacity: 1;
 }
 
 /* Grouped section box */
@@ -650,9 +681,6 @@ p.shloka {
 /* ── English chrome gets a Latin UI face ───────────────────────────────── */
 
 .nav-label,
-.script-toggle,
-.script-label,
-.script-btn,
 .mobile-toggle,
 .search-open,
 .search-input,
@@ -676,11 +704,6 @@ p.shloka {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--chrome);
-}
-
-.script-btn,
-.script-label {
-  letter-spacing: 0.02em;
 }
 
 /* Search button in the toolbar -- the "/" shortcut has no mobile equivalent */
@@ -759,17 +782,10 @@ h1 {
   box-shadow: inset 3px 0 0 var(--cat);
 }
 
-/* toolbar controls follow the page colour */
+/* the mobile search button follows the page colour; the toolbar controls
+   already take it in their own rules */
 .search-open {
   color: var(--cat);
-}
-
-.search-open {
-  border-color: var(--cat);
-}
-
-.script-btn.active {
-  background: var(--cat);
   border-color: var(--cat);
 }
 
