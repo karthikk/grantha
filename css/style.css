@@ -1187,7 +1187,7 @@ body.shell::before {
 .namah {
   margin: 0 0 1rem;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   line-height: 1.3;
   letter-spacing: 0.02em;
   color: var(--chrome);
@@ -1246,13 +1246,13 @@ body.shell::before {
 /* chapter number; the ordinal in the full name is redundant beside it */
 .tn {
   font-family: var(--ui-font);
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   color: var(--tier, var(--chrome));
-  margin-right: 0.3rem;
+  margin-right: 0.2rem;
 }
 
 .tlist a {
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--text);
   text-decoration: none;
 }
@@ -1277,7 +1277,7 @@ body.shell::before {
   flex: none;
   width: 9.5rem;              /* holds श्रीमद्भगवद्गीता, the longest label */
   text-align: right;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   color: var(--tier, var(--chrome));
 }
@@ -1308,7 +1308,7 @@ body.shell::before {
 .brand {
   flex: none;
   font-family: var(--font);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--text);
   text-decoration: none;
