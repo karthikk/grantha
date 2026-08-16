@@ -5,34 +5,40 @@
     { "slug": "dakshinamurti", "name": "दक्षिणामूर्तिः", "side": "left" },
     { "slug": "vyasa", "name": "व्यासः", "side": "left" },
     { "slug": "shankara", "name": "भगवत्पादः", "side": "right" },
-    { "slug": "rangaaji", "name": "आचार्यरङ्गाजी", "side": "right",
-      "href": "https://www.brahmavidyamandir.in/" },
-    { "slug": "suryapriya", "name": "आचार्यसूर्यप्रिया", "side": "right",
-      "href": "https://www.youtube.com/@advaitabharati4487" }
-  ],
-  "tiers": [
+    { "slug": "rangaaji", "name": "आचार्यरङ्गाजी", "side": "right", "href": "https://www.brahmavidyamandir.in/" },
     {
-      "id": "prasthanatrayi",
-      "name": "प्रस्थानत्रयी",
-      "en": "the three sources"
-    },
-    {
-      "id": "prakarana",
-      "name": "प्रकरणग्रन्थाः",
-      "en": "manuals"
-    },
-    {
-      "id": "stotra",
-      "name": "स्तोत्राणि",
-      "en": "devotional"
+      "slug": "suryapriya",
+      "name": "आचार्यसूर्यप्रिया",
+      "side": "right",
+      "href": "https://www.youtube.com/@advaitabharati4487"
     }
   ],
-  "categories": [
-    "upanishads",
-    "gita",
-    "brahmasutra",
-    "prakarana",
-    "slokas",
-    "sahasranama"
-  ]
+  "_acharyas": "Whose classes these are. Each teacher's batches are drawn as one bordered set beside the text, and a batch owns a colour.",
+  "acharyas": [
+    {
+      "id": "rangaaji",
+      "name": "आचार्यरङ्गाजी",
+      "batches": [
+        { "id": "dhanyosi", "name": "धन्योसि" },
+        { "id": "jijnasu", "name": "जिज्ञासु" },
+        { "id": "tattvamasi", "name": "तत्त्वमसि" },
+        { "id": "classes", "name": "प्रवचनम्" }
+      ]
+    },
+    {
+      "id": "suryapriya",
+      "name": "आचार्यसूर्यप्रिया",
+      "batches": [
+        { "id": "kashi", "name": "काशी" },
+        { "id": "kanchi", "name": "काञ्ची" },
+        { "id": "nalanda", "name": "नालन्दा" }
+      ]
+    }
+  ],
+  "tiers": [
+    { "id": "prasthanatrayi", "name": "प्रस्थानत्रयी", "en": "the three sources" },
+    { "id": "prakarana", "name": "प्रकरणग्रन्थाः", "en": "manuals" },
+    { "id": "stotra", "name": "स्तोत्राणि", "en": "devotional" }
+  ],
+  "categories": ["upanishads", "gita", "brahmasutra", "prakarana", "slokas", "sahasranama"]
 }

@@ -6,36 +6,310 @@
   "groups": ["भगवत्पादः", "हस्तामलकः", "विद्यारण्यः", "सदानन्दः", "लक्ष्मीधरः", "रमणमहर्षिः", "अन्ये"],
   "_note": "Searched fields: file, en, alias. Add an alias only for spellings you would actually type.",
   "texts": [
-    { "file": "vivekachudamani",         "dev": "विवेकचूडामणिः",        "en": "Vivekachudamani",          "alias": ["viveka", "vc", "chudamani"],        "group": "भगवत्पादः" },
-    { "file": "vedantasara",             "dev": "वेदान्तसारः",           "en": "Vedanta Sara",             "alias": ["vedantasaram", "sara"],            "group": "सदानन्दः" },
-    { "file": "aparokshanubhuti",        "dev": "अपरोक्षानुभूतिः",      "en": "Aparokshanubhuti",         "alias": ["aparoksha"],                        "group": "भगवत्पादः" },
-    { "file": "advaitamakaranda",        "dev": "अद्वैतमकरन्दः",        "en": "Advaita Makaranda",        "alias": ["makaranda"],                        "group": "लक्ष्मीधरः" },
-    { "file": "upadeshasaram",           "dev": "उपदेशसारम्",           "en": "Upadesha Saram",           "alias": ["upadesa", "upadesha"],              "group": "रमणमहर्षिः" },
-    { "file": "kaupinapanchakam",        "dev": "कौपीनपञ्चकम्",         "en": "Kaupina Panchakam",        "alias": ["koupeena", "kaupina"],              "group": "भगवत्पादः" },
-    { "file": "saddarshanam",            "dev": "सद्दर्शनम्",            "en": "Saddarshanam",             "alias": ["saddarshana", "satdarshana"],      "group": "रमणमहर्षिः" },
-    { "file": "panchikaranam",           "dev": "पञ्चीकरणम्",           "en": "Panchikaranam",            "alias": ["panchikarana", "vartika"],          "group": "भगवत्पादः" },
-    { "file": "ramagita",                "dev": "रामगीता",              "en": "Rama Gita",                "alias": ["ramagitaa"],                        "group": "अन्ये" },
-    { "file": "ashtavakragita",          "dev": "अष्टावक्रगीता",        "en": "Ashtavakra Gita",          "alias": ["ashtavakra"],                       "group": "अन्ये" },
-    { "file": "panchadasi",              "dev": "पञ्चदशी",              "en": "Panchadasi",               "alias": ["pancadasi", "pd"],                  "group": "विद्यारण्यः" },
-    { "file": "atmabodha",               "dev": "आत्मबोधः",             "en": "Atma Bodha",               "alias": ["atmabodham"],                       "group": "भगवत्पादः" },
-    { "file": "tattvabodha",             "dev": "तत्त्वबोधः",            "en": "Tattva Bodha",             "alias": ["tattvabodham", "tatva"],           "group": "भगवत्पादः" },
-    { "file": "drkdrshyaviveka",         "dev": "दृग्दृश्यविवेकः",       "en": "Drk Drshya Viveka",        "alias": ["drgdrshya", "drk", "drishya"],     "group": "विद्यारण्यः" },
-    { "file": "vakyavritti",             "dev": "वाक्यवृत्तिः",          "en": "Vakya Vritti",             "alias": ["vakyavrtti"],                      "group": "भगवत्पादः" },
-    { "file": "laghuvakyavritti",        "dev": "लघुवाक्यवृत्तिः",       "en": "Laghu Vakya Vritti",       "alias": ["laghu"],                           "group": "भगवत्पादः" },
-    { "file": "bhajagovindam",           "dev": "भजगोविन्दम्",          "en": "Bhaja Govindam",           "alias": ["bhaja", "govindam", "mohamudgara"], "group": "भगवत्पादः" },
-    { "file": "manishapanchakam",        "dev": "मनीषापञ्चकम्",         "en": "Manisha Panchakam",        "alias": ["manisha"],                          "group": "भगवत्पादः" },
-    { "file": "mayapanchakam",           "dev": "मायापञ्चकम्",          "en": "Maya Panchakam",           "alias": ["maya"],                             "group": "भगवत्पादः" },
-    { "file": "kashipanchakam",          "dev": "काशीपञ्चकम्",          "en": "Kashi Panchakam",          "alias": ["kashi"],                            "group": "भगवत्पादः" },
-    { "file": "sadhanapanchakam",        "dev": "साधनपञ्चकम्",          "en": "Sadhana Panchakam",        "alias": ["sadhana", "upadeshapanchakam"],     "group": "भगवत्पादः" },
-    { "file": "advaitapancharatnam",     "dev": "अद्वैतपञ्चरत्नम्",      "en": "Advaita Pancharatnam",     "alias": ["pancharatna"],                     "group": "भगवत्पादः" },
-    { "file": "advaitanubhuti",          "dev": "अद्वैतानुभूतिः",        "en": "Advaitanubhuti",           "alias": ["advaitaanubhuti"],                 "group": "भगवत्पादः" },
-    { "file": "brahmajnanavali",         "dev": "ब्रह्मज्ञानावलीमाला",  "en": "Brahma Jnanavali Mala",    "alias": ["jnanavali"],                        "group": "भगवत्पादः" },
-    { "file": "dashashloki",             "dev": "दशश्लोकी",             "en": "Dasha Shloki",             "alias": ["dashashloki", "dasasloki"],         "group": "भगवत्पादः" },
-    { "file": "ekashloki",               "dev": "एकश्लोकी",             "en": "Eka Shloki",               "alias": ["ekasloki"],                         "group": "भगवत्पादः" },
-    { "file": "dhanyashtakam",           "dev": "धन्याष्टकम्",           "en": "Dhanyashtakam",            "alias": ["dhanya"],                          "group": "भगवत्पादः" },
-    { "file": "hastamalakiyam",          "dev": "हस्तामलकीयम्",         "en": "Hastamalakiyam",           "alias": ["hastamalaka"],                      "group": "हस्तामलकः" },
-    { "file": "prashnottararatnamalika", "dev": "प्रश्नोत्तररत्नमालिका", "en": "Prashnottara Ratnamalika", "alias": ["ratnamalika", "prashnottara"],     "group": "भगवत्पादः" },
-    { "file": "pratahsmaranam",          "dev": "प्रातःस्मरणम्",         "en": "Pratah Smaranam",          "alias": ["pratah", "smaranam"],              "group": "भगवत्पादः" },
-    { "file": "svarupanusandhana",       "dev": "स्वरूपानुसन्धानाष्टकम्", "en": "Svarupanusandhanashtakam", "alias": ["svarupa", "anusandhana"],         "group": "भगवत्पादः" }
+    {
+      "file": "vivekachudamani",
+      "dev": "विवेकचूडामणिः",
+      "en": "Vivekachudamani",
+      "alias": ["viveka", "vc", "chudamani"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8ErU9e2Sd8ogaQGhUE3n1u" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9XnLlA1ED7FD14CEUXD8Ds" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9XnLlA1ED7FD14CEUXD8Ds" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCTXEyje4pRejH4W0dqjqAJg" }
+      ]
+    },
+    {
+      "file": "vedantasara",
+      "dev": "वेदान्तसारः",
+      "en": "Vedanta Sara",
+      "alias": ["vedantasaram", "sara"],
+      "group": "सदानन्दः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_4B5kkH1BuzlFT1tzskxsK" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCRRtEtw1RjqD7aWPakHn94Z" }
+      ]
+    },
+    {
+      "file": "aparokshanubhuti",
+      "dev": "अपरोक्षानुभूतिः",
+      "en": "Aparokshanubhuti",
+      "alias": ["aparoksha"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "classes", "list": "PL7qtWZUUoJN-gIA65OYeEmiuvNRB_YrWJ" }
+      ]
+    },
+    {
+      "file": "advaitamakaranda",
+      "dev": "अद्वैतमकरन्दः",
+      "en": "Advaita Makaranda",
+      "alias": ["makaranda"],
+      "group": "लक्ष्मीधरः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8fhF6gzeBUFU7LqHemO_yH" }
+      ]
+    },
+    {
+      "file": "upadeshasaram",
+      "dev": "उपदेशसारम्",
+      "en": "Upadesha Saram",
+      "alias": ["upadesa", "upadesha"],
+      "group": "रमणमहर्षिः",
+      "playlists": [
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9vsBHWF85GwYFs1ij3t3Gv" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQl-YjToxEGG0_K90EpUppO" }
+      ]
+    },
+    {
+      "file": "kaupinapanchakam",
+      "dev": "कौपीनपञ्चकम्",
+      "en": "Kaupina Panchakam",
+      "alias": ["koupeena", "kaupina"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN8kP2k7RhI72VwYwDia75yl" }
+      ]
+    },
+    {
+      "file": "saddarshanam",
+      "dev": "सद्दर्शनम्",
+      "en": "Saddarshanam",
+      "alias": ["saddarshana", "satdarshana"],
+      "group": "रमणमहर्षिः",
+      "playlists": [
+        { "batch": "classes", "list": "PL7qtWZUUoJN_BOC6rW90M2EONiRwcd7h3" }
+      ]
+    },
+    {
+      "file": "panchikaranam",
+      "dev": "पञ्चीकरणम्",
+      "en": "Panchikaranam",
+      "alias": ["panchikarana", "vartika"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "classes", "list": "PL7qtWZUUoJN_quGOT3J-HK-drYNBYO85t" }
+      ]
+    },
+    {
+      "file": "ramagita",
+      "dev": "रामगीता",
+      "en": "Rama Gita",
+      "alias": ["ramagitaa"],
+      "group": "अन्ये"
+    },
+    {
+      "file": "ashtavakragita",
+      "dev": "अष्टावक्रगीता",
+      "en": "Ashtavakra Gita",
+      "alias": ["ashtavakra"],
+      "group": "अन्ये",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_0E7O2XOM48ZB-QrCN5oZG" }
+      ]
+    },
+    {
+      "file": "panchadasi",
+      "dev": "पञ्चदशी",
+      "en": "Panchadasi",
+      "alias": ["pancadasi", "pd"],
+      "group": "विद्यारण्यः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_NPfp87VSR_8bkWcuQ1SSQ" }
+      ]
+    },
+    {
+      "file": "atmabodha",
+      "dev": "आत्मबोधः",
+      "en": "Atma Bodha",
+      "alias": ["atmabodham"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN9v_w-fLicguq8BXCUf3mxU" }
+      ]
+    },
+    {
+      "file": "tattvabodha",
+      "dev": "तत्त्वबोधः",
+      "en": "Tattva Bodha",
+      "alias": ["tattvabodham", "tatva"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-7nBeVc6nb0aN0C3hcpGyN" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN87z7ShVsgyJR-xBqFU8cK5" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN-loWUMfGgHk_GNE_IjDVBp" }
+      ]
+    },
+    {
+      "file": "drkdrshyaviveka",
+      "dev": "दृग्दृश्यविवेकः",
+      "en": "Drk Drshya Viveka",
+      "alias": ["drgdrshya", "drk", "drishya"],
+      "group": "विद्यारण्यः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN84coOtNfbVIel5_ZJsWM7D" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9jr-TZWLVS3Lhbe9X6LjJW" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQRWiYm7YllSr8cNAHp5gR8" }
+      ]
+    },
+    {
+      "file": "vakyavritti",
+      "dev": "वाक्यवृत्तिः",
+      "en": "Vakya Vritti",
+      "alias": ["vakyavrtti"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-SYAhmkzdWdkJhAEjM58NW" },
+        { "batch": "tattvamasi", "list": "PLewyyfREFeVk" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCS5bMMOvS_nItpq-i33QXMe" }
+      ]
+    },
+    {
+      "file": "laghuvakyavritti",
+      "dev": "लघुवाक्यवृत्तिः",
+      "en": "Laghu Vakya Vritti",
+      "alias": ["laghu"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "bhajagovindam",
+      "dev": "भजगोविन्दम्",
+      "en": "Bhaja Govindam",
+      "alias": ["bhaja", "govindam", "mohamudgara"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_-M5DV_UuTKdByTMcvD_ed" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN-VKYVThNbK6lk4wU6Ar_N0" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9ggVSJ_zxHDioJeGF6YFoi" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCTi0jp2GVuRMvOMxW4jaTXk" }
+      ]
+    },
+    {
+      "file": "manishapanchakam",
+      "dev": "मनीषापञ्चकम्",
+      "en": "Manisha Panchakam",
+      "alias": ["manisha"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8xpX2u4P18MA9WUsxj3uo5" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9m3TBj3DR_s1ml7CnJhcFF" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_K49Z8rIcjdXUHnDQBUCSo" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCT8rdyPkYDOXlkWcTlHD5Xc" }
+      ]
+    },
+    {
+      "file": "mayapanchakam",
+      "dev": "मायापञ्चकम्",
+      "en": "Maya Panchakam",
+      "alias": ["maya"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "kashipanchakam",
+      "dev": "काशीपञ्चकम्",
+      "en": "Kashi Panchakam",
+      "alias": ["kashi"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_2hqtcR4_707WbYAzp_18i" }
+      ]
+    },
+    {
+      "file": "sadhanapanchakam",
+      "dev": "साधनपञ्चकम्",
+      "en": "Sadhana Panchakam",
+      "alias": ["sadhana", "upadeshapanchakam"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9i1PvdFwcLX4qq38ilz7GW" }
+      ]
+    },
+    {
+      "file": "advaitapancharatnam",
+      "dev": "अद्वैतपञ्चरत्नम्",
+      "en": "Advaita Pancharatnam",
+      "alias": ["pancharatna"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "advaitanubhuti",
+      "dev": "अद्वैतानुभूतिः",
+      "en": "Advaitanubhuti",
+      "alias": ["advaitaanubhuti"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "brahmajnanavali",
+      "dev": "ब्रह्मज्ञानावलीमाला",
+      "en": "Brahma Jnanavali Mala",
+      "alias": ["jnanavali"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "dashashloki",
+      "dev": "दशश्लोकी",
+      "en": "Dasha Shloki",
+      "alias": ["dashashloki", "dasasloki"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-UEFvGfM_0OO5tspf7BnPp" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQXYAIg_szl42dA3EezWd7V" }
+      ]
+    },
+    {
+      "file": "ekashloki",
+      "dev": "एकश्लोकी",
+      "en": "Eka Shloki",
+      "alias": ["ekasloki"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "kashi", "list": "PL9DocMYaPnCQt6tNN2xjIIV22vp7hreV_" }
+      ]
+    },
+    {
+      "file": "dhanyashtakam",
+      "dev": "धन्याष्टकम्",
+      "en": "Dhanyashtakam",
+      "alias": ["dhanya"],
+      "group": "भगवत्पादः"
+    },
+    {
+      "file": "hastamalakiyam",
+      "dev": "हस्तामलकीयम्",
+      "en": "Hastamalakiyam",
+      "alias": ["hastamalaka"],
+      "group": "हस्तामलकः",
+      "playlists": [
+        { "batch": "kashi", "list": "PL9DocMYaPnCT7QVp9Yolw3X3_1iq2Uznj" }
+      ]
+    },
+    {
+      "file": "prashnottararatnamalika",
+      "dev": "प्रश्नोत्तररत्नमालिका",
+      "en": "Prashnottara Ratnamalika",
+      "alias": ["ratnamalika", "prashnottara"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN99gtAdNOlcPM5hvq0fhsHg" }
+      ]
+    },
+    {
+      "file": "pratahsmaranam",
+      "dev": "प्रातःस्मरणम्",
+      "en": "Pratah Smaranam",
+      "alias": ["pratah", "smaranam"],
+      "group": "भगवत्पादः",
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN82j3qsWgcdVTMQfyidO80m" },
+        { "batch": "jijnasu", "list": "PLZR4J0j9N0cQ" }
+      ]
+    },
+    {
+      "file": "svarupanusandhana",
+      "dev": "स्वरूपानुसन्धानाष्टकम्",
+      "en": "Svarupanusandhanashtakam",
+      "alias": ["svarupa", "anusandhana"],
+      "group": "भगवत्पादः"
+    }
   ]
 }

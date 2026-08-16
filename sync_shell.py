@@ -29,6 +29,8 @@ DATA = os.path.join(BASE, 'data')
 BEGIN = '<!-- shell:begin -->'
 END = '<!-- shell:end -->'
 
+YT = 'https://www.youtube.com/playlist?list='
+
 HOME_BEGIN = '<!-- home:begin -->'
 HOME_END = '<!-- home:end -->'
 
@@ -44,7 +46,7 @@ def load():
     # should leave a gap, not a broken image
     lineage = [f for f in man.get('parampara', [])
                if os.path.exists(os.path.join(BASE, 'images', f['slug'] + '.jpg'))]
-    return order, tiers, cats, lineage
+    return order, tiers, cats, lineage, man.get('acharyas', [])
 
 
 def dev_name(cat, blob):
@@ -148,6 +150,86 @@ def home_body(order, tiers, cats):
     return '      %s\n%s\n      %s' % (HOME_BEGIN, '\n'.join(out), HOME_END)
 
 
+def div_block(s, opener):
+    """Span of a <div> and its matching close, counting nesting.
+
+    A non-greedy regex stops at the first </div>, which for a block that
+    nests -- as this one does -- leaves the outer close behind and grows the
+    file by one stray tag on every run.
+    """
+    i = s.find(opener)
+    if i < 0:
+        return None
+    start = s.rfind('\n', 0, i) + 1
+    depth, j = 0, i
+    tag = re.compile(r'<div\b|</div>')
+    while True:
+        m = tag.search(s, j)
+        if not m:
+            return None
+        if m.group(0) == '</div>':
+            depth -= 1
+            if depth == 0:
+                end = m.end()
+                return (start, end + 1 if s[end:end + 1] == '\n' else end)
+        else:
+            depth += 1
+        j = m.end()
+
+
+def text_for(rel, blob):
+    """The data entry a page belongs to. Chapters share their text's entry."""
+    name = os.path.basename(rel)[:-5]
+    for t in blob['texts']:
+        if t.get('chapters') and re.fullmatch(
+                re.escape(t['chapterPrefix']) + r'\d+', name):
+            return t
+        if t['file'] == name:
+            return t
+    return None
+
+
+def classes(text, acharyas, indent):
+    """The class recordings for one text, as one bordered set per teacher.
+
+    A batch is a pill. A batch that ran the text over several playlists --
+    माण्डूक्य's four kārikā prakaraṇas, छान्दोग्य's chapter blocks -- keeps one
+    pill and opens, so a set never grows past one pill per batch.
+    """
+    pls = text.get('playlists') or []
+    if not pls:
+        return ''
+    p = ' ' * indent
+    sets = []
+    for a in acharyas:
+        rows = []
+        for b in a['batches']:
+            mine = [x for x in pls if x.get('batch') == b['id']]
+            if not mine:
+                continue
+            cls = 'b-' + b['id']
+            if len(mine) == 1:
+                rows.append(
+                    '%s    <a class="playlist-link %s" href="%s%s" target="_blank" '
+                    'rel="noopener">%s</a>' % (p, cls, YT, mine[0]['list'], b['name']))
+                continue
+            opts = ''.join(
+                '%s        <a href="%s%s" target="_blank" rel="noopener">%s</a>\n'
+                % (p, YT, m['list'], m.get('part') or b['name']) for m in mine)
+            rows.append(
+                '%s    <details class="playlist-menu %s">\n'
+                '%s      <summary class="playlist-link">%s</summary>\n'
+                '%s      <div class="playlist-drop">\n%s%s      </div>\n'
+                '%s    </details>' % (p, cls, p, b['name'], p, opts, p, p))
+        if rows:
+            sets.append('%s  <div class="acharya-set">\n'
+                        '%s    <span class="set-name">%s</span>\n%s\n%s  </div>'
+                        % (p, p, a['name'], '\n'.join(rows), p))
+    if not sets:
+        return ''
+    return '%s<div class="playlist-links">\n%s\n%s</div>\n' % (p, '\n'.join(sets), p)
+
+
 def figures(lineage, side, up, indent):
     """The parampara, as portraits flanking the bar.
 
@@ -219,7 +301,7 @@ def convert_layout(s, is_index):
     return s
 
 
-def sync(path, order, tiers, cats, lineage):
+def sync(path, order, tiers, cats, lineage, acharyas):
     rel = os.path.relpath(path, BASE)
     d = rel.split(os.sep)[0]
     here = d if d in cats else None
@@ -278,6 +360,19 @@ def sync(path, order, tiers, cats, lineage):
     else:
         s = re.sub(r'(<body class="[^"]*">\n)', r'\1' + block, s, count=1)
 
+    # the class recordings, from data/. Replaced wholesale: which batches ran
+    # a text is a fact about the corpus, not something a page should own.
+    if here is not None:
+        text = text_for(rel, cats[here])
+        if text is not None:
+            block = classes(text, acharyas, 8)
+            span = div_block(s, '<div class="playlist-links">')
+            if span:
+                s = s[:span[0]] + block + s[span[1]:]
+            elif block:
+                s = re.sub(r'(<h1[^>]*>.*?</h1>\n)', lambda m: m.group(1) + block,
+                           s, count=1, flags=re.S)
+
     # the home page's listing, generated so it can never drift from data/
     if rel == 'index.html':
         body = home_body(order, tiers, cats)
@@ -302,12 +397,12 @@ def sync(path, order, tiers, cats, lineage):
 
 def main():
     check = '--check' in sys.argv
-    order, tiers, cats, lineage = load()
+    order, tiers, cats, lineage, acharyas = load()
     pages = sorted(glob.glob(os.path.join(BASE, '*', '*.html')) +
                    glob.glob(os.path.join(BASE, '*.html')))
     stale = 0
     for p in pages:
-        out, changed = sync(p, order, tiers, cats, lineage)
+        out, changed = sync(p, order, tiers, cats, lineage, acharyas)
         if not changed:
             continue
         stale += 1

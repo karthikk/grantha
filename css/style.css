@@ -162,14 +162,19 @@ h2 {
 .toolbar {
   --ctl-h: 1.65rem;
   display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 1.1rem 0 0.9rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  margin: 1.2rem 0 1.1rem;
 }
 
-/* script on the left, classes on the right */
+/* script on the left, classes on the right -- and given room, because two
+   teachers with three batches each is more than a line's worth */
 .toolbar .playlist-links {
   margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* a segmented control, not three loose boxes */
@@ -213,14 +218,26 @@ h2 {
   font-weight: 600;
 }
 
-/* One tag per class batch, named. Outlined rather than filled, so the row
-   stays quiet until you reach for it and the segmented control opposite is
-   the only solid thing on the line. */
+/* One tag per class batch, named, and the batches of one teacher fenced
+   together under their name. Two teachers now record these texts, and a
+   loose row of six pills said nothing about whose class was whose. */
 
-.playlist-panel {
+.acharya-set {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.3rem;
+  padding: 0.3rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.set-name {
+  padding: 0 0.2rem 0 0.1rem;
+  font-family: var(--font);
+  font-size: 0.7rem;
+  color: var(--chrome);
+  white-space: nowrap;
 }
 
 .playlist-link {
@@ -246,11 +263,17 @@ h2 {
 .b-dhanyosi   { --batch: #b45309; --batch-soft: #fdf2e2; }
 .b-jijnasu    { --batch: #6b21c4; --batch-soft: #f3ebfd; }
 .b-tattvamasi { --batch: #0f7a6b; --batch-soft: #e6f4f1; }
+.b-kashi      { --batch: #1d4ed8; --batch-soft: #e8eefc; }
+.b-kanchi     { --batch: #be185d; --batch-soft: #fdeaf1; }
+.b-nalanda    { --batch: #4d7c0f; --batch-soft: #eef6e2; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-scheme='light']) .b-dhanyosi   { --batch: #f0b45c; --batch-soft: #2b1f0e; }
   :root:not([data-scheme='light']) .b-jijnasu    { --batch: #c49bff; --batch-soft: #201434; }
   :root:not([data-scheme='light']) .b-tattvamasi { --batch: #3fd0b8; --batch-soft: #10241f; }
+  :root:not([data-scheme='light']) .b-kashi      { --batch: #8ab4ff; --batch-soft: #121a2c; }
+  :root:not([data-scheme='light']) .b-kanchi     { --batch: #ff8fb4; --batch-soft: #2c1219; }
+  :root:not([data-scheme='light']) .b-nalanda    { --batch: #a3c93a; --batch-soft: #1a2210; }
 }
 
 /* माण्डूक्य carries the Upanishad and the three Kārikā prakaraṇas as four

@@ -5,17 +5,144 @@
   "tierName": "प्रस्थानत्रयी",
   "_note": "Searched fields: file, en, alias. No need to repeat the filename or words already in 'en' -- both are matched automatically. Add an alias only for spellings you would actually type.",
   "texts": [
-    { "file": "isha",           "dev": "ईशावास्योपनिषद्",      "en": "Isha Upanishad",           "alias": ["ishavasya", "ishopanishad", "ish"] },
-    { "file": "kena",           "dev": "केनोपनिषद्",           "en": "Kena Upanishad",           "alias": ["kenopanishad"] },
-    { "file": "katha",          "dev": "कठोपनिषद्",            "en": "Katha Upanishad",          "alias": ["kathaka", "kathopanishad"] },
-    { "file": "prashna",        "dev": "प्रश्नोपनिषद्",         "en": "Prashna Upanishad",        "alias": ["prasna", "prashnopanishad"] },
-    { "file": "mundaka",        "dev": "मुण्डकोपनिषद्",        "en": "Mundaka Upanishad",        "alias": ["mundakopanishad"] },
-    { "file": "mandukya",       "dev": "माण्डूक्योपनिषद्",      "en": "Mandukya Upanishad",       "alias": ["mandukyopanishad", "karika"] },
-    { "file": "taittiriya",     "dev": "तैत्तिरीयोपनिषद्",      "en": "Taittiriya Upanishad",     "alias": ["taitt", "taittiriyopanishad"] },
-    { "file": "aitareya",       "dev": "ऐतरेयोपनिषद्",         "en": "Aitareya Upanishad",       "alias": ["aitareyopanishad"] },
-    { "file": "chandogya",      "dev": "छान्दोग्योपनिषद्",      "en": "Chandogya Upanishad",      "alias": ["cha", "chandogyopanishad"] },
-    { "file": "brihadaranyaka", "dev": "बृहदारण्यकोपनिषद्",    "en": "Brihadaranyaka Upanishad", "alias": ["brhad", "brihad", "bu"] },
-    { "file": "kaivalya",       "dev": "कैवल्योपनिषद्",         "en": "Kaivalya Upanishad",       "alias": ["kaivalyopanishad"] },
-    { "file": "shvetashvatara", "dev": "श्वेताश्वतरोपनिषद्",    "en": "Shvetashvatara Upanishad", "alias": ["sveta", "shveta", "svetasvatara"] }
+    {
+      "file": "isha",
+      "dev": "ईशावास्योपनिषद्",
+      "en": "Isha Upanishad",
+      "alias": ["ishavasya", "ishopanishad", "ish"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-fHSCHo7kQjj80hjkjuuRP" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQkuZ3fBdOhW8G_hI3F_mVv" }
+      ]
+    },
+    {
+      "file": "kena",
+      "dev": "केनोपनिषद्",
+      "en": "Kena Upanishad",
+      "alias": ["kenopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8zVzRvHRkwWYyYf2J7Pwwa" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9X1u0qmthTH_C1z5rpACH_" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN86oKPdBy3Pkn5iMN1EntEA" }
+      ]
+    },
+    {
+      "file": "katha",
+      "dev": "कठोपनिषद्",
+      "en": "Katha Upanishad",
+      "alias": ["kathaka", "kathopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN910IVaIX74K3BFaPJA0YDO" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN85sgycMWNWA6diHuAewGUU" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_BBteWSdwCsIuQ9VUJuIAt" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSUlIY9DjLUqvgBFkv9E252" }
+      ]
+    },
+    {
+      "file": "prashna",
+      "dev": "प्रश्नोपनिषद्",
+      "en": "Prashna Upanishad",
+      "alias": ["prasna", "prashnopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-KjPtp6dkKGsQ-DIsZSk-Z" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN-c2-lyARGWmaOeAj8kV42N" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCRxhqeVE31-W8ZCK_W2GGGF" }
+      ]
+    },
+    {
+      "file": "mundaka",
+      "dev": "मुण्डकोपनिषद्",
+      "en": "Mundaka Upanishad",
+      "alias": ["mundakopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-sJxtZcojI6E5HhX4WKj1M" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN_zxCptBoUPGv9C0fPBUufF" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_KR-NKWkC8kg30g2GMpOt3" }
+      ]
+    },
+    {
+      "file": "mandukya",
+      "dev": "माण्डूक्योपनिषद्",
+      "en": "Mandukya Upanishad",
+      "alias": ["mandukyopanishad", "karika"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_zMEvDbzZ2R03XrkTp-r_c", "part": "आगमप्रकरणम्" },
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-sw3YM0_x1WPqxxVqbJ_8_", "part": "वैतथ्यप्रकरणम्" },
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_D_c4lAN_I5tdKfW6cqWCa", "part": "अद्वैतप्रकरणम्" },
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8WTlBQTwxM-HNEho5u0kEt", "part": "अलातशान्तिप्रकरणम्" },
+        { "batch": "tattvamasi", "list": "PLOxBwvJ5WXcA" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQZMnj_CckOBOm25ccTCixh", "part": "आगमप्रकरणम्" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSmpNgmTsSL3eMXFAbATSX0", "part": "वैतथ्यप्रकरणम्" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCRZAbmPR47-OFi2OEpQYCI9", "part": "अद्वैतप्रकरणम्" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCTQgZmx_aA3b7ymMibbsGoA", "part": "अलातशान्तिप्रकरणम्" }
+      ]
+    },
+    {
+      "file": "taittiriya",
+      "dev": "तैत्तिरीयोपनिषद्",
+      "en": "Taittiriya Upanishad",
+      "alias": ["taitt", "taittiriyopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN-nT5Ax6xNof4KVLRJGNYuq" },
+        { "batch": "jijnasu", "list": "PLOaALll8GqBc" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9KzepCcnktYaSZ6N92sCGN" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCRelGe7Ps0PMBxFmCVqu2oA" }
+      ]
+    },
+    {
+      "file": "aitareya",
+      "dev": "ऐतरेयोपनिषद्",
+      "en": "Aitareya Upanishad",
+      "alias": ["aitareyopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8l9CG77zV_x892jLpHYBVP" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_cSWOwCfUCloWkLf951ksU" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQe5_2SYxxwLm1AChZ-b-V2" }
+      ]
+    },
+    {
+      "file": "chandogya",
+      "dev": "छान्दोग्योपनिषद्",
+      "en": "Chandogya Upanishad",
+      "alias": ["cha", "chandogyopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_w3-oai-AQrQyfogvhCC2F" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSNhkW1Ei5FMX6lljy3fdi5", "part": "अध्यायाः १–५" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCRpkBNz2zWyXUQEEfO0k8yL", "part": "षष्ठोऽध्यायः" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSMdMHJ4nfJolhpA9Atarf9", "part": "अध्यायौ ७–८" }
+      ]
+    },
+    {
+      "file": "brihadaranyaka",
+      "dev": "बृहदारण्यकोपनिषद्",
+      "en": "Brihadaranyaka Upanishad",
+      "alias": ["brhad", "brihad", "bu"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN8JvnpnKob9SkEdPa_Ki29v" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQUap9B5tm6KactvltNIqJP" }
+      ]
+    },
+    {
+      "file": "kaivalya",
+      "dev": "कैवल्योपनिषद्",
+      "en": "Kaivalya Upanishad",
+      "alias": ["kaivalyopanishad"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN9lPZyt9-1Xw4uqnjYbv7kX" },
+        { "batch": "jijnasu", "list": "PLESw7m5eHalA" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN9NUEPQx1hvn0rxigR23DF9" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCT2_tlSbPOcy4V2FiQ5_fvb" }
+      ]
+    },
+    {
+      "file": "shvetashvatara",
+      "dev": "श्वेताश्वतरोपनिषद्",
+      "en": "Shvetashvatara Upanishad",
+      "alias": ["sveta", "shveta", "svetasvatara"],
+      "playlists": [
+        { "batch": "classes", "list": "PL7qtWZUUoJN_hTmNunrfqJEoiULsc38zF" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCQU68_g7OE9iVcPvl291xLI" }
+      ]
+    }
   ]
 }

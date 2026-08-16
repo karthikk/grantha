@@ -9,7 +9,12 @@
       "file": "dhyanam",
       "dev": "ध्यानम्",
       "en": "Gita Dhyanam",
-      "alias": ["gitadhyanam"]
+      "alias": ["gitadhyanam"],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_6oslVhuNEJp9ZFHyzPwVO" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9YstvRqoLl2J9Jwr5qFM6p" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_uCv2_3H51xW93FVAQXcpC" }
+      ]
     },
     {
       "file": "index",
@@ -37,6 +42,13 @@
         "षोडशोऽध्यायः — दैवासुरसम्पद्विभागयोगः",
         "सप्तदशोऽध्यायः — श्रद्धात्रयविभागयोगः",
         "अष्टादशोऽध्यायः — मोक्षसन्न्यासयोगः"
+      ],
+      "playlists": [
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN_6oslVhuNEJp9ZFHyzPwVO" },
+        { "batch": "jijnasu", "list": "PL7qtWZUUoJN9YstvRqoLl2J9Jwr5qFM6p" },
+        { "batch": "tattvamasi", "list": "PL7qtWZUUoJN_uCv2_3H51xW93FVAQXcpC" },
+        { "batch": "kanchi", "list": "PL9DocMYaPnCQ53YBJVoMkcFApVJWSvdDu", "part": "काञ्ची" },
+        { "batch": "kashi", "list": "PL9DocMYaPnCSUNWOLgG-CmZEscl7yjt4m", "part": "पश्चिममाम्बलम्" }
       ]
     }
   ]
