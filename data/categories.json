@@ -4,7 +4,7 @@
   "parampara": [
     { "slug": "dakshinamurti", "name": "दक्षिणामूर्तिः", "side": "left" },
     { "slug": "vyasa", "name": "व्यासः", "side": "left" },
-    { "slug": "shankara", "name": "भगवत्पादः", "side": "right" },
+    { "slug": "shankara", "name": "भगवत्पादः", "side": "left" },
     { "slug": "rangaaji", "name": "आचार्य रङ्गाजी", "side": "right", "href": "https://www.brahmavidyamandir.in/" },
     {
       "slug": "suryapriya",
@@ -22,8 +22,7 @@
       "batches": [
         { "id": "dhanyosi", "name": "धन्योसि" },
         { "id": "jijnasu", "name": "जिज्ञासु" },
-        { "id": "tattvamasi", "name": "तत्त्वमसि" },
-        { "id": "classes", "name": "प्रवचनम्" }
+        { "id": "tattvamasi", "name": "तत्त्वमसि" }
       ]
     },
     {

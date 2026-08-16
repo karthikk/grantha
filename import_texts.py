@@ -250,7 +250,7 @@ def playlist_div(rows, ind):
         cls = 'playlist-link' + (' b-' + slug if slug else '')
         out += (f'{ind}    <a class="{cls}" '
                 f'href="https://www.youtube.com/playlist?list={pid}" '
-                f'target="_blank" rel="noopener">{batch or "Classes"}</a>\n')
+                f'target="_blank" rel="noopener">{batch or "धन्योसि"}</a>\n')
     return (f'{ind}<div class="playlist-links">\n'
             f'{ind}  <div class="playlist-panel">\n{out}'
             f'{ind}  </div>\n{ind}</div>\n')
