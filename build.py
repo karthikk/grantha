@@ -1,12 +1,26 @@
 #!/usr/bin/env python3
 """
 Fetches texts from advaitasharada.sringeri.net and generates HTML pages.
-Run: python3 build.py
+Run: python3 build.py --force
+
+WARNING -- this is the original bootstrap script and it rewrites its pages from
+scratch. The site has since moved past what it can reproduce, so a plain run
+would DISCARD all of the following:
+
+  * every <div class="playlist-links"> panel (added by hand across ~50 pages)
+  * the swara editions of isha.html and taittiriya.html (from stotranidhi)
+  * upanishads/kaivalya.html and the docx-imported prakarana pages, which this
+    script knows nothing about and would simply leave stale
+  * the prettier formatting the committed pages use
+
+It therefore refuses to run without --force. For the texts added later see
+import_texts.py, which preserves playlist panels and has a --check mode.
 """
 
 import os
 import html
 import re
+import sys
 import requests
 from bs4 import BeautifulSoup
 
@@ -79,7 +93,7 @@ def shanti_html(text):
     """Render a shanti mantra as a verse div with special styling."""
     lines = text.split('\n')
     inner = '<br>\n      '.join(l.strip() for l in lines if l.strip())
-    return f'  <div class="verse shanti">\n    <p class="shloka">\n      {inner}\n    </div>\n  </div>\n'
+    return f'  <div class="verse shanti">\n    <p class="shloka">\n      {inner}\n    </p>\n  </div>\n'
 
 
 def to_dev(n):
@@ -756,6 +770,12 @@ def build_prakaranas():
 # ─── Main ───
 
 def main():
+    if '--force' not in sys.argv:
+        sys.exit(
+            'build.py refuses to run without --force.\n'
+            'It rewrites its pages from scratch and would discard the playlist\n'
+            'panels, the swara isha/taittiriya, and the prettier formatting.\n'
+            'See the module docstring; for the later texts use import_texts.py.')
     print('Fetching texts from advaitasharada.sringeri.net...\n')
 
     soups = {}

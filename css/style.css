@@ -408,6 +408,13 @@ p.shloka {
   color: var(--accent);
 }
 
+/* Prose texts (वेदान्तसारः) -- numbered paragraphs, not shlokas */
+.verse.prose .shloka {
+  line-height: 1.75;
+  text-align: justify;
+  text-indent: 1.5rem;
+}
+
 /* Prev/Next navigation */
 
 .page-nav {
