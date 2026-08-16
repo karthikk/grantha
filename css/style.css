@@ -1,14 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap');
 
 :root {
-  --text: #2c2c2c;
+  /* Neutral greys -- no warm bias anywhere. Text is near-black, secondary text
+     is dark enough to actually read, and the accent is a full-strength red
+     used in small deliberate doses rather than a muted maroon spread thin. */
   --bg: #ffffff;
-  --subtle-bg: #f9f7f4;
-  --border: #e0dcd5;
-  --accent: #8b1a1a;
-  --link: #5a3e1b;
-  --link-hover: #3a2510;
+  --surface: #f4f4f5;
+  --surface-2: #e9e9ec;
+  --border: #e0e0e4;
+  --border-strong: #c8c8ce;
+
+  --text: #14141a;      /* verses, titles          18.4:1 */
+  --num: #d92121;       /* verse numbers, shanti    5.0:1 */
+  --head: #1449b8;      /* section headings         7.9:1 */
+  --chrome: #0f7a6b;    /* labels, rail, nav       5.2:1 */
+  --link: #6b21c4;      /* text links               8.0:1 */
+  --mark: #ffd43b;      /* search landing                 */
+
+  /* Category hues. Each collection owns a colour, so the page tells you where
+     you are before you read a word. Overridden per section by body[class]. */
+  --cat: #0f7a6b;
+  --cat-soft: #e6f4f1;
+
+  --accent: var(--num);
+  --accent-ink: #ffffff;
+  --accent-soft: #fdeaea;
+  --subtle-bg: var(--surface);
+  --link-hover: var(--num);
+
   --max-width: 700px;
+  /* height of the sticky top bar. The two panes pin directly below it, so
+     they read it from here rather than each carrying its own guess. */
+  --chrome-h: 2.9rem;
   --font: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
   /* UI chrome is English now. Font matching is per-character, so a Latin face
      first with the Devanagari face behind it renders mixed strings like
@@ -16,6 +39,50 @@
      Mono, because these are short technical labels -- swap the first entries
      for -apple-system (system UI) or ui-serif (New York) if you prefer. */
   --ui-font: ui-monospace, 'SF Mono', Menlo, 'Tiro Devanagari Hindi', monospace;
+  /* play triangle, used as a mask so it inherits the text colour */
+  --play: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 10'%3E%3Cpath d='M0 0l8 5-8 5z'/%3E%3C/svg%3E");
+}
+
+/* Dark. Only the tokens change -- every rule below is written against them,
+   so a further scheme is a block like this and nothing else. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-scheme='light']) {
+    --bg: #121214;
+    --surface: #1c1c20;
+    --surface-2: #26262b;
+    --border: #33333a;
+    --border-strong: #52525c;
+
+    --text: #f2f2f4;      /* 16.7:1 */
+    --num: #ff6b6b;       /*  6.7:1 */
+    --head: #7aa7ff;      /*  7.8:1 */
+    --chrome: #3fd0b8;    /*  9.7:1 */
+    --link: #c49bff;      /*  8.5:1 */
+    --mark: #6b5410;
+
+    --accent: var(--num);
+    --accent-ink: #12070a;
+    --accent-soft: #2a1315;
+  }
+}
+
+:root[data-scheme='dark'] {
+  --bg: #121214;
+  --surface: #1c1c20;
+  --surface-2: #26262b;
+  --border: #33333a;
+  --border-strong: #52525c;
+
+  --text: #f2f2f4;    /* 16.7:1 */
+  --num: #ff6b6b;     /*  6.7:1 */
+  --head: #7aa7ff;    /*  7.8:1 */
+  --chrome: #3fd0b8;  /*  9.7:1 */
+  --link: #c49bff;    /*  8.5:1 */
+  --mark: #6b5410;
+
+  --accent: var(--num);
+  --accent-ink: #12070a;
+  --accent-soft: #2a1315;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +96,7 @@ body {
   font-family: var(--font);
   color: var(--text);
   background: var(--bg);
-  line-height: 2;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -51,68 +118,21 @@ a:hover {
   padding: 2rem 1.5rem;
 }
 
-/* Site header */
-
-.site-header {
-  background: #8b1a1a;
-  padding: 1rem 0;
-}
-
-.site-header .container {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.site-title {
-  font-size: 1.5rem;
-  font-weight: normal;
-  letter-spacing: 0.02em;
-  text-align: center;
-}
-
-.site-title a {
-  color: #fff;
-}
-
-.site-title a:hover {
-  text-decoration: none;
-}
-
-/* Breadcrumb */
-
-.breadcrumb {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.breadcrumb a {
-  color: #888;
-}
-
-.breadcrumb a:hover {
-  color: var(--link-hover);
-}
-
-.breadcrumb .sep {
-  margin: 0 0.3rem;
-}
-
 /* Page heading */
 
 h1 {
-  font-size: 1.8rem;
-  font-weight: normal;
+  font-size: 1.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 1rem;
   line-height: 1.4;
 }
 
 h2 {
   font-size: 1.1rem;
-  font-weight: normal;
+  font-weight: 600;
   margin: 0 0 0.3rem;
-  color: var(--accent);
+  color: var(--head);
 }
 
 /* Toolbar (script toggle + playlist links) */
@@ -136,7 +156,7 @@ h2 {
 }
 
 .script-label {
-  color: #aaa;
+  color: var(--chrome);
   margin-right: 0.15rem;
 }
 
@@ -150,7 +170,7 @@ h2 {
   margin-left: 0.1rem;
   border: 1px solid var(--border);
   border-radius: 2px;
-  color: #aaa;
+  color: var(--chrome);
   font-size: 0.7rem;
   text-decoration: none;
   line-height: 1;
@@ -165,140 +185,60 @@ h2 {
 
 .script-btn.active {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
   border-color: var(--accent);
 }
 
-/* Playlist links */
+/* Playlist links -- one oval tag per class batch, named, beside the title.
+   Was a <details> dropdown holding rows of "<batch> ▶"; the glyph-in-a-box
+   said nothing the pill does not, and the click to open bought nothing when
+   there are only ever two or three. */
 
-.playlist-links {
-  font-size: 0.7rem;
-  position: relative;
-}
-
-.playlist-links summary {
-  color: var(--accent);
-  cursor: pointer;
-  font-size: 0.7rem;
-  list-style: none;
-}
-
-.playlist-links summary::-webkit-details-marker {
-  display: none;
-}
-
-.playlist-links details[open] .playlist-panel {
-  position: absolute;
-  right: 0;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.4rem 0.6rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  z-index: 10;
-  white-space: nowrap;
-}
-
-.playlist-row {
+.playlist-panel {
   display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin: 0.25rem 0;
-}
-
-.playlist-batch {
-  color: #888;
-  min-width: 5em;
-  text-align: right;
+  flex-wrap: wrap;
+  gap: 0.35rem;
 }
 
 .playlist-link {
-  display: inline-block;
-  margin-right: 0.3rem;
-  padding: 0.05rem 0.3rem;
-  border: 1px solid var(--border);
-  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.1rem 0.65rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.75rem;
+  line-height: 1.75;
   text-decoration: none;
+  white-space: nowrap;
+}
+
+/* A play mark, drawn rather than typed -- masked so it takes the colour of
+   the text beside it in either scheme, including on hover. */
+.playlist-link::before {
+  content: '';
+  flex: none;
+  width: 0.52em;
+  height: 0.6em;
+  background-color: currentColor;
+  opacity: 0.75;
+  -webkit-mask: var(--play) center / contain no-repeat;
+  mask: var(--play) center / contain no-repeat;
 }
 
 .playlist-link:hover {
-  border-color: var(--accent);
+  border-color: var(--cat);
+  background: var(--cat-soft);
+  color: var(--cat);
   text-decoration: none;
 }
 
 /* Grouped section box */
 
 .group {
-  background: var(--subtle-bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.75rem 1rem;
   margin-bottom: 0.75rem;
-}
-
-/* Text listing / TOC */
-
-.text-list {
-  list-style: none;
-  margin: 0.25rem 0 0;
-}
-
-.text-list li {
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-  line-height: 1.8;
-}
-
-.text-list li:last-child {
-  border-bottom: none;
-}
-
-.text-list a {
-  display: block;
-  padding: 0.2rem 0;
-}
-
-.text-list .subtitle {
-  font-size: 0.85rem;
-  color: #888;
-  margin-left: 0.5rem;
-}
-
-/* Category cards on home page */
-
-.categories {
-  list-style: none;
-  margin: 2rem 0;
-}
-
-.categories li {
-  margin-bottom: 1rem;
-}
-
-.categories a {
-  display: block;
-  padding: 1.25rem 1.5rem;
-  background: var(--subtle-bg);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: border-color 0.2s;
-}
-
-.categories a:hover {
-  border-color: var(--accent);
-  text-decoration: none;
-}
-
-.categories .cat-title {
-  font-size: 1.4rem;
-  display: block;
-  margin-bottom: 0.15rem;
-}
-
-.categories .cat-desc {
-  font-size: 0.85rem;
-  color: #888;
 }
 
 /* Page with sidebar */
@@ -340,8 +280,8 @@ h2 {
 
 .sidebar a {
   font-size: 0.8rem;
-  color: #888;
-  line-height: 1.5;
+  color: var(--chrome);
+  line-height: 1.6;
   display: block;
 }
 
@@ -351,7 +291,8 @@ h2 {
 
 .sidebar .sidebar-group-title {
   font-size: 0.8rem;
-  color: var(--accent);
+  color: var(--head);
+  font-weight: 600;
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
   display: block;
@@ -376,12 +317,12 @@ h2 {
 
 .section-heading {
   font-size: 1.15rem;
-  font-weight: normal;
-  color: var(--accent);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--head);
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--head);
 }
 
 .section-heading:first-of-type {
@@ -393,22 +334,30 @@ h2 {
 /* Verses */
 
 .verse {
-  margin: 0.75rem 0;
-  padding: 0;
+  margin: 0;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.verse:first-child,
+.section-heading + .verse {
+  border-top: none;
 }
 
 p.shloka {
   font-size: 1.1rem;
-  line-height: 2;
+  line-height: 1.9;
   word-wrap: break-word;
   overflow-wrap: break-word;
   margin: 0;
 }
 
 .verse-num {
-  color: var(--accent);
+  color: var(--num);
   display: inline;
   white-space: nowrap;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .verse.mantra .shloka {
@@ -417,7 +366,7 @@ p.shloka {
 
 .verse.shanti {
   margin: 1rem 0 1.5rem;
-  color: var(--accent);
+  color: var(--num);
 }
 
 /* Prose texts (वेदान्तसारः) -- numbered paragraphs, not shlokas */
@@ -450,7 +399,7 @@ p.shloka {
 
 .page-nav .nav-label {
   font-size: 0.75rem;
-  color: #888;
+  color: var(--chrome);
   display: block;
 }
 
@@ -461,7 +410,7 @@ p.shloka {
   padding: 1rem 0;
   border-top: 1px solid var(--border);
   font-size: 0.75rem;
-  color: #aaa;
+  color: var(--chrome);
   text-align: center;
 }
 
@@ -507,7 +456,8 @@ p.shloka {
   .sidebar .mobile-toggle {
     display: inline-block;
     font-size: 0.8rem;
-    color: var(--accent);
+    color: var(--chrome);
+    font-weight: 600;
     cursor: pointer;
     padding: 0.2rem 0.5rem;
     border: 1px solid var(--border);
@@ -526,14 +476,6 @@ p.shloka {
 
   h1 {
     font-size: 1.5rem;
-  }
-
-  .categories a {
-    padding: 1rem 1.25rem;
-  }
-
-  .categories .cat-title {
-    font-size: 1.2rem;
   }
 }
 
@@ -567,14 +509,9 @@ p.shloka {
   padding: 0.75rem 1rem;
 }
 
-.search-input::placeholder {
-  color: #b9b3aa;
-  font-size: 0.95rem;
-}
-
 .search-input:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--cat);
 }
 
 /* Results */
@@ -587,7 +524,7 @@ p.shloka {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 6px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 12%);
   max-height: 60vh;
   overflow-y: auto;
 }
@@ -611,16 +548,29 @@ p.shloka {
 }
 
 .search-name {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-weight: 400;
   color: var(--text);
 }
 
+/* 4. the Devanagari name carries the collection's colour, and the collection
+   is named at the end of the row -- so a list of hits reads as grouped even
+   though it is ordered by match quality. */
 .search-dev {
   font-size: 0.95rem;
-  color: #777;
+  color: var(--tier, var(--chrome));
 }
 
-.search-cat,
+.search-cat {
+  margin-left: auto;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--tier, var(--chrome));
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
 /* Overlay opened with "/" or "f" */
 /* display:flex below would override the browser's [hidden] rule, so the
    overlay could never be dismissed -- guard it explicitly. */
@@ -633,7 +583,7 @@ p.shloka {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.28);
+  background: rgb(0 0 0 / 34%);
   display: flex;
   justify-content: center;
   padding: 12vh 1rem 1rem;
@@ -647,7 +597,7 @@ p.shloka {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 8px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 16px 44px rgb(0 0 0 / 26%);
   padding: 0.75rem;
 }
 
@@ -663,12 +613,12 @@ p.shloka {
 }
 
 @keyframes search-flash {
-  0%, 35% { background: #fdf3d7; }
+  0%, 35% { background: var(--mark); }
   100% { background: transparent; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .search-hit { animation: none; background: #fdf3d7; }
+  .search-hit { animation: none; background: var(--mark); }
   html { scroll-behavior: auto; }
 }
 
@@ -685,11 +635,11 @@ p.shloka {
   bottom: 2rem;
   transform: translateX(-50%);
   background: var(--text);
-  color: #fff;
+  color: var(--accent-ink);
   font-size: 0.85rem;
   padding: 0.5rem 0.9rem;
   border-radius: 5px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 28%);
   max-width: 90vw;
 }
 
@@ -699,9 +649,7 @@ p.shloka {
 
 /* ── English chrome gets a Latin UI face ───────────────────────────────── */
 
-.breadcrumb,
 .nav-label,
-.playlist-links summary,
 .script-toggle,
 .script-label,
 .script-btn,
@@ -716,7 +664,7 @@ p.shloka {
 
 /* these carry Devanagari and keep the text face */
 .search-dev,
-.playlist-batch {
+.playlist-link {
   font-family: var(--font);
 }
 
@@ -727,25 +675,20 @@ p.shloka {
   font-size: 0.66rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #aaa;
+  color: var(--chrome);
 }
 
-.playlist-links summary,
 .script-btn,
 .script-label {
   letter-spacing: 0.02em;
-}
-
-.breadcrumb {
-  font-size: 0.78rem;
-  letter-spacing: 0.01em;
 }
 
 /* Search button in the toolbar -- the "/" shortcut has no mobile equivalent */
 .search-open {
   font-family: var(--ui-font);
   font-size: 0.7rem;
-  color: var(--accent);
+  color: var(--chrome);
+  font-weight: 600;
   background: none;
   border: 1px solid var(--border);
   border-radius: 3px;
@@ -763,4 +706,532 @@ p.shloka {
     font-size: 0.78rem;
     padding: 0.3rem 0.6rem;
   }
+}
+
+/* ── Category colour ───────────────────────────────────────────────────────
+   Each collection owns a hue. It runs through the page rule, the section
+   headings and the verse marks, so where you are is legible before you read
+   a word. All six pass AA on both grounds. */
+
+/* A band of the category colour across the top of every page */
+body::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: var(--cat);
+}
+
+h1 {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--cat);
+}
+
+.section-heading {
+  color: var(--cat);
+  border-top-color: var(--cat);
+}
+
+.sidebar .sidebar-group-title {
+  color: var(--cat);
+}
+
+.sidebar ul {
+  border-left-color: var(--cat);
+}
+
+/* shanti mantras bracket a text -- give them a tinted panel, not just colour */
+.verse.shanti {
+  background: var(--cat-soft);
+  border-left: 3px solid var(--cat);
+  border-top: none;
+  padding: 0.9rem 1rem;
+  border-radius: 3px;
+  color: var(--text);
+}
+
+.verse.shanti .shloka {
+  font-style: italic;
+}
+
+/* the search landing highlight, in the category colour */
+.search-hit {
+  background: var(--cat-soft);
+  box-shadow: inset 3px 0 0 var(--cat);
+}
+
+/* toolbar controls follow the page colour */
+.search-open {
+  color: var(--cat);
+}
+
+.search-open {
+  border-color: var(--cat);
+}
+
+.script-btn.active {
+  background: var(--cat);
+  border-color: var(--cat);
+}
+
+/* ── Tier colour ───────────────────────────────────────────────────────────
+   Three hues, one per traditional class of text. This is the tradition's own
+   taxonomy, not six colours assigned by folder order:
+
+     प्रस्थानत्रयी  the three sources every commentator answers to
+     प्रकरणग्रन्थाः  introductory manuals, written to be taught from
+     स्तोत्राणि      devotional, recited rather than analysed             */
+
+body.tier-prasthanatrayi { --cat: #1449b8; --cat-soft: #e8eefc; }
+body.tier-prakarana      { --cat: #0f7a6b; --cat-soft: #e6f4f1; }
+body.tier-stotra         { --cat: #c81e3c; --cat-soft: #fdeaee; }
+body.cat-home            { --cat: #14141a; --cat-soft: var(--surface); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-scheme='light']) body.tier-prasthanatrayi { --cat: #7aa7ff; --cat-soft: #121a2c; }
+  :root:not([data-scheme='light']) body.tier-prakarana      { --cat: #3fd0b8; --cat-soft: #10241f; }
+  :root:not([data-scheme='light']) body.tier-stotra         { --cat: #ff7a90; --cat-soft: #2a1218; }
+  :root:not([data-scheme='light']) body.cat-home            { --cat: #f2f2f4; --cat-soft: var(--surface); }
+}
+
+/* ══ Two-pane shell ═══════════════════════════════════════════════════════
+   Opt-in via body.shell, so pages not yet converted keep the old layout.
+   Structure lives in the markup; js/rail.js only fills the rail in. */
+
+body.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body.shell::before {
+  display: none;                 /* the top bar carries the colour instead */
+}
+
+/* ── sticky top bar ── */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: inset 0 3px 0 var(--cat);
+}
+
+/* Brand and search sit centred as a pair, over the reading column below --
+   not pushed to the window edges. The panes flanking that column are near
+   enough the same width that page-centre and column-centre agree. */
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.55rem 1.25rem;
+}
+
+/* Shallower than the page-body input this inherits from: it is chrome, and
+   it has to fit inside --chrome-h, which is what the two panes pin against. */
+.topbar .search-input {
+  flex: 1;
+  min-width: 0;
+  max-width: 26rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+}
+
+/* the home input drops its absolute list positioning when it lives up here */
+.topbar .search-list {
+  top: calc(100% + 0.3rem);
+  left: 0;
+  right: auto;
+  width: 26rem;
+  max-width: 90vw;
+}
+
+.topbar .search-home {
+  position: relative;
+  flex: 1;
+  max-width: 26rem;
+  margin: 0;
+}
+
+/* ── two panes ── */
+
+.shell-body {
+  flex: 1;
+  display: flex;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  align-items: flex-start;
+}
+
+.rail {
+  width: 194px;
+  flex: none;
+  position: sticky;
+  top: var(--chrome-h);
+  max-height: calc(100vh - var(--chrome-h));
+  overflow-y: auto;
+  font-family: var(--ui-font);
+}
+
+.reading {
+  flex: 1;
+  min-width: 0;
+  max-width: 42rem;
+}
+
+/* ── rail contents ── */
+
+.rail-group + .rail-group {
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.rail-label {
+  font-family: var(--font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--cat);
+  margin-bottom: 0.5rem;
+}
+
+.rail-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.rail-list a {
+  display: block;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0.16rem 0 0.16rem 0.7rem;
+  border-left: 2px solid transparent;
+  color: var(--text);
+}
+
+.rail-list a:hover {
+  border-left-color: var(--border-strong);
+  text-decoration: none;
+}
+
+.rail-list a.on {
+  border-left-color: var(--cat);
+  color: var(--cat);
+  font-weight: 600;
+}
+
+.rail-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rail-cell {
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--surface);
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.rail-cell:hover {
+  background: var(--cat-soft);
+  color: var(--cat);
+  text-decoration: none;
+}
+
+.rail-cell.on {
+  background: var(--cat);
+  color: var(--bg);
+  font-weight: 600;
+}
+
+/* ── phone: rail moves below the text, top bar stays ── */
+
+@media (max-width: 860px) {
+  .shell-body {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 1rem 2rem;
+  }
+
+  .rail {
+    width: 100%;
+    position: static;
+    max-height: none;
+    order: 2;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .reading {
+    order: 1;
+    max-width: none;
+  }
+
+  .topbar-inner {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* ── shell refinements ─────────────────────────────────────────────────── */
+
+/* 3. a real edge between the panes */
+.shell-body {
+  gap: 0;
+}
+
+.rail {
+  border-right: 1px solid var(--border);
+  padding-right: 1.4rem;
+}
+
+.reading {
+  padding-left: 2.2rem;
+}
+
+/* 4. the rail sits closer to the window edge */
+.shell-body {
+  padding-left: 1rem;
+}
+
+/* section names in the rail, with the number trailing quietly */
+.rail-sections a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.rail-n {
+  margin-left: auto;
+  font-family: var(--ui-font);
+  font-size: 0.7rem;
+  opacity: 0.65;
+}
+
+@media (max-width: 860px) {
+  .shell-body {
+    padding-left: 1rem;
+  }
+
+  .rail {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .reading {
+    padding-left: 0;
+  }
+}
+
+/* ── Home: the corpus, grouped by tier ─────────────────────────────────────
+   The one screen where completeness is the point, and now the only index
+   there is -- every text in the corpus is reachable from here, so nothing
+   truncates. Columns keep 88 entries down to a page and a half. */
+
+.tier {
+  margin-bottom: 2.4rem;
+}
+
+.tier:last-child { margin-bottom: 0; }
+
+.tier-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding-top: 0.55rem;
+  border-top: 3px solid currentColor;
+  margin-bottom: 0.8rem;
+}
+
+.tier.t-prasthanatrayi,
+.search-row.t-prasthanatrayi { --tier: #1449b8; }
+.tier.t-prakarana,
+.search-row.t-prakarana      { --tier: #0f7a6b; }
+.tier.t-stotra,
+.search-row.t-stotra         { --tier: #c81e3c; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-scheme='light']) .tier.t-prasthanatrayi,
+  :root:not([data-scheme='light']) .search-row.t-prasthanatrayi { --tier: #7aa7ff; }
+  :root:not([data-scheme='light']) .tier.t-prakarana,
+  :root:not([data-scheme='light']) .search-row.t-prakarana      { --tier: #3fd0b8; }
+  :root:not([data-scheme='light']) .tier.t-stotra,
+  :root:not([data-scheme='light']) .search-row.t-stotra         { --tier: #ff7a90; }
+}
+
+.tier-name { color: var(--tier); }
+
+/* A running row, not a column of one-per-line entries -- 88 titles set as
+   lines is a page you scroll past, set as running text it is a page you read.
+   The interpunct is what keeps adjacent titles from running together. */
+.tlist {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 0.15rem;
+  line-height: 1.7;
+}
+
+.tlist li:not(:last-child)::after {
+  content: '·';
+  margin-left: 0.5rem;
+  color: var(--border-strong);
+}
+
+/* chapter number; the ordinal in the full name is redundant beside it */
+.tn {
+  font-family: var(--ui-font);
+  font-size: 0.7rem;
+  color: var(--tier, var(--chrome));
+  margin-right: 0.3rem;
+}
+
+.tlist a {
+  font-size: 0.95rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.tlist a:hover {
+  color: var(--tier, var(--cat));
+  text-decoration: underline;
+}
+
+/* Every tier is a flat run of these: a label in the gutter, its texts
+   beside it. The label is a collection (उपनिषदः), an author (भगवत्पादः) or a
+   deity (शिवः) depending on the tier -- but the shape never changes, so the
+   eye learns it once and reads all three the same way. */
+.grp {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
+}
+
+.grp-name {
+  flex: none;
+  width: 9.5rem;              /* holds श्रीमद्भगवद्गीता, the longest label */
+  text-align: right;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--tier, var(--chrome));
+}
+
+.grp .tlist {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 700px) {
+  .grp { display: block; }
+  .grp-name { text-align: left; width: auto; }
+}
+
+/* ── Shell v2: panes hugging the edges ─────────────────────────────────────
+   left  = which text     (hugs the window edge)
+   right = where in it    (floats, like the sidebar this replaced)
+
+   The top bar is the exception: it centres in its own column rather than
+   spanning the window, so the brand and the search sit together. */
+
+.shell-body {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 1.25rem;
+}
+
+.brand {
+  flex: none;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand:hover { color: var(--cat); text-decoration: none; }
+
+.shell-body {
+  gap: 0;
+  align-items: flex-start;
+}
+
+.rail {
+  width: 194px;
+  padding: 1.2rem 1.1rem 1.2rem 1.25rem;
+  border-right: 1px solid var(--border);
+  top: var(--chrome-h);
+}
+
+.reading {
+  flex: 1;
+  min-width: 0;
+  max-width: 44rem;
+  margin: 0 auto;          /* centred in whatever space the panes leave */
+  padding: 1.4rem 2rem;
+}
+
+/* no rail on these, so the column centres on the page itself. Wider than a
+   reading column: the titles run on, and width buys fewer wrapped lines. */
+body.is-index .reading,
+body.cat-home .reading {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.6rem 2rem;
+}
+
+.onpage {
+  width: 178px;
+  flex: none;
+  position: sticky;
+  top: var(--chrome-h);
+  max-height: calc(100vh - var(--chrome-h));
+  overflow-y: auto;
+  padding: 1.2rem 0 1.2rem 1.2rem;
+  border-left: 1px solid var(--border);
+  font-family: var(--ui-font);
+}
+
+.onpage:empty { display: none; }
+
+.onpage .rail-label {
+  font-family: var(--font);
+  color: var(--cat);
+}
+
+@media (max-width: 1080px) {
+  .onpage { display: none; }
+  .reading { max-width: none; }
+}
+
+@media (max-width: 860px) {
+  .rail {
+    width: 100%;
+    position: static;
+    max-height: none;
+    order: 2;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    padding: 1rem;
+  }
+  .reading { order: 1; padding: 1rem; }
+  .shell-body { flex-direction: column; padding-right: 0; }
 }

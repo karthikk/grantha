@@ -6,40 +6,33 @@
     <title>माण्डूक्योपनिषद् — ग्रन्थसङ्ग्रहः</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
+  <body class="tier-prasthanatrayi cat-upanishads shell">
+    <!-- shell:begin -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../">ग्रन्थसङ्ग्रहः</a>
+        <div class="search-home" id="search-home">
+          <input
+            type="text"
+            class="search-input"
+            aria-label="search texts"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-list" hidden></div>
+        </div>
       </div>
     </header>
-
-    <div class="page-with-sidebar">
-      <div class="page-content">
-        <nav class="breadcrumb">
-          <a href="../">Home</a>
-          <span class="sep">»</span>
-          <a href="./">उपनिषदः</a>
-          <span class="sep">»</span>
-          माण्डूक्योपनिषद्
-        </nav>
+    <!-- shell:end -->
+    <div class="shell-body">
+      <nav class="rail" id="rail"></nav>
+      <main class="reading">
         <h1>माण्डूक्योपनिषद्</h1>
         <div class="playlist-links">
-          <details>
-            <summary>Classes ▾</summary>
-            <div class="playlist-panel">
-              <div class="playlist-row">
-                <span class="playlist-batch">धन्योसि</span>
-                <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_zMEvDbzZ2R03XrkTp-r_c" target="_blank" rel="noopener" class="playlist-link">आगमप्रकरणम्</a>
-                <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN-sw3YM0_x1WPqxxVqbJ_8_" target="_blank" rel="noopener" class="playlist-link">वैतथ्यप्रकरणम्</a>
-                <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_D_c4lAN_I5tdKfW6cqWCa" target="_blank" rel="noopener" class="playlist-link">अद्वैतप्रकरणम्</a>
-                <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN8WTlBQTwxM-HNEho5u0kEt" target="_blank" rel="noopener" class="playlist-link">अलातशान्तिप्रकरणम्</a>
-              </div>
-              <div class="playlist-row">
-                <span class="playlist-batch">तत्त्वमसि</span>
-                <a href="https://www.youtube.com/playlist?list=PLOxBwvJ5WXcA" target="_blank" rel="noopener" class="playlist-link">▶</a>
-              </div>
-            </div>
-          </details>
+          <div class="playlist-panel">
+            <a class="playlist-link" href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_zMEvDbzZ2R03XrkTp-r_c" target="_blank" rel="noopener">धन्योसि</a>
+            <a class="playlist-link" href="https://www.youtube.com/playlist?list=PLOxBwvJ5WXcA" target="_blank" rel="noopener">तत्त्वमसि</a>
+          </div>
         </div>
         <article>
           <div class="group">
@@ -1949,18 +1942,8 @@
             <a href="taittiriya.html">तैत्तिरीयोपनिषद्</a>
           </div>
         </nav>
-      </div>
-      <aside class="sidebar">
-        <nav>
-          <ul>
-            <li><a href="#moolam">मूलम्</a></li>
-            <li><a href="#आगमप्रकरणम्">आगमप्रकरणम्</a></li>
-            <li><a href="#वैतथ्यप्रकरणम्">वैतथ्यप्रकरणम्</a></li>
-            <li><a href="#अद्वैतप्रकरणम्">अद्वैतप्रकरणम्</a></li>
-            <li><a href="#अलातशान्तिप्रकरणम्">अलातशान्तिप्रकरणम्</a></li>
-          </ul>
-        </nav>
-      </aside>
+      </main>
+      <aside class="onpage" id="onpage"></aside>
     </div>
 
     <footer class="site-footer">
@@ -1969,13 +1952,7 @@
 
     <script src="../js/script-toggle.js"></script>
     <script src="../js/sidebar-mobile.js"></script>
-    <script>
-      document.addEventListener("click", function (e) {
-        document.querySelectorAll(".playlist-links details[open]").forEach(function (d) {
-          if (!d.contains(e.target)) d.removeAttribute("open");
-        });
-      });
-    </script>
+    <script src="../js/rail.js"></script>
     <script src="../js/search.js"></script>
   </body>
 </html>

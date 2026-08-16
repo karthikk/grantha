@@ -6,71 +6,217 @@
     <title>ग्रन्थसङ्ग्रहः</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="site-title"><a href="./">ग्रन्थसङ्ग्रहः</a></div>
+  <body class="cat-home shell is-index">
+    <!-- shell:begin -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./">ग्रन्थसङ्ग्रहः</a>
+        <div class="search-home" id="search-home">
+          <input
+            type="text"
+            class="search-input"
+            aria-label="search texts"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-list" hidden></div>
+        </div>
       </div>
     </header>
-
-    <main class="container">
-      <h1>ग्रन्थसङ्ग्रहः</h1>
-
-      <div class="search-home" id="search-home">
-        <input
-          type="text"
-          class="search-input"
-          placeholder="kena · cha 7.25 · gita 2.47"
-          aria-label="search texts"
-          autocomplete="off"
-          spellcheck="false"
-        />
-        <div class="search-list" hidden></div>
-      </div>
-
-      <ul class="categories">
-        <li>
-          <a href="upanishads/">
-            <span class="cat-title">उपनिषदः</span>
-            <span class="cat-desc">दशोपनिषदः — ईशा, केन, कठ, प्रश्न, मुण्डक, माण्डूक्य, तैत्तिरीय, ऐतरेय, छान्दोग्य, बृहदारण्यक</span>
-          </a>
-        </li>
-        <li>
-          <a href="gita/">
-            <span class="cat-title">श्रीमद्भगवद्गीता</span>
-            <span class="cat-desc">अष्टादशाध्यायाः</span>
-          </a>
-        </li>
-        <li>
-          <a href="brahmasutra/">
-            <span class="cat-title">ब्रह्मसूत्रम्</span>
-            <span class="cat-desc">चत्वारोऽध्यायाः, षोडशपादाः</span>
-          </a>
-        </li>
-        <li>
-          <a href="prakarana/">
-            <span class="cat-title">प्रकरणग्रन्थाः</span>
-            <span class="cat-desc">विवेकचूडामणिः, आत्मबोधः, तत्त्वबोधः, इत्यादयः</span>
-          </a>
-        </li>
-        <li>
-          <a href="slokas/">
-            <span class="cat-title">श्लोकाः</span>
-            <span class="cat-desc">स्तोत्राणि, सुभाषितानि</span>
-          </a>
-        </li>
-        <li>
-          <a href="sahasranama/">
-            <span class="cat-title">सहस्रनामानि</span>
-            <span class="cat-desc">श्रीविष्णुसहस्रनामम्, श्रीललितासहस्रनामम्</span>
-          </a>
-        </li>
-      </ul>
+    <!-- shell:end -->
+    <div class="shell-body">
+      <main class="reading">
+      <!-- home:begin -->
+      <section class="tier t-prasthanatrayi">
+        <h2 class="tier-name">प्रस्थानत्रयी</h2>
+        <div class="grp">
+          <span class="grp-name">उपनिषदः</span>
+          <ul class="tlist">
+            <li><a href="upanishads/isha.html">ईशावास्योपनिषद्</a></li>
+            <li><a href="upanishads/kena.html">केनोपनिषद्</a></li>
+            <li><a href="upanishads/katha.html">कठोपनिषद्</a></li>
+            <li><a href="upanishads/prashna.html">प्रश्नोपनिषद्</a></li>
+            <li><a href="upanishads/mundaka.html">मुण्डकोपनिषद्</a></li>
+            <li><a href="upanishads/mandukya.html">माण्डूक्योपनिषद्</a></li>
+            <li><a href="upanishads/taittiriya.html">तैत्तिरीयोपनिषद्</a></li>
+            <li><a href="upanishads/aitareya.html">ऐतरेयोपनिषद्</a></li>
+            <li><a href="upanishads/chandogya.html">छान्दोग्योपनिषद्</a></li>
+            <li><a href="upanishads/brihadaranyaka.html">बृहदारण्यकोपनिषद्</a></li>
+            <li><a href="upanishads/kaivalya.html">कैवल्योपनिषद्</a></li>
+            <li><a href="upanishads/shvetashvatara.html">श्वेताश्वतरोपनिषद्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">श्रीमद्भगवद्गीता</span>
+          <ul class="tlist">
+            <li><a href="gita/dhyanam.html">ध्यानम्</a></li>
+            <li><a href="gita/adhyaya-1.html"><span class="tn">१</span>अर्जुनविषादयोगः</a></li>
+            <li><a href="gita/adhyaya-2.html"><span class="tn">२</span>साङ्ख्ययोगः</a></li>
+            <li><a href="gita/adhyaya-3.html"><span class="tn">३</span>कर्मयोगः</a></li>
+            <li><a href="gita/adhyaya-4.html"><span class="tn">४</span>ज्ञानकर्मसन्न्यासयोगः</a></li>
+            <li><a href="gita/adhyaya-5.html"><span class="tn">५</span>कर्मसन्न्यासयोगः</a></li>
+            <li><a href="gita/adhyaya-6.html"><span class="tn">६</span>आत्मसंयमयोगः</a></li>
+            <li><a href="gita/adhyaya-7.html"><span class="tn">७</span>ज्ञानविज्ञानयोगः</a></li>
+            <li><a href="gita/adhyaya-8.html"><span class="tn">८</span>अक्षरब्रह्मयोगः</a></li>
+            <li><a href="gita/adhyaya-9.html"><span class="tn">९</span>राजविद्याराजगुह्ययोगः</a></li>
+            <li><a href="gita/adhyaya-10.html"><span class="tn">१०</span>विभूतियोगः</a></li>
+            <li><a href="gita/adhyaya-11.html"><span class="tn">११</span>विश्वरूपदर्शनयोगः</a></li>
+            <li><a href="gita/adhyaya-12.html"><span class="tn">१२</span>भक्तियोगः</a></li>
+            <li><a href="gita/adhyaya-13.html"><span class="tn">१३</span>क्षेत्रक्षेत्रज्ञविभागयोगः</a></li>
+            <li><a href="gita/adhyaya-14.html"><span class="tn">१४</span>गुणत्रयविभागयोगः</a></li>
+            <li><a href="gita/adhyaya-15.html"><span class="tn">१५</span>पुरुषोत्तमयोगः</a></li>
+            <li><a href="gita/adhyaya-16.html"><span class="tn">१६</span>दैवासुरसम्पद्विभागयोगः</a></li>
+            <li><a href="gita/adhyaya-17.html"><span class="tn">१७</span>श्रद्धात्रयविभागयोगः</a></li>
+            <li><a href="gita/adhyaya-18.html"><span class="tn">१८</span>मोक्षसन्न्यासयोगः</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">ब्रह्मसूत्रम्</span>
+          <ul class="tlist">
+            <li><a href="brahmasutra/adhyaya-1.html"><span class="tn">१</span>समन्वयाध्यायः</a></li>
+            <li><a href="brahmasutra/adhyaya-2.html"><span class="tn">२</span>अविरोधाध्यायः</a></li>
+            <li><a href="brahmasutra/adhyaya-3.html"><span class="tn">३</span>साधनाध्यायः</a></li>
+            <li><a href="brahmasutra/adhyaya-4.html"><span class="tn">४</span>फलाध्यायः</a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="tier t-prakarana">
+        <h2 class="tier-name">प्रकरणग्रन्थाः</h2>
+        <div class="grp">
+          <span class="grp-name">भगवत्पादः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/vivekachudamani.html">विवेकचूडामणिः</a></li>
+            <li><a href="prakarana/aparokshanubhuti.html">अपरोक्षानुभूतिः</a></li>
+            <li><a href="prakarana/kaupinapanchakam.html">कौपीनपञ्चकम्</a></li>
+            <li><a href="prakarana/panchikaranam.html">पञ्चीकरणम्</a></li>
+            <li><a href="prakarana/atmabodha.html">आत्मबोधः</a></li>
+            <li><a href="prakarana/tattvabodha.html">तत्त्वबोधः</a></li>
+            <li><a href="prakarana/vakyavritti.html">वाक्यवृत्तिः</a></li>
+            <li><a href="prakarana/laghuvakyavritti.html">लघुवाक्यवृत्तिः</a></li>
+            <li><a href="prakarana/bhajagovindam.html">भजगोविन्दम्</a></li>
+            <li><a href="prakarana/manishapanchakam.html">मनीषापञ्चकम्</a></li>
+            <li><a href="prakarana/mayapanchakam.html">मायापञ्चकम्</a></li>
+            <li><a href="prakarana/kashipanchakam.html">काशीपञ्चकम्</a></li>
+            <li><a href="prakarana/sadhanapanchakam.html">साधनपञ्चकम्</a></li>
+            <li><a href="prakarana/advaitapancharatnam.html">अद्वैतपञ्चरत्नम्</a></li>
+            <li><a href="prakarana/advaitanubhuti.html">अद्वैतानुभूतिः</a></li>
+            <li><a href="prakarana/brahmajnanavali.html">ब्रह्मज्ञानावलीमाला</a></li>
+            <li><a href="prakarana/dashashloki.html">दशश्लोकी</a></li>
+            <li><a href="prakarana/ekashloki.html">एकश्लोकी</a></li>
+            <li><a href="prakarana/dhanyashtakam.html">धन्याष्टकम्</a></li>
+            <li><a href="prakarana/prashnottararatnamalika.html">प्रश्नोत्तररत्नमालिका</a></li>
+            <li><a href="prakarana/pratahsmaranam.html">प्रातःस्मरणम्</a></li>
+            <li><a href="prakarana/svarupanusandhana.html">स्वरूपानुसन्धानाष्टकम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">हस्तामलकः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/hastamalakiyam.html">हस्तामलकीयम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">विद्यारण्यः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/panchadasi.html">पञ्चदशी</a></li>
+            <li><a href="prakarana/drkdrshyaviveka.html">दृग्दृश्यविवेकः</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">सदानन्दः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/vedantasara.html">वेदान्तसारः</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">लक्ष्मीधरः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/advaitamakaranda.html">अद्वैतमकरन्दः</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">रमणमहर्षिः</span>
+          <ul class="tlist">
+            <li><a href="prakarana/upadeshasaram.html">उपदेशसारम्</a></li>
+            <li><a href="prakarana/saddarshanam.html">सद्दर्शनम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">अन्ये</span>
+          <ul class="tlist">
+            <li><a href="prakarana/ramagita.html">रामगीता</a></li>
+            <li><a href="prakarana/ashtavakragita.html">अष्टावक्रगीता</a></li>
+          </ul>
+        </div>
+      </section>
+      <section class="tier t-stotra">
+        <h2 class="tier-name">स्तोत्राणि</h2>
+        <div class="grp">
+          <span class="grp-name">गुरुः</span>
+          <ul class="tlist">
+            <li><a href="slokas/dakshinamurtyashtakam.html">दक्षिणामूर्त्यष्टकम्</a></li>
+            <li><a href="slokas/gurupadukastotram.html">गुरुपादुकास्तोत्रम्</a></li>
+            <li><a href="slokas/gurustotram.html">गुरुस्तोत्रम्</a></li>
+            <li><a href="slokas/gurvashtakam.html">गुर्वष्टकम्</a></li>
+            <li><a href="slokas/totakashtakam.html">तोटकाष्टकम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">गणपतिः</span>
+          <ul class="tlist">
+            <li><a href="slokas/sankatanashana.html">सङ्कटनाशनगणेशस्तोत्रम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">शिवः</span>
+          <ul class="tlist">
+            <li><a href="slokas/dvadashalingastotram.html">द्वादशज्योतिर्लिङ्गस्तोत्रम्</a></li>
+            <li><a href="slokas/lingashtakam.html">लिङ्गाष्टकम्</a></li>
+            <li><a href="slokas/margabandhustotram.html">मार्गबन्धुस्तोत्रम्</a></li>
+            <li><a href="slokas/natarajastotram.html">नटराजस्तोत्रम्</a></li>
+            <li><a href="slokas/shivamanasapuja.html">शिवमानसपूजा</a></li>
+            <li><a href="slokas/shivashankarastotram.html">शिवशङ्करस्तोत्रम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">विष्णुः</span>
+          <ul class="tlist">
+            <li><a href="slokas/govindashtakam.html">श्रीगोविन्दाष्टकम्</a></li>
+            <li><a href="slokas/krishnashtakam.html">कृष्णाष्टकम्</a></li>
+            <li><a href="slokas/ramabhujangastotram.html">रामभुजङ्गस्तोत्रम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">देवी</span>
+          <ul class="tlist">
+            <li><a href="slokas/gangastotram.html">गङ्गास्तोत्रम्</a></li>
+            <li><a href="slokas/kamalajadayitashtakam.html">कमलजदयिताष्टकम्</a></li>
+            <li><a href="slokas/mahishasuramardini.html">महिषासुरमर्दिनिस्तोत्रम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">अन्ये</span>
+          <ul class="tlist">
+            <li><a href="slokas/ekatmatastotram.html">एकात्मतास्तोत्रम्</a></li>
+            <li><a href="slokas/nirvanashatkam.html">निर्वाणषट्कम्</a></li>
+          </ul>
+        </div>
+        <div class="grp">
+          <span class="grp-name">सहस्रनामानि</span>
+          <ul class="tlist">
+            <li><a href="sahasranama/vishnu-sahasranama.html">श्रीविष्णुसहस्रनामस्तोत्रम्</a></li>
+            <li><a href="sahasranama/lalita-sahasranama.html">श्रीललितासहस्रनामस्तोत्रम्</a></li>
+          </ul>
+        </div>
+      </section>
+      <!-- home:end -->
     </main>
+    </div>
 
     <footer class="site-footer">
       <div class="container">ग्रन्थसङ्ग्रहः</div>
     </footer>
+    <script src="js/rail.js"></script>
     <script src="js/search.js"></script>
   </body>
 </html>

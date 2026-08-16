@@ -1,8 +1,28 @@
-[
-  "upanishads",
-  "gita",
-  "brahmasutra",
-  "prakarana",
-  "slokas",
-  "sahasranama"
-]
+{
+  "_note": "Order here is the order of the collection row. Tiers group them.",
+  "tiers": [
+    {
+      "id": "prasthanatrayi",
+      "name": "प्रस्थानत्रयी",
+      "en": "the three sources"
+    },
+    {
+      "id": "prakarana",
+      "name": "प्रकरणग्रन्थाः",
+      "en": "manuals"
+    },
+    {
+      "id": "stotra",
+      "name": "स्तोत्राणि",
+      "en": "devotional"
+    }
+  ],
+  "categories": [
+    "upanishads",
+    "gita",
+    "brahmasutra",
+    "prakarana",
+    "slokas",
+    "sahasranama"
+  ]
+}

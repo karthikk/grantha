@@ -1,6 +1,8 @@
 {
   "dir": "upanishads",
   "label": "Upanishads",
+  "tier": "prasthanatrayi",
+  "tierName": "प्रस्थानत्रयी",
   "_note": "Searched fields: file, en, alias. No need to repeat the filename or words already in 'en' -- both are matched automatically. Add an alias only for spellings you would actually type.",
   "texts": [
     { "file": "isha",           "dev": "ईशावास्योपनिषद्",      "en": "Isha Upanishad",           "alias": ["ishavasya", "ishopanishad", "ish"] },

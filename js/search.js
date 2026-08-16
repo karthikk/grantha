@@ -110,7 +110,9 @@
     if (loading) { return loading; }
     loading = fetch(root + 'data/categories.json')
       .then(function (r) { return r.json(); })
-      .then(function (cats) {
+      .then(function (man) {
+        // manifest carries tiers now; the list of collections is under .categories
+        var cats = man.categories || man;
         return Promise.all(cats.map(function (c) {
           return fetch(root + 'data/' + c + '.json').then(function (r) { return r.json(); });
         }));
@@ -122,6 +124,7 @@
             texts.push({
               dir: f.dir,
               label: f.label,
+              tier: f.tier,          // colours the row in the results list
               file: t.file,
               dev: t.dev,
               en: t.en,
@@ -177,12 +180,15 @@
   /** Where does this hit live, and what reference is left for the page? */
   function target(hit) {
     var t = hit.text, ref = hit.ref, file = t.file, rest = ref;
-    if (t.chapters && ref) {              // gita / brahmasutra: first number picks the file
-      var bits = ref.split('.');
-      var n = parseInt(bits[0], 10);
-      if (n >= 1 && n <= t.chapters) {
-        file = t.prefix + n;
-        rest = bits.slice(1).join('.');
+    if (t.chapters) {                     // gita / brahmasutra: first number picks the file
+      file = t.prefix + 1;                // no chapter asked for -> start at the first
+      if (ref) {
+        var bits = ref.split('.');
+        var n = parseInt(bits[0], 10);
+        if (n >= 1 && n <= t.chapters) {
+          file = t.prefix + n;
+          rest = bits.slice(1).join('.');
+        }
       }
     }
     var url = root + t.dir + '/' + file + '.html';
@@ -215,7 +221,9 @@
       list.innerHTML = '';
       cursor = 0;
       hits.forEach(function (h, i) {
-        var row = el('div', 'search-row' + (i === 0 ? ' on' : ''));
+        // the tier class carries the collection's colour into the row
+        var row = el('div', 'search-row t-' + (h.text.tier || 'none') +
+                            (i === 0 ? ' on' : ''));
         row.appendChild(el('span', 'search-name', h.text.en));
         row.appendChild(el('span', 'search-dev', h.text.dev));
         var tail = h.ref ? h.text.label + ' · ' + h.ref : h.text.label;
@@ -271,7 +279,6 @@
       var box = el('div', 'search-box');
       var input = el('input', 'search-input');
       input.type = 'text';
-      input.placeholder = 'kena \u00b7 cha 7.25 \u00b7 gita 2.47';
       input.setAttribute('aria-label', 'search texts');
       input.autocomplete = 'off';
       input.spellcheck = false;
@@ -313,15 +320,16 @@
       }
     }
 
-    // Touch devices have no "/" key, so every page gets a real button in the
-    // toolbar that script-toggle.js builds.
-    var bar = document.querySelector('.toolbar');
-    if (bar) {
-      var btn = el('button', 'search-open', '\u2315 Search');
-      btn.type = 'button';
-      btn.setAttribute('aria-label', 'search texts');
-      btn.addEventListener('click', function () { openOverlay(); });
-      bar.insertBefore(btn, bar.firstChild);
+    // Only pages without the top-bar input need a button to reach search.
+    if (!document.querySelector('.topbar .search-input')) {
+      var bar = document.querySelector('.toolbar');
+      if (bar) {
+        var btn = el('button', 'search-open', '\u2315 Search');
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'search texts');
+        btn.addEventListener('click', function () { openOverlay(); });
+        bar.insertBefore(btn, bar.firstChild);
+      }
     }
 
     document.addEventListener('keydown', function (e) {

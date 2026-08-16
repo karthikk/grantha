@@ -1,6 +1,8 @@
 {
   "dir": "sahasranama",
   "label": "Sahasranamas",
+  "tier": "stotra",
+  "tierName": "स्तोत्राणि",
   "_note": "Searched fields: file, en, alias. Add an alias only for spellings you would actually type.",
   "texts": [
     { "file": "vishnu-sahasranama", "dev": "श्रीविष्णुसहस्रनामस्तोत्रम्", "en": "Vishnu Sahasranama", "alias": ["vishnu", "vsn"] },

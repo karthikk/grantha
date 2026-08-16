@@ -6,32 +6,32 @@
     <title>पञ्चदशी — ग्रन्थसङ्ग्रहः</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
+  <body class="tier-prakarana cat-prakarana shell">
+    <!-- shell:begin -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../">ग्रन्थसङ्ग्रहः</a>
+        <div class="search-home" id="search-home">
+          <input
+            type="text"
+            class="search-input"
+            aria-label="search texts"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-list" hidden></div>
+        </div>
       </div>
     </header>
-    <div class="page-with-sidebar">
-      <div class="page-content">
-        <nav class="breadcrumb">
-          <a href="../">Home</a>
-          <span class="sep">»</span>
-          <a href="./">प्रकरणग्रन्थाः</a>
-          <span class="sep">»</span>
-          पञ्चदशी
-        </nav>
+    <!-- shell:end -->
+    <div class="shell-body">
+      <nav class="rail" id="rail"></nav>
+      <main class="reading">
         <h1>पञ्चदशी</h1>
         <div class="playlist-links">
-          <details>
-            <summary>Classes ▾</summary>
-            <div class="playlist-panel">
-              <div class="playlist-row">
-                <span class="playlist-batch">धन्योसि</span>
-                <a href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_NPfp87VSR_8bkWcuQ1SSQ" target="_blank" rel="noopener" class="playlist-link">▶</a>
-              </div>
-            </div>
-          </details>
+          <div class="playlist-panel">
+            <a class="playlist-link" href="https://www.youtube.com/playlist?list=PL7qtWZUUoJN_NPfp87VSR_8bkWcuQ1SSQ" target="_blank" rel="noopener">धन्योसि</a>
+          </div>
         </div>
         <article>
           <div class="group">
@@ -12698,41 +12698,15 @@
             </nav>
           </div>
         </article>
-      </div>
-      <aside class="sidebar">
-        <nav>
-          <ul>
-            <li><a href="#ch-1">तत्त्वविवेकः</a></li>
-            <li><a href="#ch-2">भूतविवेकः</a></li>
-            <li><a href="#ch-3">पञ्चकोषविवेकः</a></li>
-            <li><a href="#ch-4">द्वैतविवेकः</a></li>
-            <li><a href="#ch-5">महावाक्यविवेकः</a></li>
-            <li><a href="#ch-6">चित्रदीपः</a></li>
-            <li><a href="#ch-7">तृप्तिदीपः</a></li>
-            <li><a href="#ch-8">कूटस्थदीपः</a></li>
-            <li><a href="#ch-9">ध्यानदीपः</a></li>
-            <li><a href="#ch-10">नाटकदीपः</a></li>
-            <li><a href="#ch-11">योगानन्दः</a></li>
-            <li><a href="#ch-12">आत्मानन्दः</a></li>
-            <li><a href="#ch-13">अद्वैतानन्दः</a></li>
-            <li><a href="#ch-14">विद्यानन्दः</a></li>
-            <li><a href="#ch-15">विषयानन्दः</a></li>
-          </ul>
-        </nav>
-      </aside>
+      </main>
+      <aside class="onpage" id="onpage"></aside>
     </div>
     <footer class="site-footer">
       <div class="container">ग्रन्थसङ्ग्रहः</div>
     </footer>
     <script src="../js/script-toggle.js"></script>
     <script src="../js/sidebar-mobile.js"></script>
-    <script>
-      document.addEventListener("click", function (e) {
-        document.querySelectorAll(".playlist-links details[open]").forEach(function (d) {
-          if (!d.contains(e.target)) d.removeAttribute("open");
-        });
-      });
-    </script>
+    <script src="../js/rail.js"></script>
     <script src="../js/search.js"></script>
   </body>
 </html>

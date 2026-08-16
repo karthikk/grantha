@@ -1,6 +1,8 @@
 {
   "dir": "brahmasutra",
   "label": "Brahma Sutra",
+  "tier": "prasthanatrayi",
+  "tierName": "प्रस्थानत्रयी",
   "_note": "Four adhyaya files. 'bs 1.2.3' -> brahmasutra/adhyaya-1.html, then pada 2, sutra 3.",
   "texts": [
     {
@@ -9,7 +11,13 @@
       "en": "Brahma Sutra",
       "alias": ["bs", "brahmasutram", "sutra", "shariraka"],
       "chapters": 4,
-      "chapterPrefix": "adhyaya-"
+      "chapterPrefix": "adhyaya-",
+      "chapterNames": [
+        "प्रथमोऽध्यायः — समन्वयाध्यायः",
+        "द्वितीयोऽध्यायः — अविरोधाध्यायः",
+        "तृतीयोऽध्यायः — साधनाध्यायः",
+        "चतुर्थोऽध्यायः — फलाध्यायः"
+      ]
     }
   ]
 }

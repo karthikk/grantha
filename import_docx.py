@@ -223,19 +223,12 @@ def main():
 
         write_file(os.path.join(sloka_dir, f'{key}.html'),
                    page_html(clean_title,
-                            [('../', 'Home'), ('./', 'श्लोकाः'), (None, clean_title)],
+                            [('../', 'Home'), (None, 'श्लोकाः'), (None, clean_title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
-    # Update slokas index
-    items = ''
-    for title, key in all_slokas:
-        items += f'    <li><a href="{key}.html">{title}</a></li>\n'
-    idx_body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(sloka_dir, 'index.html'),
-               page_html('श्लोकाः',
-                        [('../', 'Home'), (None, 'श्लोकाः')],
-                        idx_body, css_path='../css/style.css'))
+    # No index page: every text is listed on the home page, from
+    # data/slokas.json. See sync_shell.py.
 
     # ─── Write new prakarana pages ───
     prakarana_dir = os.path.join(BASE, 'prakarana')
@@ -261,19 +254,12 @@ def main():
 
         write_file(os.path.join(prakarana_dir, f'{key}.html'),
                    page_html(clean_title,
-                            [('../', 'Home'), ('./', 'प्रकरणग्रन्थाः'), (None, clean_title)],
+                            [('../', 'Home'), (None, 'प्रकरणग्रन्थाः'), (None, clean_title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
-    # Update prakarana index
-    items = ''
-    for title, key in all_prakaranas:
-        items += f'    <li><a href="{key}.html">{title}</a></li>\n'
-    idx_body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(prakarana_dir, 'index.html'),
-               page_html('प्रकरणग्रन्थाः',
-                        [('../', 'Home'), (None, 'प्रकरणग्रन्थाः')],
-                        idx_body, css_path='../css/style.css'))
+    # No index page: every text is listed on the home page, from
+    # data/prakarana.json. See sync_shell.py.
 
     # ─── Gita dhyana slokas ───
     print("\nExtracting Gita dhyana slokas...")

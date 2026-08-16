@@ -1,16 +1,43 @@
 {
   "dir": "gita",
   "label": "Bhagavad Gita",
+  "tier": "prasthanatrayi",
+  "tierName": "प्रस्थानत्रयी",
   "_note": "One text spread over 18 chapter files. 'chapters' + 'chapterPrefix' tell the search that the first number in a reference selects the file: 'gita 2.47' -> gita/adhyaya-2.html, then verse 47.",
   "texts": [
+    {
+      "file": "dhyanam",
+      "dev": "ध्यानम्",
+      "en": "Gita Dhyanam",
+      "alias": ["gitadhyanam"]
+    },
     {
       "file": "index",
       "dev": "श्रीमद्भगवद्गीता",
       "en": "Bhagavad Gita",
       "alias": ["gita", "bg", "bhagavadgita", "bhagavad"],
       "chapters": 18,
-      "chapterPrefix": "adhyaya-"
-    },
-    { "file": "dhyanam", "dev": "ध्यानम्", "en": "Gita Dhyanam", "alias": ["gitadhyanam"] }
+      "chapterPrefix": "adhyaya-",
+      "chapterNames": [
+        "प्रथमोऽध्यायः — अर्जुनविषादयोगः",
+        "द्वितीयोऽध्यायः — साङ्ख्ययोगः",
+        "तृतीयोऽध्यायः — कर्मयोगः",
+        "चतुर्थोऽध्यायः — ज्ञानकर्मसन्न्यासयोगः",
+        "पञ्चमोऽध्यायः — कर्मसन्न्यासयोगः",
+        "षष्ठोऽध्यायः — आत्मसंयमयोगः",
+        "सप्तमोऽध्यायः — ज्ञानविज्ञानयोगः",
+        "अष्टमोऽध्यायः — अक्षरब्रह्मयोगः",
+        "नवमोऽध्यायः — राजविद्याराजगुह्ययोगः",
+        "दशमोऽध्यायः — विभूतियोगः",
+        "एकादशोऽध्यायः — विश्वरूपदर्शनयोगः",
+        "द्वादशोऽध्यायः — भक्तियोगः",
+        "त्रयोदशोऽध्यायः — क्षेत्रक्षेत्रज्ञविभागयोगः",
+        "चतुर्दशोऽध्यायः — गुणत्रयविभागयोगः",
+        "पञ्चदशोऽध्यायः — पुरुषोत्तमयोगः",
+        "षोडशोऽध्यायः — दैवासुरसम्पद्विभागयोगः",
+        "सप्तदशोऽध्यायः — श्रद्धात्रयविभागयोगः",
+        "अष्टादशोऽध्यायः — मोक्षसन्न्यासयोगः"
+      ]
+    }
   ]
 }

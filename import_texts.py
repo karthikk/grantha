@@ -227,18 +227,23 @@ def nav_div(prev, nxt, ind, compact=False):
 
 
 def playlist_div(rows, ind):
+    """One oval link per batch, laid out flat beside the title.
+
+    These used to be rows of "<batch name> ▶" inside a <details> dropdown --
+    a click to open, and a bare glyph in a box for the link itself. There are
+    only ever two or three, so they cost nothing to show, and the batch name
+    is the useful part: it says whose class this is.
+    """
     if not rows:
         return ''
     out = ''
     for batch, pid in rows:
-        badge = f'{ind}      <span class="playlist-batch">{batch}</span>\n' if batch else ''
-        out += (f'{ind}      <div class="playlist-row">\n{badge}'
-                f'{ind}        <a href="https://www.youtube.com/playlist?list={pid}" '
-                f'target="_blank" rel="noopener" class="playlist-link">▶</a>\n'
-                f'{ind}      </div>\n')
-    return (f'{ind}<div class="playlist-links">\n{ind}  <details>\n'
-            f'{ind}    <summary>Classes ▾</summary>\n{ind}    <div class="playlist-panel">\n'
-            f'{out}{ind}    </div>\n{ind}  </details>\n{ind}</div>\n')
+        out += (f'{ind}    <a class="playlist-link" '
+                f'href="https://www.youtube.com/playlist?list={pid}" '
+                f'target="_blank" rel="noopener">{batch or "प्रवचनम्"}</a>\n')
+    return (f'{ind}<div class="playlist-links">\n'
+            f'{ind}  <div class="playlist-panel">\n{out}'
+            f'{ind}  </div>\n{ind}</div>\n')
 
 
 def keep_playlists(path, rows, ind):
@@ -259,12 +264,7 @@ HEAD = '''<!doctype html>
     <title>{title} — ग्रन्थसङ्ग्रहः</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
-      </div>
-    </header>
+  <body class="cat-{cat}">
 '''
 
 CLOSE = '''
@@ -286,16 +286,9 @@ CLOSE = '''
 '''
 
 
-def flat_page(title, crumb, body, playlists, prev, nxt):
-    return HEAD.format(title=title) + f'''
+def flat_page(title, crumb, body, playlists, prev, nxt, cat='prakarana'):
+    return HEAD.format(title=title, cat=cat) + f'''
     <main class="container">
-      <nav class="breadcrumb">
-        <a href="../">Home</a>
-        <span class="sep">»</span>
-        <a href="./">{crumb}</a>
-        <span class="sep">»</span>
-        {title}
-      </nav>
       <h1>{title}</h1>
 {playlists}      <article>
         <div class="group">
@@ -305,18 +298,11 @@ def flat_page(title, crumb, body, playlists, prev, nxt):
 ''' + CLOSE.format(extra='')
 
 
-def sidebar_page(title, crumb, body, sidebar, playlists, prev, nxt):
+def sidebar_page(title, crumb, body, sidebar, playlists, prev, nxt, cat='upanishads'):
     links = '\n'.join(f'            <li><a href="#{a}">{t}</a></li>' for a, t in sidebar)
-    return HEAD.format(title=title) + f'''
+    return HEAD.format(title=title, cat=cat) + f'''
     <div class="page-with-sidebar">
       <div class="page-content">
-        <nav class="breadcrumb">
-          <a href="../">Home</a>
-          <span class="sep">»</span>
-          <a href="./">{crumb}</a>
-          <span class="sep">»</span>
-          {title}
-        </nav>
         <h1>{title}</h1>
 {playlists}        <article>
           <div class="group">
@@ -458,7 +444,8 @@ def check_search_index():
     import json
 
     data = os.path.join(BASE, 'data')
-    cats = json.load(open(os.path.join(data, 'categories.json'), encoding='utf-8'))
+    man = json.load(open(os.path.join(data, 'categories.json'), encoding='utf-8'))
+    cats = man['categories'] if isinstance(man, dict) else man
 
     listed, declared_dirs = set(), set()
     for c in cats:

@@ -6,21 +6,27 @@
     <title>गुरुस्तोत्रम् — ग्रन्थसङ्ग्रहः</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
+  <body class="tier-stotra cat-slokas shell">
+    <!-- shell:begin -->
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="../">ग्रन्थसङ्ग्रहः</a>
+        <div class="search-home" id="search-home">
+          <input
+            type="text"
+            class="search-input"
+            aria-label="search texts"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="search-list" hidden></div>
+        </div>
       </div>
     </header>
-
-    <main class="container">
-      <nav class="breadcrumb">
-        <a href="../">Home</a>
-        <span class="sep">»</span>
-        <a href="./">श्लोकाः</a>
-        <span class="sep">»</span>
-        गुरुस्तोत्रम्
-      </nav>
+    <!-- shell:end -->
+    <div class="shell-body">
+      <nav class="rail" id="rail"></nav>
+      <main class="reading">
       <h1>गुरुस्तोत्रम्</h1>
       <article>
         <div class="group">
@@ -161,12 +167,15 @@
           <a href="gurupadukastotram.html">गुरुपादुकास्तोत्रम्</a></div>
       </nav>
     </main>
+      <aside class="onpage" id="onpage"></aside>
+    </div>
 
     <footer class="site-footer">
       <div class="container">ग्रन्थसङ्ग्रहः</div>
     </footer>
 
     <script src="../js/script-toggle.js"></script>
+    <script src="../js/rail.js"></script>
     <script src="../js/search.js"></script>
   </body>
 </html>

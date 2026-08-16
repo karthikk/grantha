@@ -124,13 +124,16 @@ def verse_html(text, num_label):
 
 
 def breadcrumb_html(crumbs):
-    parts = []
-    for i, c in enumerate(crumbs):
-        if i == len(crumbs) - 1:
-            parts.append(c[1])
-        else:
-            parts.append(f'<a href="{c[0]}">{c[1]}</a>')
-    return '<nav class="breadcrumb">\n    ' + '<span class="sep">»</span>'.join(parts) + '\n  </nav>'
+    """Nothing. Pages carry no breadcrumb any more.
+
+    It read "Home » उपनिषदः » कठोपनिषद्": the last crumb repeated the <h1>
+    right beneath it, the middle one lost its page when the collection
+    listings went, and the brand in the top bar is already the way home.
+
+    Kept as a no-op so the callers can go on passing their crumbs -- they are
+    a decent record of where each page sits, and cost nothing.
+    """
+    return ''
 
 
 def nav_html(prev_link, next_link):
@@ -164,11 +167,6 @@ def page_html(title, breadcrumbs, body, prev_link=None, next_link=None, css_path
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
-  </div>
-</header>
 
 <main class="container">
   {bc}
@@ -211,11 +209,6 @@ def sidebar_page_html(title, breadcrumbs, sections_content, sidebar_items,
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
-  </div>
-</header>
 
 <div class="page-with-sidebar">
   <div class="page-content">
@@ -486,11 +479,6 @@ def build_two_level_single_page(key, soup):
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <div class="site-title"><a href="{home}">ग्रन्थसङ्ग्रहः</a></div>
-  </div>
-</header>
 
 <div class="page-with-sidebar">
   <div class="page-content">
@@ -553,15 +541,8 @@ def build_gita(soup):
     out_dir = os.path.join(BASE_DIR, 'gita')
     chapters = soup.find_all('div', class_='chapter')
 
-    items = ''
-    for ci, ch in enumerate(chapters):
-        yoga = GITA_ADHYAYA_NAMES[ci] if ci < len(GITA_ADHYAYA_NAMES) else ''
-        label = f'{ordinal(ci)}ोऽध्यायः — {yoga}'
-        items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name, [('../', 'Home'), (None, name)], body, css_path='../css/style.css'))
-
+    # No index page: the chapters are listed on the home page, from
+    # data/gita.json. See sync_shell.py.
     for ci, ch in enumerate(chapters):
         yoga = GITA_ADHYAYA_NAMES[ci] if ci < len(GITA_ADHYAYA_NAMES) else ''
         title = f'{ordinal(ci)}ोऽध्यायः — {yoga}'
@@ -627,15 +608,8 @@ def build_brahmasutra(soup):
     out_dir = os.path.join(BASE_DIR, 'brahmasutra')
     chapters = soup.find_all('div', class_='chapter')
 
-    # Index — just 4 adhyaya links
-    items = ''
-    for ci, ch in enumerate(chapters):
-        adh_name = BS_ADHYAYA_NAMES[ci] if ci < len(BS_ADHYAYA_NAMES) else ''
-        label = f'{ordinal(ci)}ोऽध्यायः — {adh_name}'
-        items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name, [('../', 'Home'), (None, name)], body, css_path='../css/style.css'))
+    # No index page: the four adhyayas are listed on the home page, from
+    # data/brahmasutra.json. See sync_shell.py.
 
     # One page per adhyaya: padas as top-level sidebar, adhikaranas nested
     for ci, ch in enumerate(chapters):
@@ -684,11 +658,6 @@ def build_brahmasutra(soup):
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <div class="site-title"><a href="../">ग्रन्थसङ्ग्रहः</a></div>
-  </div>
-</header>
 
 <div class="page-with-sidebar">
   <div class="page-content">
@@ -744,7 +713,6 @@ PRAKARANAS = [
 def build_prakaranas():
     out_dir = os.path.join(BASE_DIR, 'prakarana')
 
-    items = ''
     for si, (title, key, url) in enumerate(PRAKARANAS):
         soup = fetch(url)
         body = verses_body(extract_verses(soup))
@@ -754,17 +722,12 @@ def build_prakaranas():
 
         write_file(os.path.join(out_dir, f'{key}.html'),
                    page_html(title,
-                            [('../', 'Home'), ('./', 'प्रकरणग्रन्थाः'), (None, title)],
+                            [('../', 'Home'), (None, 'प्रकरणग्रन्थाः'), (None, title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
-        items += f'    <li><a href="{key}.html">{title}</a></li>\n'
-
-    body = f'  <ul class="text-list">\n{items}  </ul>\n'
-    write_file(os.path.join(out_dir, 'index.html'),
-               page_html('प्रकरणग्रन्थाः',
-                        [('../', 'Home'), (None, 'प्रकरणग्रन्थाः')],
-                        body, css_path='../css/style.css'))
+    # No index page: every prakarana is listed on the home page, from
+    # data/prakarana.json. See sync_shell.py.
 
 
 # ─── Main ───
