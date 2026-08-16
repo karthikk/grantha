@@ -151,12 +151,23 @@
     // where these controls belong -- they act on the text below them.
 
     // माण्डूक्य's batch pill opens a list of its four prakaraṇas. <details>
-    // has no notion of "click elsewhere", so close it by hand.
-    document.addEventListener('click', function (e) {
+    // has no notion of "elsewhere", so close it by hand.
+    //
+    // pointerdown, not click: iOS does not raise a bubbling click for a tap
+    // on ordinary text or empty space, so on a phone there was frequently no
+    // event at all to close on. pointerdown also lands before <details>
+    // toggles itself, which keeps the summary case straightforward -- a
+    // press inside the menu is simply left alone.
+    function shut(e) {
       var open = document.querySelectorAll('.playlist-menu[open]');
       for (var i = 0; i < open.length; i++) {
-        if (!open[i].contains(e.target)) { open[i].removeAttribute('open'); }
+        if (!e || !open[i].contains(e.target)) { open[i].removeAttribute('open'); }
       }
+    }
+
+    document.addEventListener('pointerdown', shut);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { shut(null); }
     });
   }
 
