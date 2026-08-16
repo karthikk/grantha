@@ -6,7 +6,9 @@
     { "slug": "vyasa", "name": "व्यासः", "side": "left" },
     { "slug": "shankara", "name": "भगवत्पादः", "side": "right" },
     { "slug": "rangaaji", "name": "आचार्यरङ्गाजी", "side": "right",
-      "href": "https://www.brahmavidyamandir.in/" }
+      "href": "https://www.brahmavidyamandir.in/" },
+    { "slug": "suryapriya", "name": "आचार्यसूर्यप्रिया", "side": "right",
+      "href": "https://www.youtube.com/@advaitabharati4487" }
   ],
   "tiers": [
     {
