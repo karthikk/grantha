@@ -10,6 +10,12 @@
   --link-hover: #3a2510;
   --max-width: 700px;
   --font: 'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif;
+  /* UI chrome is English now. Font matching is per-character, so a Latin face
+     first with the Devanagari face behind it renders mixed strings like
+     "Home » उपनिषदः" correctly in both scripts.
+     Mono, because these are short technical labels -- swap the first entries
+     for -apple-system (system UI) or ui-serif (New York) if you prefer. */
+  --ui-font: ui-monospace, 'SF Mono', Menlo, 'Tiro Devanagari Hindi', monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -113,10 +119,16 @@ h2 {
 
 .toolbar {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
   font-size: 0.7rem;
+}
+
+/* playlists stay right; search and script toggle sit left */
+.toolbar .playlist-links {
+  margin-left: auto;
 }
 
 .script-toggle {
@@ -532,5 +544,223 @@ p.shloka {
 
   .container {
     padding: 1rem 0.75rem;
+  }
+}
+
+/* ── Search (js/search.js) ─────────────────────────────────────────────── */
+
+/* Home page bar */
+.search-home {
+  position: relative;
+  margin: 0 0 2rem;
+}
+
+.search-input {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.search-input::placeholder {
+  color: #b9b3aa;
+  font-size: 0.95rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Results */
+.search-list {
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  right: 0;
+  margin-top: 0.3rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.search-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border);
+}
+
+.search-row:last-child {
+  border-bottom: none;
+}
+
+.search-row.on {
+  background: var(--subtle-bg);
+}
+
+.search-name {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.search-dev {
+  font-size: 0.95rem;
+  color: #777;
+}
+
+.search-cat,
+/* Overlay opened with "/" or "f" */
+/* display:flex below would override the browser's [hidden] rule, so the
+   overlay could never be dismissed -- guard it explicitly. */
+.search-overlay[hidden],
+.search-list[hidden] {
+  display: none;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.28);
+  display: flex;
+  justify-content: center;
+  padding: 12vh 1rem 1rem;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  height: max-content;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  padding: 0.75rem;
+}
+
+.search-overlay .search-list {
+  position: static;
+  box-shadow: none;
+  margin-top: 0.5rem;
+}
+
+/* Landing highlight */
+.search-hit {
+  animation: search-flash 2.2s ease-out;
+}
+
+@keyframes search-flash {
+  0%, 35% { background: #fdf3d7; }
+  100% { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .search-hit { animation: none; background: #fdf3d7; }
+  html { scroll-behavior: auto; }
+}
+
+@media (max-width: 600px) {
+  .search-overlay { padding-top: 6vh; }
+  .search-input { font-size: 1rem; }
+}
+
+/* "no such reference" notice */
+.search-note {
+  position: fixed;
+  z-index: 120;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  font-size: 0.85rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  max-width: 90vw;
+}
+
+.search-note[hidden] {
+  display: none;
+}
+
+/* ── English chrome gets a Latin UI face ───────────────────────────────── */
+
+.breadcrumb,
+.nav-label,
+.playlist-links summary,
+.script-toggle,
+.script-label,
+.script-btn,
+.mobile-toggle,
+.search-open,
+.search-input,
+.search-note,
+.search-name,
+.search-cat {
+  font-family: var(--ui-font);
+}
+
+/* these carry Devanagari and keep the text face */
+.search-dev,
+.playlist-batch {
+  font-family: var(--font);
+}
+
+/* Small English labels: quieter and tighter than the serif defaults.
+   Specificity matches the .page-nav .nav-label rule above so they do not
+   fight -- this one is meant to win. */
+.page-nav .nav-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.playlist-links summary,
+.script-btn,
+.script-label {
+  letter-spacing: 0.02em;
+}
+
+.breadcrumb {
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+}
+
+/* Search button in the toolbar -- the "/" shortcut has no mobile equivalent */
+.search-open {
+  font-family: var(--ui-font);
+  font-size: 0.7rem;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.2rem 0.45rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.search-open:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .search-open {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.6rem;
   }
 }

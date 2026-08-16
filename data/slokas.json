@@ -1,0 +1,27 @@
+{
+  "dir": "slokas",
+  "label": "Stotras",
+  "_note": "Searched fields: file, en, alias. Add an alias only for spellings you would actually type.",
+  "texts": [
+    { "file": "dakshinamurtyashtakam", "dev": "दक्षिणामूर्त्यष्टकम्",     "en": "Dakshinamurty Ashtakam",  "alias": ["dakshinamurthy", "dakshina"] },
+    { "file": "dvadashalingastotram",  "dev": "द्वादशज्योतिर्लिङ्गस्तोत्रम्", "en": "Dvadasha Jyotirlinga Stotram", "alias": ["jyotirlinga", "dvadasha"] },
+    { "file": "ekatmatastotram",       "dev": "एकात्मतास्तोत्रम्",       "en": "Ekatmata Stotram",        "alias": ["ekatmata"] },
+    { "file": "gangastotram",          "dev": "गङ्गास्तोत्रम्",           "en": "Ganga Stotram",           "alias": ["ganga"] },
+    { "file": "govindashtakam",        "dev": "श्रीगोविन्दाष्टकम्",       "en": "Govindashtakam",          "alias": ["govinda"] },
+    { "file": "gurupadukastotram",     "dev": "गुरुपादुकास्तोत्रम्",      "en": "Guru Paduka Stotram",     "alias": ["paduka"] },
+    { "file": "gurustotram",           "dev": "गुरुस्तोत्रम्",            "en": "Guru Stotram",            "alias": ["guru"] },
+    { "file": "gurvashtakam",          "dev": "गुर्वष्टकम्",              "en": "Gurvashtakam",            "alias": ["guruashtakam"] },
+    { "file": "kamalajadayitashtakam", "dev": "कमलजदयिताष्टकम्",       "en": "Kamalajadayita Ashtakam", "alias": ["kamalaja"] },
+    { "file": "krishnashtakam",        "dev": "कृष्णाष्टकम्",             "en": "Krishnashtakam",          "alias": ["krishna"] },
+    { "file": "lingashtakam",          "dev": "लिङ्गाष्टकम्",             "en": "Lingashtakam",            "alias": ["linga"] },
+    { "file": "mahishasuramardini",    "dev": "महिषासुरमर्दिनिस्तोत्रम्", "en": "Mahishasura Mardini",     "alias": ["mahishasura", "aigiri"] },
+    { "file": "margabandhustotram",    "dev": "मार्गबन्धुस्तोत्रम्",      "en": "Margabandhu Stotram",     "alias": ["margabandhu"] },
+    { "file": "natarajastotram",       "dev": "नटराजस्तोत्रम्",           "en": "Nataraja Stotram",        "alias": ["nataraja", "patanjali"] },
+    { "file": "nirvanashatkam",        "dev": "निर्वाणषट्कम्",            "en": "Nirvana Shatkam",         "alias": ["nirvana", "atmashatkam"] },
+    { "file": "ramabhujangastotram",   "dev": "रामभुजङ्गस्तोत्रम्",       "en": "Rama Bhujanga Stotram",   "alias": ["bhujanga", "rama"] },
+    { "file": "sankatanashana",        "dev": "सङ्कटनाशनगणेशस्तोत्रम्",  "en": "Sankatanashana Ganesha Stotram", "alias": ["sankatanashana", "ganesha"] },
+    { "file": "shivamanasapuja",       "dev": "शिवमानसपूजा",            "en": "Shiva Manasa Puja",       "alias": ["manasapuja", "shiva"] },
+    { "file": "shivashankarastotram",  "dev": "शिवशङ्करस्तोत्रम्",        "en": "Shiva Shankara Stotram",  "alias": ["shankara"] },
+    { "file": "totakashtakam",         "dev": "तोटकाष्टकम्",              "en": "Totakashtakam",           "alias": ["totaka"] }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "dir": "sahasranama",
+  "label": "Sahasranamas",
+  "_note": "Searched fields: file, en, alias. Add an alias only for spellings you would actually type.",
+  "texts": [
+    { "file": "vishnu-sahasranama", "dev": "श्रीविष्णुसहस्रनामस्तोत्रम्", "en": "Vishnu Sahasranama", "alias": ["vishnu", "vsn"] },
+    { "file": "lalita-sahasranama", "dev": "श्रीललितासहस्रनामस्तोत्रम्", "en": "Lalita Sahasranama", "alias": ["lalita", "lsn"] }
+  ]
+}

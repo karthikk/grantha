@@ -1,0 +1,19 @@
+{
+  "dir": "upanishads",
+  "label": "Upanishads",
+  "_note": "Searched fields: file, en, alias. No need to repeat the filename or words already in 'en' -- both are matched automatically. Add an alias only for spellings you would actually type.",
+  "texts": [
+    { "file": "isha",           "dev": "ईशावास्योपनिषद्",      "en": "Isha Upanishad",           "alias": ["ishavasya", "ishopanishad", "ish"] },
+    { "file": "kena",           "dev": "केनोपनिषद्",           "en": "Kena Upanishad",           "alias": ["kenopanishad"] },
+    { "file": "katha",          "dev": "कठोपनिषद्",            "en": "Katha Upanishad",          "alias": ["kathaka", "kathopanishad"] },
+    { "file": "prashna",        "dev": "प्रश्नोपनिषद्",         "en": "Prashna Upanishad",        "alias": ["prasna", "prashnopanishad"] },
+    { "file": "mundaka",        "dev": "मुण्डकोपनिषद्",        "en": "Mundaka Upanishad",        "alias": ["mundakopanishad"] },
+    { "file": "mandukya",       "dev": "माण्डूक्योपनिषद्",      "en": "Mandukya Upanishad",       "alias": ["mandukyopanishad", "karika"] },
+    { "file": "taittiriya",     "dev": "तैत्तिरीयोपनिषद्",      "en": "Taittiriya Upanishad",     "alias": ["taitt", "taittiriyopanishad"] },
+    { "file": "aitareya",       "dev": "ऐतरेयोपनिषद्",         "en": "Aitareya Upanishad",       "alias": ["aitareyopanishad"] },
+    { "file": "chandogya",      "dev": "छान्दोग्योपनिषद्",      "en": "Chandogya Upanishad",      "alias": ["cha", "chandogyopanishad"] },
+    { "file": "brihadaranyaka", "dev": "बृहदारण्यकोपनिषद्",    "en": "Brihadaranyaka Upanishad", "alias": ["brhad", "brihad", "bu"] },
+    { "file": "kaivalya",       "dev": "कैवल्योपनिषद्",         "en": "Kaivalya Upanishad",       "alias": ["kaivalyopanishad"] },
+    { "file": "shvetashvatara", "dev": "श्वेताश्वतरोपनिषद्",    "en": "Shvetashvatara Upanishad", "alias": ["sveta", "shveta", "svetasvatara"] }
+  ]
+}

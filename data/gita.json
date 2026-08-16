@@ -1,0 +1,16 @@
+{
+  "dir": "gita",
+  "label": "Bhagavad Gita",
+  "_note": "One text spread over 18 chapter files. 'chapters' + 'chapterPrefix' tell the search that the first number in a reference selects the file: 'gita 2.47' -> gita/adhyaya-2.html, then verse 47.",
+  "texts": [
+    {
+      "file": "index",
+      "dev": "श्रीमद्भगवद्गीता",
+      "en": "Bhagavad Gita",
+      "alias": ["gita", "bg", "bhagavadgita", "bhagavad"],
+      "chapters": 18,
+      "chapterPrefix": "adhyaya-"
+    },
+    { "file": "dhyanam", "dev": "ध्यानम्", "en": "Gita Dhyanam", "alias": ["gitadhyanam"] }
+  ]
+}

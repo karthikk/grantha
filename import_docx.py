@@ -223,7 +223,7 @@ def main():
 
         write_file(os.path.join(sloka_dir, f'{key}.html'),
                    page_html(clean_title,
-                            [('../', 'मुख्यम्'), ('./', 'श्लोकाः'), (None, clean_title)],
+                            [('../', 'Home'), ('./', 'श्लोकाः'), (None, clean_title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
@@ -234,7 +234,7 @@ def main():
     idx_body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(sloka_dir, 'index.html'),
                page_html('श्लोकाः',
-                        [('../', 'मुख्यम्'), (None, 'श्लोकाः')],
+                        [('../', 'Home'), (None, 'श्लोकाः')],
                         idx_body, css_path='../css/style.css'))
 
     # ─── Write new prakarana pages ───
@@ -261,7 +261,7 @@ def main():
 
         write_file(os.path.join(prakarana_dir, f'{key}.html'),
                    page_html(clean_title,
-                            [('../', 'मुख्यम्'), ('./', 'प्रकरणग्रन्थाः'), (None, clean_title)],
+                            [('../', 'Home'), ('./', 'प्रकरणग्रन्थाः'), (None, clean_title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
@@ -272,7 +272,7 @@ def main():
     idx_body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(prakarana_dir, 'index.html'),
                page_html('प्रकरणग्रन्थाः',
-                        [('../', 'मुख्यम्'), (None, 'प्रकरणग्रन्थाः')],
+                        [('../', 'Home'), (None, 'प्रकरणग्रन्थाः')],
                         idx_body, css_path='../css/style.css'))
 
     # ─── Gita dhyana slokas ───

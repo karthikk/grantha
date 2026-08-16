@@ -139,9 +139,9 @@ def nav_html(prev_link, next_link):
     prev_part = ''
     next_part = ''
     if prev_link:
-        prev_part = f'<span class="nav-label">← पूर्वम्</span>\n      <a href="{prev_link[0]}">{prev_link[1]}</a>'
+        prev_part = f'<span class="nav-label">← Previous</span>\n      <a href="{prev_link[0]}">{prev_link[1]}</a>'
     if next_link:
-        next_part = f'<span class="nav-label">अग्रे →</span>\n      <a href="{next_link[0]}">{next_link[1]}</a>'
+        next_part = f'<span class="nav-label">Next →</span>\n      <a href="{next_link[0]}">{next_link[1]}</a>'
     return f'''
   <nav class="page-nav">
     <div class="prev">{prev_part}</div>
@@ -302,7 +302,7 @@ def build_isha(soup):
     body = shanti_html(opening) + verses_body(extract_verses(soup)) + shanti_html(closing)
     write_file(os.path.join(BASE_DIR, 'upanishads', 'isha.html'),
                page_html(name,
-                        [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                        [('../', 'Home'), ('./', 'उपनिषदः'), (None, name)],
                         body, next_link=('kena.html', 'केनोपनिषद्'),
                         css_path='../css/style.css'))
 
@@ -348,7 +348,7 @@ def build_mandukya(soup):
 
     write_file(os.path.join(BASE_DIR, 'upanishads', 'mandukya.html'),
                sidebar_page_html(name,
-                    [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                    [('../', 'Home'), ('./', 'उपनिषदः'), (None, name)],
                     body, sidebar,
                     prev_link=('mundaka.html', 'मुण्डकोपनिषद्'),
                     next_link=('taittiriya.html', 'तैत्तिरीयोपनिषद्'),
@@ -403,7 +403,7 @@ def build_flat_with_sidebar(key, soup):
 
     write_file(os.path.join(BASE_DIR, 'upanishads', f'{key}.html'),
                sidebar_page_html(name,
-                    [('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)],
+                    [('../', 'Home'), ('./', 'उपनिषदः'), (None, name)],
                     body, sidebar,
                     prev_link=prev_link, next_link=next_link,
                     css_path='../css/style.css'))
@@ -471,7 +471,7 @@ def build_two_level_single_page(key, soup):
         next_link = (get_upanishad_link(nk), NAMES[nk])
 
     # Use custom sidebar HTML instead of flat sidebar_items
-    bc = breadcrumb_html([('../', 'मुख्यम्'), ('./', 'उपनिषदः'), (None, name)])
+    bc = breadcrumb_html([('../', 'Home'), ('./', 'उपनिषदः'), (None, name)])
     nav = nav_html(prev_link, next_link)
     css_path = '../css/style.css'
     home = '../'
@@ -560,7 +560,7 @@ def build_gita(soup):
         items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
     body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name, [('../', 'मुख्यम्'), (None, name)], body, css_path='../css/style.css'))
+               page_html(name, [('../', 'Home'), (None, name)], body, css_path='../css/style.css'))
 
     for ci, ch in enumerate(chapters):
         yoga = GITA_ADHYAYA_NAMES[ci] if ci < len(GITA_ADHYAYA_NAMES) else ''
@@ -591,7 +591,7 @@ def build_gita(soup):
 
         write_file(os.path.join(out_dir, f'adhyaya-{ci+1}.html'),
                    page_html(title,
-                            [('../', 'मुख्यम्'), ('./', name), (None, title)],
+                            [('../', 'Home'), ('./', name), (None, title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
@@ -635,7 +635,7 @@ def build_brahmasutra(soup):
         items += f'    <li><a href="adhyaya-{ci+1}.html">{label}</a></li>\n'
     body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(out_dir, 'index.html'),
-               page_html(name, [('../', 'मुख्यम्'), (None, name)], body, css_path='../css/style.css'))
+               page_html(name, [('../', 'Home'), (None, name)], body, css_path='../css/style.css'))
 
     # One page per adhyaya: padas as top-level sidebar, adhikaranas nested
     for ci, ch in enumerate(chapters):
@@ -671,7 +671,7 @@ def build_brahmasutra(soup):
         prev_link = (f'adhyaya-{ci}.html', BS_ADHYAYA_NAMES[ci-1]) if ci > 0 else None
         next_link = (f'adhyaya-{ci+2}.html', BS_ADHYAYA_NAMES[ci+1]) if ci < len(chapters)-1 else None
 
-        bc = breadcrumb_html([('../', 'मुख्यम्'), ('./', name), (None, title)])
+        bc = breadcrumb_html([('../', 'Home'), ('./', name), (None, title)])
         nav = nav_html(prev_link, next_link)
 
         html_out = f'''<!DOCTYPE html>
@@ -754,7 +754,7 @@ def build_prakaranas():
 
         write_file(os.path.join(out_dir, f'{key}.html'),
                    page_html(title,
-                            [('../', 'मुख्यम्'), ('./', 'प्रकरणग्रन्थाः'), (None, title)],
+                            [('../', 'Home'), ('./', 'प्रकरणग्रन्थाः'), (None, title)],
                             body, prev_link=prev_link, next_link=next_link,
                             css_path='../css/style.css'))
 
@@ -763,7 +763,7 @@ def build_prakaranas():
     body = f'  <ul class="text-list">\n{items}  </ul>\n'
     write_file(os.path.join(out_dir, 'index.html'),
                page_html('प्रकरणग्रन्थाः',
-                        [('../', 'मुख्यम्'), (None, 'प्रकरणग्रन्थाः')],
+                        [('../', 'Home'), (None, 'प्रकरणग्रन्थाः')],
                         body, css_path='../css/style.css'))
 
 

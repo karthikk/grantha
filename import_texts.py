@@ -12,8 +12,14 @@ pancharatna stotras from advaitasharada. This script covers the rest:
 Re-running is safe: a <div class="playlist-links"> block already present in a
 page is carried over verbatim, so hand-added playlist rows survive a rebuild.
 
-    python3 import_texts.py            # write pages
-    python3 import_texts.py --check    # report what would change, write nothing
+    python3 import_texts.py                # write pages
+    python3 import_texts.py --check        # report changes, write nothing, exit 1 if any
+    python3 import_texts.py --search-only  # only verify search coverage
+
+Every run also checks that each text page is listed in data/*.json. A page
+that is missing is invisible to search and nothing at runtime says so, which
+is exactly how the playlist links silently drifted -- so it fails the build
+instead.
 """
 
 import html
@@ -216,7 +222,7 @@ def nav_div(prev, nxt, ind, compact=False):
     if not prev and not nxt:
         return ''
     return (f'\n{ind}<nav class="page-nav">\n'
-            + side('prev', prev, '← पूर्वम्') + side('next', nxt, 'अग्रे →')
+            + side('prev', prev, '← Previous') + side('next', nxt, 'Next →')
             + f'{ind}</nav>\n')
 
 
@@ -231,7 +237,7 @@ def playlist_div(rows, ind):
                 f'target="_blank" rel="noopener" class="playlist-link">▶</a>\n'
                 f'{ind}      </div>\n')
     return (f'{ind}<div class="playlist-links">\n{ind}  <details>\n'
-            f'{ind}    <summary>पाठाः ▾</summary>\n{ind}    <div class="playlist-panel">\n'
+            f'{ind}    <summary>Classes ▾</summary>\n{ind}    <div class="playlist-panel">\n'
             f'{out}{ind}    </div>\n{ind}  </details>\n{ind}</div>\n')
 
 
@@ -274,6 +280,7 @@ CLOSE = '''
         }});
       }});
     </script>
+    <script src="../js/search.js"></script>
   </body>
 </html>
 '''
@@ -283,7 +290,7 @@ def flat_page(title, crumb, body, playlists, prev, nxt):
     return HEAD.format(title=title) + f'''
     <main class="container">
       <nav class="breadcrumb">
-        <a href="../">मुख्यम्</a>
+        <a href="../">Home</a>
         <span class="sep">»</span>
         <a href="./">{crumb}</a>
         <span class="sep">»</span>
@@ -304,7 +311,7 @@ def sidebar_page(title, crumb, body, sidebar, playlists, prev, nxt):
     <div class="page-with-sidebar">
       <div class="page-content">
         <nav class="breadcrumb">
-          <a href="../">मुख्यम्</a>
+          <a href="../">Home</a>
           <span class="sep">»</span>
           <a href="./">{crumb}</a>
           <span class="sep">»</span>
@@ -439,8 +446,60 @@ def build_vedantasara():
                           ('saddarshanam.html', 'सद्दर्शनम्'))
 
 
+def check_search_index():
+    """Every text page must be reachable from the search index.
+
+    js/search.js can only find what data/*.json lists, and nothing at runtime
+    complains about a page that is missing -- it is simply invisible to search
+    forever. This turns that silent gap into a build failure. Returns the
+    number of problems found.
+    """
+    import glob
+    import json
+
+    data = os.path.join(BASE, 'data')
+    cats = json.load(open(os.path.join(data, 'categories.json'), encoding='utf-8'))
+
+    listed, declared_dirs = set(), set()
+    for c in cats:
+        f = os.path.join(data, c + '.json')
+        if not os.path.exists(f):
+            print(f'  MISSING FILE  data/{c}.json (named in categories.json)')
+            continue
+        blob = json.load(open(f, encoding='utf-8'))
+        d = blob['dir']
+        declared_dirs.add(d)
+        for t in blob['texts']:
+            if t.get('chapters'):          # one entry covering adhyaya-1..N
+                for n in range(1, t['chapters'] + 1):
+                    listed.add(f"{d}/{t['chapterPrefix']}{n}.html")
+            else:
+                listed.add(f"{d}/{t['file']}.html")
+
+    on_disk = {p for p in glob.glob('*/*.html', root_dir=BASE)
+               if not p.endswith('index.html')}
+
+    problems = 0
+    for p in sorted(on_disk - listed):
+        d = p.split('/')[0]
+        why = '' if d in declared_dirs else '  (whole folder missing from categories.json)'
+        print(f'  NOT SEARCHABLE  {p}{why}')
+        problems += 1
+    for p in sorted(listed - on_disk):
+        print(f'  LISTED BUT ABSENT  {p}')
+        problems += 1
+
+    print(f'  search index: {len(on_disk)} pages on disk, {len(listed)} listed, '
+          f'{problems} problem(s)')
+    return problems
+
+
 def main():
     check = '--check' in sys.argv
+
+    if '--search-only' in sys.argv:
+        sys.exit(1 if check_search_index() else 0)
+
     pages = [build_vivekachudamani(), build_vedantasara(), build_shvetashvatara()]
     pages += [build_sd_flat(k) for k in SANSKRITDOCS if k != 'shvetashvatara']
 
@@ -459,6 +518,11 @@ def main():
             print(f'  wrote      {rel}')
     print(f'\n{len(pages)} pages, {changed} changed'
           + ('  (--check: nothing written)' if check else ''))
+
+    print('\nsearch index coverage:')
+    problems = check_search_index()
+    if check and (problems or changed):
+        sys.exit(1)
 
 
 if __name__ == '__main__':

@@ -16,6 +16,18 @@
     <main class="container">
       <h1>ग्रन्थसङ्ग्रहः</h1>
 
+      <div class="search-home" id="search-home">
+        <input
+          type="text"
+          class="search-input"
+          placeholder="kena · cha 7.25 · gita 2.47"
+          aria-label="search texts"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <div class="search-list" hidden></div>
+      </div>
+
       <ul class="categories">
         <li>
           <a href="upanishads/">
@@ -59,5 +71,6 @@
     <footer class="site-footer">
       <div class="container">ग्रन्थसङ्ग्रहः</div>
     </footer>
+    <script src="js/search.js"></script>
   </body>
 </html>

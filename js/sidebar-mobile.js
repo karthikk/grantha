@@ -12,11 +12,11 @@
 
   var toggle = document.createElement('span');
   toggle.className = 'mobile-toggle';
-  toggle.textContent = 'विषयसूची ▾';
+  toggle.textContent = 'Contents ▾';
   sidebar.insertBefore(toggle, ul);
 
   toggle.addEventListener('click', function() {
     ul.classList.toggle('mobile-open');
-    toggle.textContent = ul.classList.contains('mobile-open') ? 'विषयसूची ▴' : 'विषयसूची ▾';
+    toggle.textContent = ul.classList.contains('mobile-open') ? 'Contents ▴' : 'Contents ▾';
   });
 })();
