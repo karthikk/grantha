@@ -164,7 +164,7 @@ h2 {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 0.7rem 1rem;
-  margin: 1.2rem 0 1.1rem;
+  margin: 1.2rem 0 1rem;
 }
 
 /* script on the left, classes on the right -- and given room, because two
@@ -179,7 +179,7 @@ h2 {
 /* a segmented control, not three loose boxes */
 .script-toggle {
   display: inline-flex;
-  align-items: stretch;
+  align-items: center;
   gap: 2px;
   padding: 2px;
   border: 1px solid var(--border);
@@ -188,18 +188,17 @@ h2 {
 }
 
 .script-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  text-align: center;
   min-width: 2.15rem;
-  padding: 0.14rem 0.5rem;
+  padding: 0.16rem 0.5rem;
   border: none;
   border-radius: 999px;
   background: transparent;
   color: var(--chrome);
   font-family: var(--font);
   font-size: 0.8rem;
-  line-height: 1.5;
+  line-height: 1.2rem;
   text-decoration: none;
   transition: background 0.12s, color 0.12s;
 }
@@ -220,44 +219,44 @@ h2 {
    together under their name. Two teachers now record these texts, and a
    loose row of six pills said nothing about whose class was whose. */
 
-.acharya-set {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
+/* A teacher's batches are one segmented control, built exactly like the
+   script track opposite -- same height, same radius, same hairline, same
+   soft ground. The page then carries one kind of control in three copies
+   rather than a rounded box wrapped around a row of rounded pills, which is
+   what made this corner look assembled rather than designed.
 
-/* The teacher's own face marks the set. A bordered box around the pills was
-   a second rounded rectangle around a row of rounded rectangles, which read
-   as packaging rather than as meaning; the portrait says whose class it is
-   at a glance, and ties the row to the parampara in the bar above. */
-.set-face {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  object-fit: cover;
-  flex: none;
+   The short code rides at the head of the track: BVM for ब्रह्मविद्यामन्दिरम्,
+   AB for अद्वैतभारती, with the full name on the track's title. */
+.acharya-set {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
 }
 
 .set-name {
-  font-family: var(--font);
-  font-size: 0.75rem;
+  padding: 0.16rem 0.4rem 0.16rem 0.55rem;
+  line-height: 1.2rem;
+  font-family: var(--ui-font);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
   color: var(--chrome);
-  white-space: nowrap;
-  margin-right: 0.1rem;
+  cursor: default;
 }
 
 .playlist-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  padding: 0.14rem 0.75rem;
-  border: 1px solid var(--border);
+  display: inline-block;
+  padding: 0.16rem 0.7rem;
+  line-height: 1.2rem;
+  border: none;
   border-radius: 999px;
   color: var(--batch, var(--chrome));
   font-family: var(--font);
   font-size: 0.8rem;
-  line-height: 1.5;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.12s, border-color 0.12s, color 0.12s;
@@ -298,7 +297,7 @@ h2 {
 
 .playlist-menu[open] > summary {
   background: var(--batch-soft, var(--cat-soft));
-  border-color: var(--batch, var(--cat));
+  box-shadow: inset 0 0 0 1px var(--batch, var(--cat));
 }
 
 .playlist-drop {
@@ -333,7 +332,6 @@ h2 {
 }
 
 .playlist-link:hover {
-  border-color: var(--batch, var(--cat));
   background: var(--batch-soft, var(--cat-soft));
   color: var(--batch, var(--cat));
   text-decoration: none;

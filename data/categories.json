@@ -18,6 +18,7 @@
     {
       "id": "rangaaji",
       "name": "आचार्य रङ्गाजी",
+      "short": "BVM",
       "batches": [
         { "id": "dhanyosi", "name": "धन्योसि" },
         { "id": "jijnasu", "name": "जिज्ञासु" },
@@ -28,6 +29,7 @@
     {
       "id": "suryapriya",
       "name": "आचार्य सूर्यप्रिया जी",
+      "short": "AB",
       "batches": [
         { "id": "kashi", "name": "काशी" },
         { "id": "kanchi", "name": "काञ्ची" },
