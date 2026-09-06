@@ -442,6 +442,39 @@ h2 {
 }
 
 .verse:first-child,
+.section-heading:has(> .heading-classes) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.head-text {
+  flex: 1 1 auto;
+}
+
+.heading-classes {
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+.heading-classes .playlist-link {
+  font-size: 0.78rem;
+  padding: 0.1rem 0.55rem;
+}
+
+.heading-classes .set-name {
+  padding: 0.1rem 0.3rem 0.1rem 0.45rem;
+  font-size: 0.55rem;
+}
+
+.class-num {
+  margin-left: 0.32rem;
+  font-family: var(--ui-font);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 .section-heading + .verse {
   border-top: none;
 }

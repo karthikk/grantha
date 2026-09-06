@@ -20,9 +20,9 @@
       "name": "आचार्य रङ्गाजी",
       "short": "BVM",
       "batches": [
-        { "id": "dhanyosi", "name": "धन्योसि" },
-        { "id": "jijnasu", "name": "जिज्ञासु" },
-        { "id": "tattvamasi", "name": "तत्त्वमसि" }
+        { "id": "dhanyosi", "abbr": "ध", "name": "धन्योसि" },
+        { "id": "jijnasu", "abbr": "जि", "name": "जिज्ञासु" },
+        { "id": "tattvamasi", "abbr": "त", "name": "तत्त्वमसि" }
       ]
     },
     {
@@ -30,9 +30,9 @@
       "name": "आचार्य सूर्यप्रिया जी",
       "short": "AB",
       "batches": [
-        { "id": "kashi", "name": "काशी" },
-        { "id": "kanchi", "name": "काञ्ची" },
-        { "id": "nalanda", "name": "नालन्दा" }
+        { "id": "kashi", "abbr": "का", "name": "काशी" },
+        { "id": "kanchi", "abbr": "काञ्", "name": "काञ्ची" },
+        { "id": "nalanda", "abbr": "ना", "name": "नालन्दा" }
       ]
     }
   ],

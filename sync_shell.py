@@ -30,6 +30,9 @@ BEGIN = '<!-- shell:begin -->'
 END = '<!-- shell:end -->'
 
 YT = 'https://www.youtube.com/playlist?list='
+WATCH = 'https://www.youtube.com/watch?v='
+
+HEAD = re.compile(r'(<h3 class="section-heading" id="([^"]+)">)(.*?)(</h3>)', re.S)
 
 HOME_BEGIN = '<!-- home:begin -->'
 HOME_END = '<!-- home:end -->'
@@ -46,7 +49,11 @@ def load():
     # should leave a gap, not a broken image
     lineage = [f for f in man.get('parampara', [])
                if os.path.exists(os.path.join(BASE, 'images', f['slug'] + '.jpg'))]
-    return order, tiers, cats, lineage, man.get('acharyas', [])
+    marks = {}
+    for path in glob.glob(os.path.join(DATA, 'classes', '*.json')):
+        marks[os.path.basename(path)[:-5]] = json.load(
+            open(path, encoding='utf-8')).get('pages', {})
+    return order, tiers, cats, lineage, man.get('acharyas', []), marks
 
 
 def dev_name(cat, blob):
@@ -231,6 +238,46 @@ def classes(text, acharyas, indent):
     return '%s<div class="playlist-links">\n%s\n%s</div>\n' % (p, '\n'.join(sets), p)
 
 
+def heading_set(rows, acharyas, lists):
+    """The classes an adhikaranam starts at, as the toolbar's own pill."""
+    sets = []
+    for a in acharyas:
+        pills = []
+        for b in a['batches']:
+            for r in rows:
+                if r['batch'] != b['id'] or b['id'] not in lists:
+                    continue
+                pills.append(
+                    '<a class="playlist-link b-%s" href="%s%s&amp;list=%s" '
+                    'target="_blank" rel="noopener" title="%s \u2014 class %s">%s'
+                    '<span class="class-num">%s</span></a>'
+                    % (b['id'], WATCH, r['video'], lists[b['id']], b['name'],
+                       r['class'], b.get('abbr') or b['name'], r['class']))
+        if pills:
+            sets.append('<span class="acharya-set" title="%s">'
+                        '<span class="set-name">%s</span>%s</span>'
+                        % (a['name'], a.get('short') or a['name'], ''.join(pills)))
+    if not sets:
+        return ''
+    return '<span class="heading-classes">%s</span>' % ''.join(sets)
+
+
+def heading_classes(s, marks, acharyas, lists):
+    """Put each adhikaranam's first class on its own heading line."""
+    def one(m):
+        head, aid, inner, tail = m.groups()
+        cut = inner.find('<span class="heading-classes">')
+        if cut >= 0:
+            inner = inner[:cut]
+        inner = re.sub(r'^<span class="head-text">(.*)</span>$', r'\1',
+                       inner.strip(), flags=re.S)
+        block = heading_set(marks.get(aid) or [], acharyas, lists)
+        if not block:
+            return head + inner + tail
+        return '%s<span class="head-text">%s</span>%s%s' % (head, inner, block, tail)
+    return HEAD.sub(one, s)
+
+
 def figures(lineage, side, up, indent):
     """The parampara, as portraits flanking the bar.
 
@@ -302,7 +349,7 @@ def convert_layout(s, is_index):
     return s
 
 
-def sync(path, order, tiers, cats, lineage, acharyas):
+def sync(path, order, tiers, cats, lineage, acharyas, marks):
     rel = os.path.relpath(path, BASE)
     d = rel.split(os.sep)[0]
     here = d if d in cats else None
@@ -373,6 +420,11 @@ def sync(path, order, tiers, cats, lineage, acharyas):
             elif block:
                 s = re.sub(r'(<h1[^>]*>.*?</h1>\n)', lambda m: m.group(1) + block,
                            s, count=1, flags=re.S)
+            page = os.path.basename(rel)[:-5]
+            lists = {p['batch']: p['list'] for p in (text.get('playlists') or [])
+                     if p.get('batch')}
+            s = heading_classes(s, (marks.get(here) or {}).get(page, {}),
+                                acharyas, lists)
 
     # the home page's listing, generated so it can never drift from data/
     if rel == 'index.html':
@@ -398,12 +450,12 @@ def sync(path, order, tiers, cats, lineage, acharyas):
 
 def main():
     check = '--check' in sys.argv
-    order, tiers, cats, lineage, acharyas = load()
+    order, tiers, cats, lineage, acharyas, marks = load()
     pages = sorted(glob.glob(os.path.join(BASE, '*', '*.html')) +
                    glob.glob(os.path.join(BASE, '*.html')))
     stale = 0
     for p in pages:
-        out, changed = sync(p, order, tiers, cats, lineage, acharyas)
+        out, changed = sync(p, order, tiers, cats, lineage, acharyas, marks)
         if not changed:
             continue
         stale += 1

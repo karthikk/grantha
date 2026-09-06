@@ -19,7 +19,8 @@
         "चतुर्थोऽध्यायः — फलाध्यायः"
       ],
       "playlists": [
-        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN9SUYzes8bADGwBu1oRSTR0" }
+        { "batch": "dhanyosi", "list": "PL7qtWZUUoJN9SUYzes8bADGwBu1oRSTR0",
+          "starts": { "1.2.5": "3X2Ww30h-aM" } }
       ]
     }
   ]
